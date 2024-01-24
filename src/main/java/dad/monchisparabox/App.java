@@ -1,6 +1,6 @@
 package dad.monchisparabox;
 
-import dad.monchisparabox.uicontroller.MainController;
+import dad.monchisparabox.ui.controller.MainController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
