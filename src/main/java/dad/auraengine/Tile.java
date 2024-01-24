@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile {
 
-	static String mapa0 = """
+	public static String mapa0 = """
 			##########
 			#........#
 			b........#
@@ -22,7 +22,8 @@ public class Tile {
 
 	
 	
-	static String mapa1= """
+	
+	public	static String mapa1= """
 			##########
 			#.....N..#
 			#....EMO.#
@@ -36,7 +37,7 @@ public class Tile {
 			""";
 	
 	
-	static String mapa2= """
+	public	static String mapa2= """
 			##########
 			#_....####
 			#.......=#
