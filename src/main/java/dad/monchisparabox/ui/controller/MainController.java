@@ -15,7 +15,11 @@ import javafx.scene.layout.BorderPane;
 public class MainController implements Initializable {
 	
 	
-	public static Map mapa = Tile.tile(Tile.mapa0);
+	public static Map mapa = Tile.tile(Tile.mapa2);
+	
+	
+	
+	
     @FXML
     private BorderPane view;
     

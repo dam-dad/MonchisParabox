@@ -85,8 +85,7 @@ public static Rectangle player;
 				case 'p':
 					
 					 player = new Rectangle(50, 50);
-				Image player2 = new Image("/assets/blob (1).jpg");
-				player.setFill(new ImagePattern(player2));
+					 player.setFill(Color.PINK);
 					map.add(player, columna, fila);
 					System.out.println("jugadorr registrado");
 					
@@ -162,9 +161,7 @@ public static Rectangle player;
 					
 				case  '=':
 					Rectangle win = new Rectangle(50, 50);			
-					Image mapaInt = new Image("/assets/Captura de pantalla 2024-01-21 212213.png");
-
-					win.setFill(new ImagePattern(mapaInt));
+						win.setFill(Color.GREEN);
 						map.add(win, columna, fila);
 						
 
