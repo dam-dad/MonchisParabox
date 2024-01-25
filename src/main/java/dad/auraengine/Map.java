@@ -11,7 +11,7 @@ import javafx.scene.layout.RowConstraints;
 
 public class Map extends GridPane {
 	
-	private static final double CELL_SIZE = 48;
+	private static final double CELL_SIZE = 50;
 	
 	public Map(int maxX, int maxY, double scale) {
 		super(0, 0);
