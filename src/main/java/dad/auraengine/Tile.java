@@ -19,8 +19,6 @@ public class Tile {
 			#........#
 			##########
 			""";
-
-	
 	
 	
 	public	static String mapa1= """
@@ -35,7 +33,7 @@ public class Tile {
 			#........#
 			##########
 			""";
-	
+
 	
 	public	static String mapa2= """
 			##########
@@ -49,24 +47,13 @@ public class Tile {
 			##..#....#
 			##########
 			""";
-	
-	
 
-	
-	
+	public static Rectangle player;
 
-	
-	
-	
-public static Rectangle player;
 	public static Map tile(String mapa) {
 
-		
-		
-		
 		Map map = new Map(10, 10, 1);
-		
-		
+
 		String[] lineas = mapa.trim().split("\n");
 
 		for (int fila = 0; fila < lineas.length; fila++) {
@@ -78,102 +65,78 @@ public static Rectangle player;
 				case '#':
 					Rectangle obstaculo = new Rectangle(50, 50);
 					obstaculo.setFill(Color.BLACK);
-						map.add(obstaculo, columna, fila);
-					
+					map.add(obstaculo, columna, fila);
 					break;
 
 				case 'p':
-					
 					 player = new Rectangle(50, 50);
 					 player.setFill(Color.PINK);
+
 					map.add(player, columna, fila);
 					System.out.println("jugadorr registrado");
-					
+
 					break;
 
 				case 'b':
 
 					Rectangle box = new Rectangle(50, 50);
 					box.setFill(Color.YELLOW);
-						map.add(box, columna, fila);
-
-					
-
+					map.add(box, columna, fila);
 					break;
 
 				case '.':
 					Rectangle Void = new Rectangle(50, 50);
 					Void.setFill(Color.TRANSPARENT);
-						map.add(Void, columna, fila);
-
-				
+					map.add(Void, columna, fila);
 					break;
-				
-				
+
 				case 'N':
 					Rectangle N = new Rectangle(50, 50);
 					N.setFill(Color.PINK);
-						map.add(N, columna, fila);
-
-					
-				
-				
+					map.add(N, columna, fila);
 					break;
 				case 'S':
 					Rectangle S = new Rectangle(50, 50);
 					S.setFill(Color.PINK);
-						map.add(S, columna, fila);
-
-				
+					map.add(S, columna, fila);
 					break;
 
 				case 'E':
 					Rectangle E = new Rectangle(50, 50);
 					E.setFill(Color.PINK);
-					
-						map.add(E, columna, fila);
-
-					
+					map.add(E, columna, fila);
 					break;
 
 				case 'O':
 					Rectangle O = new Rectangle(50, 50);
 					O.setFill(Color.PINK);
-						map.add(O, columna, fila);
-
+					map.add(O, columna, fila);
 					break;
 
 				case 'M':
 					Rectangle M = new Rectangle(50, 50);
 					M.setFill(Color.VIOLET);
-						map.add(M, columna, fila);
-
+					map.add(M, columna, fila);
 					break;
 
 				case '_':
 					Rectangle finBox = new Rectangle(50, 50);
 					finBox.setFill(Color.GREEN);
-					
-						map.add(finBox, columna, fila);
-
-				
+					map.add(finBox, columna, fila);
 					break;
-					
+
 				case  '=':
 					Rectangle win = new Rectangle(50, 50);			
 						win.setFill(Color.GREEN);
 						map.add(win, columna, fila);
-						
-
 					
-				
+
 					break;
-			
 
 				}
 
 			}
-		}			
+		}
 		return map;
 
 	}
