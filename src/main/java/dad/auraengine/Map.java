@@ -17,7 +17,7 @@ public class Map extends GridPane {
 		super(0, 0);
 		
 		setAlignment(Pos.CENTER);
-		setGridLinesVisible(true);
+		setGridLinesVisible(false);
 		
 		for (int i = 0; i < maxY; i++) {
 	        RowConstraints rConstraint = new RowConstraints();

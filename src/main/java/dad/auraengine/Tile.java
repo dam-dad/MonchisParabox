@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Tile {
 
-	static String mapa0 = """
+	public static String mapa0 = """
 			##########
 			#........#
 			b........#
@@ -19,8 +19,9 @@ public class Tile {
 			#........#
 			##########
 			""";
-
-	static String mapa1 = """
+	
+	
+	public	static String mapa1= """
 			##########
 			#.....N..#
 			#....EMO.#
@@ -33,7 +34,8 @@ public class Tile {
 			##########
 			""";
 
-	static String mapa2 = """
+	
+	public	static String mapa2= """
 			##########
 			#_....####
 			#.......=#
@@ -67,9 +69,9 @@ public class Tile {
 					break;
 
 				case 'p':
-					player = new Rectangle(50, 50);
-					Image player2 = new Image("/assets/blob (1).jpg");
-					player.setFill(new ImagePattern(player2));
+					 player = new Rectangle(50, 50);
+					 player.setFill(Color.PINK);
+
 					map.add(player, columna, fila);
 					System.out.println("jugadorr registrado");
 
@@ -123,12 +125,11 @@ public class Tile {
 					map.add(finBox, columna, fila);
 					break;
 
-				case '=':
-					Rectangle win = new Rectangle(50, 50);
-					Image mapaInt = new Image("/assets/Captura de pantalla 2024-01-21 212213.png");
-
-					win.setFill(new ImagePattern(mapaInt));
-					map.add(win, columna, fila);
+				case  '=':
+					Rectangle win = new Rectangle(50, 50);			
+						win.setFill(Color.GREEN);
+						map.add(win, columna, fila);
+					
 
 					break;
 
