@@ -4,24 +4,19 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import dad.auraengine.Map;
-import dad.auraengine.Tile;
+import dad.monchisparabox.game.Game;
+import dad.monchisparabox.game.utilities.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 
 public class MainController implements Initializable {
 	
-	
-	public static Map mapa = Tile.tile(Tile.mapa2);
-	
-	
-	
-	
     @FXML
     private BorderPane view;
+    
+    private Game game;
     
 	public MainController() {
 		try {
@@ -32,13 +27,16 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
 	}
-
+	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		game = new Game(Tile.mapa0);
 		
-		//  Aquí se establece lo que queremos mostrar...
-		 // getView().setCenter(new MapController().getView());
-		getView().setCenter(mapa);
+		getView().setCenter(getGame().getGameMap());
+	}
+	
+	public Game getGame() {
+		return game;
 	}
 
 	public BorderPane getView() {

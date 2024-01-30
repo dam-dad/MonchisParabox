@@ -1,5 +1,6 @@
 package dad.auraengine.entities;
 
+import dad.auraengine.entities.movements.Location;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 
@@ -9,12 +10,12 @@ import javafx.scene.shape.Rectangle;
  */
 public class CollidableEntity extends StaticEntity<Rectangle> {
 	
-	public CollidableEntity(Image image, int x, int y) {
-		super(image, x, y);
+	public CollidableEntity(Image image, Location location) {
+		super(image, location);
 	}
 
 	@Override
 	public Rectangle getCollisionShape() {
-		return new Rectangle(posX, posY, width, height);
+		return new Rectangle(width, height);
 	}
 }
