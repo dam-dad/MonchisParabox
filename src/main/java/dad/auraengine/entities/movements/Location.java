@@ -27,4 +27,20 @@ public class Location {
 	public int getY() {
 		return Y;
 	}
+	
+	public void incrementX() {
+		X++;
+	}
+	
+	public void incrementY() {
+		Y++;
+	}
+	
+	public void decrementX() {
+		X--;
+	}
+	
+	public void decrementY() {
+		Y--;
+	}
 }

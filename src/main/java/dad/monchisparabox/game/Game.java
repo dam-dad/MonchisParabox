@@ -2,7 +2,6 @@ package dad.monchisparabox.game;
 
 import java.util.ArrayList;
 
-import dad.auraengine.entities.movements.Direction;
 import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.game.utilities.Tile;
 import javafx.animation.AnimationTimer;
@@ -26,10 +25,8 @@ public class Game extends AnimationTimer {
 			System.out.println(event.getCode());
 			handleKeyPress(event.getCode());
 		});
-		root.setOnKeyReleased(event -> {
-			player.setDirection(Direction.NONE);
-		});
 		
+		//Esto hay que preguntar, no se puede requerir focus en en el initialize
 		Platform.runLater(new Runnable() {
 	        @Override
 	        public void run() {
@@ -56,22 +53,22 @@ public class Game extends AnimationTimer {
 	// game loop
 	@Override
 	public void handle(long now) {
-		player.movePlayer();	
+		player.updatePlayer();	
 	}
 
 	private void handleKeyPress(KeyCode code) {
 		switch (code) {
-		case LEFT:
-			player.setDirection(Direction.WEST);
+		case A:
+			player.getLocation().decrementX();
 			break;
-		case RIGHT:
-			player.setDirection(Direction.EAST);
+		case D:
+			player.getLocation().incrementX();
 			break;
-		case UP:
-			player.setDirection(Direction.NORTH);
+		case W:
+			player.getLocation().decrementY();
 			break;
-		case DOWN:
-			player.setDirection(Direction.SOUTH);
+		case S:
+			player.getLocation().incrementY();
 			break;
 		default:
 			break;
