@@ -30,9 +30,10 @@ public class MainController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		game = new Game(Tile.mapa0);
+		game = new Game(view, Tile.mapa);
+		game.start();
 		
-		getView().setCenter(getGame().getGameMap());
+		getView().setCenter(getGame().getInitialMap());
 	}
 	
 	public Game getGame() {

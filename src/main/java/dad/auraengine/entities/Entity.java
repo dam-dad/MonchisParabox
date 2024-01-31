@@ -31,5 +31,4 @@ public abstract class Entity<T extends Shape> {
 	public Image getImage() {
 		return image;
 	}
-
 }
