@@ -1,6 +1,6 @@
 package dad.auraengine.entities;
 
-import dad.auraengine.Map;
+import dad.auraengine.entities.movements.Location;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 
@@ -12,11 +12,11 @@ public abstract class Entity<T extends Shape> {
 	
 	public static final double SCALE = 0.43;
 	
-	protected int posX, posY;
+	protected Location location;
 	protected int width, height;
 	protected Image image;
 	
-	public abstract void render(Map map);
+	public abstract void render();
 	public abstract T getCollisionShape();
 	
 	/**
@@ -31,5 +31,4 @@ public abstract class Entity<T extends Shape> {
 	public Image getImage() {
 		return image;
 	}
-
 }

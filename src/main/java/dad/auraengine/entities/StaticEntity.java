@@ -1,6 +1,6 @@
 package dad.auraengine.entities;
 
-import dad.auraengine.Map;
+import dad.auraengine.entities.movements.Location;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Shape;
@@ -11,18 +11,17 @@ import javafx.scene.shape.Shape;
  */
 public class StaticEntity<T extends Shape> extends Entity<T> {
 	
-	public StaticEntity(Image image, int x, int y) {
+	public StaticEntity(Image image, Location location) {
 		super();
 		this.image = image;
-		this.posX = x;
-		this.posY = y;
+		this.location = location;
 		this.width = (int) image.getWidth();
 		this.height = (int) image.getHeight();
 	}
 
 	@Override
-	public void render(Map map) {
-		map.addEntity(new ImageView(image), posX, posY);
+	public void render() {
+		location.getMap().addEntity(new ImageView(image), location.getX(), location.getY());
 	}
 
 	@Override
