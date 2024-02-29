@@ -1,22 +1,25 @@
 package dad.auraengine.entities.movements;
 
-import dad.auraengine.Map;
+import dad.monchisparabox.game.GameMap;
 
 public class Location {
 	
-	private Map map;
+	private GameMap map;
 	private int X;
 	private int Y;
 	
+	private int lastX;
+	private int lastY;
+	
 	private Location() {}
 	
-	public Location(Map map, int X, int Y) {
+	public Location(GameMap map, int X, int Y) {
 		this.map = map;
 		this.X = X;
 		this.Y = Y;
 	}
 	
-	public Map getMap() {
+	public GameMap getMap() {
 		return map;
 	}
 	
@@ -28,19 +31,59 @@ public class Location {
 		return Y;
 	}
 	
-	public void incrementX() {
-		X++;
+	public int getLastX() {
+		return lastX;
 	}
 	
-	public void incrementY() {
-		Y++;
+	public int getLastY() {
+		return lastY;
 	}
 	
-	public void decrementX() {
-		X--;
+	public void setLastX(int lastX) {
+		this.lastX = lastX;
 	}
 	
-	public void decrementY() {
-		Y--;
+	public void setLastY(int lastY) {
+		this.lastY = lastY;
+	}
+	
+	public void setX(int x) {
+		X = x;
+	}
+	
+	public void setY(int y) {
+		Y = y;
+	}
+	
+	public boolean incrementX() {
+		if (X < map.getMapMaxWidth() - 1) {
+			X++;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean incrementY() {
+		if (Y < map.getMapMaxHeight() - 1) {
+			Y++;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean decrementX() {
+		if (X > 0) {
+			X--;
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean decrementY() {
+		if (Y > 0) {
+			Y--;
+			return true;
+		}
+		return false;
 	}
 }
