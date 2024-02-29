@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import dad.auraengine.media.Music;
 import dad.monchisparabox.game.Game;
 import dad.monchisparabox.game.utilities.Tile;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ public class MainController implements Initializable {
     private BorderPane view;
     
     private Game game;
+
+	private Music music;
     
 	public MainController() {
 		try {
@@ -32,12 +35,16 @@ public class MainController implements Initializable {
             throw new RuntimeException(e);
         }
 	}
+
+
+
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		game = new Game(view, Tile.mapa);
 		game.start();
-
+		music = new Music("Priscila");
+		music.play();
 		getView().setCenter(getGame().getInitialMap());
 	}
 	

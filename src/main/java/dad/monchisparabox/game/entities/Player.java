@@ -2,6 +2,7 @@ package dad.monchisparabox.game.entities;
 
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.movements.Location;
+import dad.auraengine.media.Music;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
@@ -17,10 +18,14 @@ public class Player extends Entity<Rectangle> {
 
 	private Location location;
 
+
+
+
+
 	public Player() {
 		super();
 		// load player image
-		image = new Image("/assets/entities/player.png");
+		image = new Image("/assets/entities/show_player.png");
 
 		playerComponent = new ImageView();
 		playerComponent.setImage(image);
@@ -28,6 +33,8 @@ public class Player extends Entity<Rectangle> {
 		// variables of character size
 		this.width = (int) 50;
 		this.height = (int) 50;
+
+
 	}
 
 	public void setLocation(Location location) {
@@ -61,6 +68,7 @@ public class Player extends Entity<Rectangle> {
 		switch (code) {
 			case A:
 				location.decrementX();
+
 				break;
 			case D:
 				location.incrementX();

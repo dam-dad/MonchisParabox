@@ -21,13 +21,17 @@ public class Music {
 	 * @param el fichero de musica
 	 */
 	public Music(String file) {
-		try { 
+		try {
 			URL path = getClass().getResource("/music/" + file + ".mp3");
+			if (path == null) {
+				throw new IllegalArgumentException("El archivo de música no se encontró: " + file);
+			}
 			this.media = new Media(path.toURI().toString());
 		} catch (URISyntaxException e) {
 			throw new RuntimeException(e);
 		}
 	}
+
 	
 	/**
 	 * Método para iniciar musica
