@@ -34,6 +34,7 @@ public class Player extends Entity<Rectangle> {
 		return location;
 	}
 
+	// First time in map
 	@Override
 	public void render() {
 		location.getMap().addEntity(playerComponent, location.getX(), location.getY());

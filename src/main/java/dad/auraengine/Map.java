@@ -13,8 +13,14 @@ public class Map extends GridPane {
 	
 	private static final double CELL_SIZE = 50;
 	
+	private int maxHeight;
+	private int maxWidth;
+	
 	public Map(int maxX, int maxY, double scale) {
 		super(0, 0);
+		
+		maxHeight = maxY;
+		maxWidth = maxX;
 		
 		setAlignment(Pos.CENTER);
 		setGridLinesVisible(false);
@@ -58,5 +64,13 @@ public class Map extends GridPane {
 	public double getCenterY(int posY) {
 	    double cellHeight = getHeight() / getRowConstraints().size();
 	    return (cellHeight * (posY + 0.5) + getLayoutY()) * 10;
+	}
+	
+	public int getMapMaxHeight() {
+		return maxHeight;
+	}
+	
+	public int getMapMaxWidth() {
+		return maxWidth;
 	}
 }

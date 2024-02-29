@@ -24,11 +24,18 @@ public abstract class Entity<T extends Shape> {
 	 * @param entidad para comprobar colision
 	 * @return
 	 */
-	public boolean checkCollision(Entity<? extends Shape> entity) {
-		return (getCollisionShape() != null && entity.getCollisionShape() != null && getCollisionShape().intersects(entity.getCollisionShape().getLayoutBounds()));
+	public boolean checkCollision(Location locChecked) {
+		if (getLocation().getX() == locChecked.getX() && getLocation().getY() == locChecked.getY()) {
+            return true;
+        }
+	    return false;
 	}
 	
 	public Image getImage() {
 		return image;
+	}
+	
+	public Location getLocation() {
+		return location;
 	}
 }
