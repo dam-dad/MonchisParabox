@@ -2,10 +2,8 @@ package dad.monchisparabox.game.utilities;
 
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.GameMap;
-import dad.monchisparabox.game.entities.BoxBlock;
-import dad.monchisparabox.game.entities.Block;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
+import dad.monchisparabox.game.block.BoxBlock;
+import dad.monchisparabox.game.block.LimitBlock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,11 +13,11 @@ public class Tile {
     public static String mapa = """
             ##########
             #........#
-            p........#
+            p....b...#
             #........#
             #..b..b..#
             #........#
-            #........#
+            #...b....#
             #........#
             #........#
             ##########
@@ -71,11 +69,11 @@ public class Tile {
                         case '=':
                             map.setEnd(new Location(map, columna, fila));
                             break;
+                        case '#':
+                            map.getBlocks().add(new LimitBlock(new Location(map, columna, fila)));
+                            break;
                         case 'b':
                             map.getBlocks().add(new BoxBlock(new Location(map, columna, fila)));
-                            break;
-                        case '#':
-                            map.getBlocks().add(new Block(new Location(map, columna, fila)));
                             break;
                         case '.':
                             // Vacío, nada, debería ser fondo
@@ -89,8 +87,10 @@ public class Tile {
                     }
                 }
             }
+
             mapList.add(map);
         }
+
         return mapList;
     }
 }

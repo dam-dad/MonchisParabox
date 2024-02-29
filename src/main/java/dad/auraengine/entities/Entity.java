@@ -25,11 +25,8 @@ public abstract class Entity<T extends Shape> {
 	 * @return
 	 */
 	public boolean checkCollision(Location locChecked) {
-		if (getLocation().getX() == locChecked.getX() && getLocation().getY() == locChecked.getY()) {
-            return true;
-        }
-	    return false;
-	}
+        return getLocation().getX() == locChecked.getX() && getLocation().getY() == locChecked.getY();
+    }
 	
 	public Image getImage() {
 		return image;
@@ -37,5 +34,10 @@ public abstract class Entity<T extends Shape> {
 	
 	public Location getLocation() {
 		return location;
+	}
+
+	public void cancelMove() {
+		location.setX(location.getLastX());
+		location.setY(location.getLastY());
 	}
 }

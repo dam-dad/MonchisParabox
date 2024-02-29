@@ -9,7 +9,12 @@ import dad.monchisparabox.game.utilities.Tile;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 
 public class MainController implements Initializable {
 	
@@ -32,7 +37,7 @@ public class MainController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		game = new Game(view, Tile.mapa);
 		game.start();
-		
+
 		getView().setCenter(getGame().getInitialMap());
 	}
 	

@@ -1,13 +1,12 @@
 package dad.auraengine;
 
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class Map extends GridPane {
 	
@@ -24,7 +23,7 @@ public class Map extends GridPane {
 		
 		setAlignment(Pos.CENTER);
 		setGridLinesVisible(false);
-		
+
 		for (int i = 0; i < maxY; i++) {
 	        RowConstraints rConstraint = new RowConstraints();
 	        rConstraint.setMaxHeight(CELL_SIZE);
