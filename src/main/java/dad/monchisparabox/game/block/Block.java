@@ -63,11 +63,17 @@ public class Block extends CollidableEntity {
 					destroy(); //Lo saco de este mapa
 				}
 
+				if(this instanceof BoxBlock && entity instanceof MapBlock) {
+					//TODO El bloque pa dentro
+					System.out.println("BLOQUE DENTRO");
+				}
+
 				if(!(entity instanceof MapBlock)) {
 					if (this instanceof MapBlock && entity instanceof Player) {
 						//TODO El jugador pa dentro
-						System.out.println("Ganaste");
+						System.out.println("JUGADOR DENTRO");
 					}
+
 					entity.cancelMove();
 				}
 			}
