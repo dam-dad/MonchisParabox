@@ -1,4 +1,4 @@
-package dad.proyectoDAD.main;
+package dad.monchisparabox.main;
 
 import dad.proyectoDAD.controller.MainController;
 import javafx.application.Application;
