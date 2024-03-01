@@ -1,0 +1,6 @@
+.inicio {
+    -fx-background-image: url('/images/fondo1.gif');
+    -fx-background-color: white;
+    -fx-background-size: contain;
+    -fx-background-repeat: repeat;
+ }
