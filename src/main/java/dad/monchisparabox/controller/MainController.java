@@ -1,4 +1,4 @@
-package dad.proyectoDAD.controller;
+package dad.monchisparabox.controller;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
