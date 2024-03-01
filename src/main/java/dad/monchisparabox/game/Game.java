@@ -3,6 +3,8 @@ package dad.monchisparabox.game;
 import java.util.ArrayList;
 
 
+import dad.auraengine.entities.StaticEntity;
+import dad.auraengine.entities.movements.Direction;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.game.block.Block;
@@ -12,6 +14,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
 
 public class Game extends AnimationTimer {
 
@@ -19,7 +22,10 @@ public class Game extends AnimationTimer {
 
     private ArrayList<GameMap> maps = new ArrayList<>();
 
-    public Game(Node root, String tiledMap) {
+    private BorderPane root;
+
+    public Game(BorderPane root, String tiledMap) {
+        this.root = root;
         maps.addAll(Tile.tiles(tiledMap));
 
         player = new Player();
@@ -44,8 +50,13 @@ public class Game extends AnimationTimer {
     }
 
     public void init() {
-        maps.get(0).getBlocks().forEach(t -> t.render());
+        getInitialMap().load();
         player.render();
+    }
+
+    public void changeMap(GameMap gameMap) {
+        gameMap.load();
+        root.setCenter(gameMap);
     }
 
     // game loop
@@ -56,6 +67,14 @@ public class Game extends AnimationTimer {
     }
 
     private void handleKeyPress(KeyCode code) {
-        player.handleMovement(code);
+        if (code == KeyCode.W) {
+            player.handleMovement(Direction.UP);
+        } else if(code == KeyCode.A) {
+            player.handleMovement(Direction.LEFT);
+        } else if(code == KeyCode.S) {
+            player.handleMovement(Direction.DOWN);
+        } else if(code == KeyCode.D) {
+            player.handleMovement(Direction.RIGHT);
+        }
     }
 }

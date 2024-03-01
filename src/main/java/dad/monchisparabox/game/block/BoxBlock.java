@@ -29,4 +29,10 @@ public class BoxBlock extends Block {
     public void render() {
         location.getMap().addEntity(blockView, location.getX(), location.getY());
     }
+
+    @Override
+    public void destroy() {
+        location.getMap().getBlocks().remove(this);
+        location.getMap().getChildren().remove(blockView);
+    }
 }

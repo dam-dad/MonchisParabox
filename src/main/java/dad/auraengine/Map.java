@@ -24,6 +24,8 @@ public class Map extends GridPane {
 		setAlignment(Pos.CENTER);
 		setGridLinesVisible(false);
 
+		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
+
 		for (int i = 0; i < maxY; i++) {
 	        RowConstraints rConstraint = new RowConstraints();
 	        rConstraint.setMaxHeight(CELL_SIZE);

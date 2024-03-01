@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dad.auraengine.Map;
+import dad.auraengine.entities.StaticEntity;
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
@@ -22,7 +23,11 @@ public class GameMap extends Map {
 		super(maxX, maxY, scale);
 		setGridLinesVisible(true);
 	}
-	
+
+	public void load() {
+		getBlocks().forEach(StaticEntity::render);
+	}
+
 	public Location getStart() {
 		return start;
 	}

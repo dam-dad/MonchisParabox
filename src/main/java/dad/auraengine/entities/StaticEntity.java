@@ -10,7 +10,9 @@ import javafx.scene.shape.Shape;
  *   emplea el metodo getShape para comprobar colisiones con el player
  */
 public class StaticEntity<T extends Shape> extends Entity<T> {
-	
+
+	private ImageView imageView;
+
 	public StaticEntity(Image image, Location location) {
 		super();
 		this.image = image;
@@ -21,12 +23,20 @@ public class StaticEntity<T extends Shape> extends Entity<T> {
 
 	@Override
 	public void render() {
-		location.getMap().addEntity(new ImageView(image), location.getX(), location.getY());
+		imageView = new ImageView(image);
+		location.getMap().addEntity(imageView, location.getX(), location.getY());
 	}
 
 	@Override
 	public T getCollisionShape() {
 		return null;
+	}
+
+	@Override
+	public void destroy() {
+		if(imageView != null) {
+			location.getMap().getChildren().remove(imageView);
+		}
 	}
 
 }
