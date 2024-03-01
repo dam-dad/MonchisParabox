@@ -57,15 +57,19 @@ public class Block extends CollidableEntity {
 				mapBlock.push(keyCode);
 			}
 
+			// Estoy estancado y voy a cancelar el movimiento
 			if (checkCollision(entity.getLocation())) {
+				// TODO ambos somos iguales
 				if(entity instanceof MapBlock) {
 					// TODO ME LO COMO
 					destroy(); //Lo saco de este mapa
 				}
 
-				if(this instanceof BoxBlock && entity instanceof MapBlock) {
+				if(this instanceof MapBlock && entity instanceof BoxBlock) {
 					//TODO El bloque pa dentro
 					System.out.println("BLOQUE DENTRO");
+					entity.destroy();
+					return;
 				}
 
 				if(!(entity instanceof MapBlock)) {
