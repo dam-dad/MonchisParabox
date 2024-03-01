@@ -54,6 +54,11 @@ public class Player extends Entity<Rectangle> {
 		return new Rectangle(width, height);
 	}
 
+	@Override
+	public void destroy() {
+		location.getMap().getChildren().remove(playerComponent);
+	}
+
 	public void handleMovement(KeyCode code) {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());

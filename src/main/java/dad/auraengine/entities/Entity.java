@@ -18,6 +18,7 @@ public abstract class Entity<T extends Shape> {
 	
 	public abstract void render();
 	public abstract T getCollisionShape();
+	public abstract void destroy();
 	
 	/**
 	 * comprobar las colisiones usando la interseccion

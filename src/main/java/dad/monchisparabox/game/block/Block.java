@@ -3,6 +3,7 @@ package dad.monchisparabox.game.block;
 import dad.auraengine.entities.CollidableEntity;
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.movements.Location;
+import dad.monchisparabox.game.entities.Player;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 
@@ -52,10 +53,23 @@ public class Block extends CollidableEntity {
 				entity.cancelMove();
 			} else if (this instanceof BoxBlock boxBlock) {
                 boxBlock.push(keyCode);
+			} else if (this instanceof MapBlock mapBlock) {
+				mapBlock.push(keyCode);
 			}
 
 			if (checkCollision(entity.getLocation())) {
-				entity.cancelMove();
+				if(entity instanceof MapBlock) {
+					// TODO ME LO COMO
+					destroy(); //Lo saco de este mapa
+				}
+
+				if(!(entity instanceof MapBlock)) {
+					if (this instanceof MapBlock && entity instanceof Player) {
+						//TODO El jugador pa dentro
+						System.out.println("Ganaste");
+					}
+					entity.cancelMove();
+				}
 			}
 		}
 	}

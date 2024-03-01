@@ -13,7 +13,7 @@ public class MapBlock extends Block {
 
     public MapBlock(Location location) {
         super(location);
-        image = new Image("/assets/block/libre2.png");
+        image = new Image("/assets/block/libre3.png");
         mapView = new ImageView(image);
     }
 
@@ -33,5 +33,11 @@ public class MapBlock extends Block {
     @Override
     public void render() {
         location.getMap().addEntity(mapView, location.getX(), location.getY());
+    }
+
+    @Override
+    public void destroy() {
+        location.getMap().getBlocks().remove(this);
+        location.getMap().getChildren().remove(mapView);
     }
 }

@@ -2,8 +2,12 @@ package dad.monchisparabox.game.utilities;
 
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.GameMap;
+import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
+import dad.monchisparabox.game.block.MapBlock;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +22,21 @@ public class Tile {
             #..b..b..#
             #........#
             #...b....#
-            #........#
+            #.....M..#
             #........#
             ##########
-            @1
+            @
             ##########
             #.....N..#
             #....EMO.#
             #b....S..#
             #........#
             #........#
-            #........#
+            #.....M..#
             #........#
             #........#
             ##########
-            @2
+            @
             ##########
             #_....####
             #.......=#
@@ -59,6 +63,10 @@ public class Tile {
                 for (int columna = 0; columna < lineas[fila].length(); columna++) {
                     char caracter = lineas[fila].charAt(columna);
 
+                    Rectangle empty = new Rectangle(50, 50);
+                    empty.setFill(Color.WHITE);
+                    map.add(empty, columna, fila);
+
                     switch (caracter) {
                         case 'p':
                             map.setStart(new Location(map, columna, fila));
@@ -75,20 +83,27 @@ public class Tile {
                         case 'b':
                             map.getBlocks().add(new BoxBlock(new Location(map, columna, fila)));
                             break;
-                        case '.':
-                            // Vacío, nada, debería ser fondo
-                            break;
                         case 'M':
-                            // Es un mapa, esto no puede ser M, número
-                            /*Rectangle M = new Rectangle(50, 50);
-                            M.setFill(Color.VIOLET);
-                            map.add(M, columna, fila);*/
+                            MapBlock mapBlock = new MapBlock(new Location(map, columna, fila));
+                            map.getBlocks().add(mapBlock);
+                            break;
+                        case '.':
+                            //nada
                             break;
                     }
                 }
             }
 
             mapList.add(map);
+        }
+
+        for (int i = 0; i < mapList.size(); i++) {
+            GameMap gameMap = mapList.get(i);
+            for(Block block : gameMap.getBlocks()) {
+                if(block instanceof MapBlock mapBlock) {
+                    mapBlock.setGameMap(mapList.get(i+1));
+                }
+            }
         }
 
         return mapList;

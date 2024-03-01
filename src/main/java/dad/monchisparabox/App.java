@@ -15,6 +15,7 @@ public class App extends Application {
 
         primaryStage.setTitle("Monchi's Parabox");
         primaryStage.setScene(new Scene(mainController.getView()));
+        primaryStage.setMaximized(true);
         primaryStage.show();
 	}
 }
