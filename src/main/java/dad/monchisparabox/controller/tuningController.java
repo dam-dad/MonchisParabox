@@ -1,4 +1,4 @@
-package dad.proyectoDAD.controller;
+package dad.monchisparabox.controller;
 
 import java.io.IOException;
 import java.net.URL;
