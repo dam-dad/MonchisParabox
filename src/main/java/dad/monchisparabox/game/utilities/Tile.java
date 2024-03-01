@@ -16,20 +16,20 @@ public class Tile {
 
     public static String mapa = """
             ##########
+            #...#....#
+            #p...b...#
+            #....b...#
+            #....b...#
             #........#
-            p....b...#
-            #........#
-            #..b..b..#
-            #........#
-            #...b....#
+            ##.......#
             #.....M..#
-            #........#
+            #.......b#
             ##########
             @
-            ##########
-            #.....N..#
-            #....EMO.#
-            #b....S..#
+            ######p###
+            #.._.....#
+            #........#
+            #.b......#
             #........#
             #........#
             #.....M..#
@@ -63,6 +63,7 @@ public class Tile {
                 for (int columna = 0; columna < lineas[fila].length(); columna++) {
                     char caracter = lineas[fila].charAt(columna);
 
+                    // Este es el fondo vacio
                     Rectangle empty = new Rectangle(50, 50);
                     empty.setFill(Color.WHITE);
                     map.add(empty, columna, fila);

@@ -1,6 +1,7 @@
 package dad.monchisparabox.game.entities;
 
 import dad.auraengine.entities.Entity;
+import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
@@ -59,21 +60,21 @@ public class Player extends Entity<Rectangle> {
 		location.getMap().getChildren().remove(playerComponent);
 	}
 
-	public void handleMovement(KeyCode code) {
+	public void handleMovement(Direction direction) {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());
 
-		switch (code) {
-			case A:
+		switch (direction) {
+			case LEFT:
 				location.decrementX();
 				break;
-			case D:
+			case RIGHT:
 				location.incrementX();
 				break;
-			case W:
+			case UP:
 				location.decrementY();
 				break;
-			case S:
+			case DOWN:
 				location.incrementY();
 				break;
 			default:
@@ -82,7 +83,7 @@ public class Player extends Entity<Rectangle> {
 
 		Block block = location.getMap().getBlockAt(location, null);
 		if(block != null) {
-			block.handleCollision(this, code);
+			block.handleCollision(this, direction);
 		}
 	}
 

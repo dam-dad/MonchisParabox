@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 
 import dad.auraengine.entities.StaticEntity;
+import dad.auraengine.entities.movements.Direction;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.game.block.Block;
@@ -66,6 +67,14 @@ public class Game extends AnimationTimer {
     }
 
     private void handleKeyPress(KeyCode code) {
-        player.handleMovement(code);
+        if (code == KeyCode.W) {
+            player.handleMovement(Direction.UP);
+        } else if(code == KeyCode.A) {
+            player.handleMovement(Direction.LEFT);
+        } else if(code == KeyCode.S) {
+            player.handleMovement(Direction.DOWN);
+        } else if(code == KeyCode.D) {
+            player.handleMovement(Direction.RIGHT);
+        }
     }
 }

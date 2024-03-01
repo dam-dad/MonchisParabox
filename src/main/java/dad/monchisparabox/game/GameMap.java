@@ -24,8 +24,6 @@ public class GameMap extends Map {
 		setGridLinesVisible(true);
 	}
 
-
-
 	public void load() {
 		getBlocks().forEach(StaticEntity::render);
 	}

@@ -2,6 +2,7 @@ package dad.monchisparabox.game.block;
 
 import dad.auraengine.entities.CollidableEntity;
 import dad.auraengine.entities.Entity;
+import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.entities.Player;
 import javafx.scene.image.Image;
@@ -13,23 +14,23 @@ public class Block extends CollidableEntity {
 		super(new Image("/assets/block/block.png"), location);
 	}
 
-	public void push(KeyCode keyCode) {
+	public void push(Direction direction) {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());
 
 		boolean move = false;
 
-		switch (keyCode) {
-			case A:
+		switch (direction) {
+			case LEFT:
 				move = location.decrementX();
 				break;
-			case D:
+			case RIGHT:
 				move = location.incrementX();
 				break;
-			case W:
+			case UP:
 				move = location.decrementY();
 				break;
-			case S:
+			case DOWN:
 				move = location.incrementY();
 				break;
 			default:
@@ -39,7 +40,7 @@ public class Block extends CollidableEntity {
 		if(move) {
 			Block block = location.getMap().getBlockAt(location, this);
 			if (block != null) {
-				block.handleCollision(this, keyCode);
+				block.handleCollision(this, direction);
 			}
 		} else {
 			System.out.println("Esta saliendo del mapa mi rey");
@@ -47,28 +48,77 @@ public class Block extends CollidableEntity {
 		}
 	}
 
-	public void handleCollision(Entity entity, KeyCode keyCode) {
+	public void handleCollision(Entity entity, Direction direction) {
 		if (checkCollision(entity.getLocation())) {
 			if (this instanceof LimitBlock) {
 				entity.cancelMove();
 			} else if (this instanceof BoxBlock boxBlock) {
-                boxBlock.push(keyCode);
+                boxBlock.push(direction);
 			} else if (this instanceof MapBlock mapBlock) {
-				mapBlock.push(keyCode);
+				mapBlock.push(direction);
 			}
 
 			// Estoy estancado y voy a cancelar el movimiento
 			if (checkCollision(entity.getLocation())) {
-				// TODO ambos somos iguales
-				if(entity instanceof MapBlock) {
-					// TODO ME LO COMO
-					destroy(); //Lo saco de este mapa
+
+			/*	// si soy un bloque y me choca un mapblock
+				if(entity instanceof MapBlock mapBlock) {
+					if(direction == Direction.LEFT) {
+						// TODO ME LO COMO
+						destroy(); //Lo saco de este mapa
+					} else {
+						entity.cancelMove();
+					}
+				}
+			 */
+				if(entity instanceof MapBlock mapBlock) {
+					if(mapBlock.getFacing() == Direction.UP) {
+						if(direction == Direction.UP) {
+							destroy();
+						} else {
+							entity.cancelMove();
+						}
+					} else if (mapBlock.getFacing() == Direction.DOWN) {
+						if(direction == Direction.DOWN) {
+							destroy();
+						} else {
+							entity.cancelMove();
+						}
+					} else if (mapBlock.getFacing() == Direction.LEFT) {
+						if(direction == Direction.LEFT) {
+							destroy();
+						} else {
+							entity.cancelMove();
+						}
+					} else if (mapBlock.getFacing() == Direction.RIGHT) {
+						if(direction == Direction.RIGHT) {
+							destroy();
+						} else {
+							entity.cancelMove();
+						}
+					}
 				}
 
-				if(this instanceof MapBlock && entity instanceof BoxBlock) {
-					//TODO El bloque pa dentro
-					System.out.println("BLOQUE DENTRO");
-					entity.destroy();
+
+				// Si soy un mapblock y me choca un bloque
+				if(this instanceof MapBlock mapBlock && entity instanceof BoxBlock) {
+					if(mapBlock.getFacing() == Direction.UP) {
+						if(direction == Direction.DOWN) {
+							entity.destroy();
+						}
+					} else if (mapBlock.getFacing() == Direction.DOWN) {
+						if(direction == Direction.UP) {
+							entity.destroy();
+						}
+					} else if (mapBlock.getFacing() == Direction.LEFT) {
+						if(direction == Direction.RIGHT) {
+							entity.destroy();
+						}
+					} else if (mapBlock.getFacing() == Direction.RIGHT) {
+						if(direction == Direction.LEFT) {
+							entity.destroy();
+						}
+					}
 					return;
 				}
 
@@ -81,6 +131,15 @@ public class Block extends CollidableEntity {
 					entity.cancelMove();
 				}
 			}
+		}
+	}
+
+	public void handleKick(Entity entity, Direction direction) {
+		if(direction == Direction.RIGHT) {
+			System.out.println("BLOQUE DENTRO");
+			entity.destroy();
+		} else {
+			entity.cancelMove();
 		}
 	}
 }
