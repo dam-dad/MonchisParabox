@@ -37,6 +37,10 @@ public abstract class Entity<T extends Shape> {
 		return location;
 	}
 
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public void cancelMove() {
 		location.setX(location.getLastX());
 		location.setY(location.getLastY());

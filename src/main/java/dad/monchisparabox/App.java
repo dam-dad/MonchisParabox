@@ -18,4 +18,8 @@ public class App extends Application {
         primaryStage.setMaximized(true);
         primaryStage.show();
 	}
+
+    public static MainController getMainController() {
+        return mainController;
+    }
 }

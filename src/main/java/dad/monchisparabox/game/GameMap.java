@@ -5,6 +5,7 @@ import java.util.List;
 
 import dad.auraengine.Map;
 import dad.auraengine.entities.StaticEntity;
+import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
@@ -57,11 +58,23 @@ public class GameMap extends Map {
 			if(block instanceof BoxBlock boxBlock) {
                 boxBlock.updateBlock();
 			}
-
 			if(block instanceof MapBlock mapBlock) {
 				mapBlock.updateBlock();
 			}
 		}
+	}
+
+	public Direction getFacing() {
+		if(getStart().getX() == 0 && getStart().getX() < getMapMaxWidth()-1 && getStart().getY() > 0 && getStart().getY() < getMapMaxHeight()-1) {
+			return Direction.LEFT;
+		} else if(getStart().getX() == getMapMaxWidth()-1 && getStart().getY() > 0 && getStart().getY() < getMapMaxHeight()-1) {
+			return Direction.RIGHT;
+		} else if(getStart().getX() < getMapMaxWidth()-1 && getStart().getX() > 0 && getStart().getY() == 0) {
+			return Direction.UP;
+		} else if(getStart().getX() < getMapMaxWidth()-1 && getStart().getX() > 0 && getStart().getY() == getMapMaxHeight()-1) {
+			return Direction.DOWN;
+		}
+		return null;
 	}
 
 	public Block getAdjacentBlock(Location location, KeyCode keyCode) {
