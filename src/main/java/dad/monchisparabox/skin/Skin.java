@@ -1,4 +1,4 @@
-package dad.proyectoDAD.skin;
+package dad.monchisparabox.skin;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
