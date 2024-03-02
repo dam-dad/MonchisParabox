@@ -3,9 +3,6 @@ package dad.monchisparabox.controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 public class ajustesController  implements Initializable {
 	
@@ -30,13 +26,14 @@ public class ajustesController  implements Initializable {
 	private EventHandler<MouseEvent> onOnMusica;
 	private EventHandler<MouseEvent> onLetras;
 	private EventHandler<MouseEvent> onFlechas;
+	private EventHandler<MouseEvent> onVolumen;
+	private EventHandler<MouseEvent> onPdf;
+	private EventHandler<MouseEvent> OnExpandir;
+	
+	//model
+	private double volumen;
 	
 	// view 
-	private TranslateTransition translateTransition;
-	
-	@FXML
-	private ImageView astronautaRacista;
-
     @FXML
     private ImageView expandirReducirImageView;
     
@@ -94,14 +91,17 @@ public class ajustesController  implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		volumenSlider.setValue(30);//PILLAR VOLUMEN ACTUAL
+		volumenSlider.setValue(30);
+		setVolumen(30);
 		
 		volumenSlider.valueProperty().addListener((o, ov, nv) -> {
-		    double volumen = nv.doubleValue();
-			System.out.println("VOLUMEN: " + volumen);
-		    //MODIFICAR VOLUMEN
-		    
-		    if (volumen == 0) {
+			double volumen = volumenSlider.valueProperty().doubleValue();
+			
+			setVolumen(volumen);
+
+			if(onVolumen != null) onVolumen.handle(null);
+			
+			if (volumen == 0) {
 		    	VolumenMenosImageView.setImage(new Image("/images/volumen0.png"));
 		    }else {
 		    	VolumenMenosImageView.setImage(new Image("/images/volumen1.png"));
@@ -110,18 +110,31 @@ public class ajustesController  implements Initializable {
 		
 	}
 	
+	public double getVolumen() {
+		return volumen;
+	}
+
+	public void setVolumen(double volumen) {
+		this.volumen = volumen;
+	}
+	
+	public void setOnVolumen(EventHandler<MouseEvent> onVolumen) {
+		this.onVolumen = onVolumen;
+	}
+	
 	@FXML
 	void onExpandirReducirClicked(MouseEvent event) {
+
+		if(OnExpandir != null) OnExpandir.handle(event);
+		
 		String nombreImagen = expandirReducirImageView.getImage().getUrl().substring(expandirReducirImageView.getImage().getUrl().lastIndexOf("/") + 1);
 		Stage stage = (Stage) view.getScene().getWindow();
 		
 		if (nombreImagen.equals("expandir.png")) {
-	        mostrarAstronauta();
 			expandirReducirImageView.setImage(new Image("/images/reducir.png"));
 	        stage.setMaximized(true);
 		    
 		}else if (nombreImagen.equals("reducir.png")) {
-			ocultarAstronauta();
 			expandirReducirImageView.setImage(new Image("/images/expandir.png"));
 			stage.setMaximized(false);
 			stage.setHeight(522);
@@ -129,28 +142,8 @@ public class ajustesController  implements Initializable {
 		}
 	}
 	
-	private void mostrarAstronauta() {
-		astronautaRacista.setLayoutX(Double.MAX_VALUE);
-
-	    if (translateTransition == null) {
-	        translateTransition = new TranslateTransition(Duration.seconds(20), astronautaRacista);
-	        translateTransition.setByX(600);
-	        translateTransition.setByY(0);
-	        ScaleTransition scaleTransition = new ScaleTransition(Duration.seconds(15), astronautaRacista);
-	        scaleTransition.setByX(-1);
-	        scaleTransition.setByY(-1);
-		    scaleTransition.play();
-	    }
-	    astronautaRacista.setVisible(true);
-	    translateTransition.play();
-	}
-
-	private void ocultarAstronauta() {
-	    if (translateTransition != null) {
-	        translateTransition.stop(); // Detiene la animación
-	    }
-	    
-	    astronautaRacista.setVisible(false);
+	public void setOnExpandir(EventHandler<MouseEvent> OnExpandir) {
+		this.OnExpandir = OnExpandir;
 	}
 	
 	@FXML
@@ -161,8 +154,7 @@ public class ajustesController  implements Initializable {
 	public void setOnAtras(EventHandler<MouseEvent> onAtras) {
 		this.onAtras = onAtras;
 	}
-	
-	
+		
 	@FXML
     void onSalirClicked(MouseEvent event) {
 		if(onSalir != null) onSalir.handle(event);
@@ -174,14 +166,18 @@ public class ajustesController  implements Initializable {
 	
 	@FXML
     void onDiplomaClicked(MouseEvent event) {
-		generarPDF();
+		if(onPdf != null) onPdf.handle(event);
     }
 
     @FXML
     void onDiplomaLabelClicked(MouseEvent event) {
-    	generarPDF();
+    	if(onPdf != null) onPdf.handle(event);
     }
 
+    public void setOnPdf(EventHandler<MouseEvent> onPdf) {
+		this.onPdf = onPdf;
+	}
+    
     @FXML
     void onEfectosClicked(MouseEvent event) {
 		String nombreImagen = efectosImageView.getImage().getUrl().substring(efectosImageView.getImage().getUrl().lastIndexOf("/") + 1);
@@ -259,21 +255,34 @@ public class ajustesController  implements Initializable {
 		this.onLetras = onLetras;
 	}
 
-
     @FXML
     void onVolumenMasClicked(MouseEvent event) {
 	    double nuevoValor = volumenSlider.getValue() + 15;
+	    
+	    VolumenMenosImageView.setImage(new Image("/images/volumen1.png"));
+	    
+		setVolumen(nuevoValor);
 	    volumenSlider.setValue(nuevoValor);
+		if(onVolumen != null) onVolumen.handle(event);
     }
 
     @FXML
     void onVolumenMenosClicked(MouseEvent event) {
 	    double nuevoValor = volumenSlider.getValue() - 15;
+	    
+	    if (nuevoValor < 0){
+	    	nuevoValor = 0;
+	    }
+	    
+	    if (nuevoValor == 0) {
+	    	VolumenMenosImageView.setImage(new Image("/images/volumen0.png"));
+	    }else {
+	    	VolumenMenosImageView.setImage(new Image("/images/volumen1.png"));
+	    }
+	    
+		setVolumen(nuevoValor);
 	    volumenSlider.setValue(nuevoValor);
+		if(onVolumen != null) onVolumen.handle(event);
     }
 
-
-	public static void generarPDF() {
-		System.out.println("GENERAR PDF HOMOSEXUAL");
-	}
 }
