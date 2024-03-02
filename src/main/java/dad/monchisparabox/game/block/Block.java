@@ -127,18 +127,17 @@ public class Block extends CollidableEntity {
                 }
 
                 if (!(entity instanceof MapBlock)) {
-
                     // Soy un jugador y me choco con un mapblock
                     if (this instanceof MapBlock mapBlock && entity instanceof Player player) {
                         System.out.println("disparo");
                         if (mapBlock.getGameMap().getFacing() == Direction.UP && direction == Direction.DOWN) {
-                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart());
+                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart(), true);
                         } else if (mapBlock.getGameMap().getFacing() == Direction.DOWN && direction == Direction.UP) {
-                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart());
+                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart(), true);
                         } else if (mapBlock.getGameMap().getFacing() == Direction.LEFT && direction == Direction.RIGHT) {
-                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart());
+                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart(), true);
                         } else if (mapBlock.getGameMap().getFacing() == Direction.RIGHT && direction == Direction.LEFT) {
-                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart());
+                            App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart(), true);
                         }
                     }
 

@@ -12,6 +12,7 @@ import javafx.scene.shape.Shape;
 public class StaticEntity<T extends Shape> extends Entity<T> {
 
 	private ImageView imageView;
+	protected boolean rendered = false;
 
 	public StaticEntity(Image image, Location location) {
 		super();
@@ -23,8 +24,11 @@ public class StaticEntity<T extends Shape> extends Entity<T> {
 
 	@Override
 	public void render() {
+		if(rendered) return;
+
 		imageView = new ImageView(image);
 		location.getMap().addEntity(imageView, location.getX(), location.getY());
+		rendered = true;
 	}
 
 	@Override
@@ -36,6 +40,7 @@ public class StaticEntity<T extends Shape> extends Entity<T> {
 	public void destroy() {
 		if(imageView != null) {
 			location.getMap().getChildren().remove(imageView);
+			rendered = false;
 		}
 	}
 

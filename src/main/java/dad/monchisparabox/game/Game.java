@@ -53,9 +53,11 @@ public class Game extends AnimationTimer {
         player.render();
     }
 
-    public void changeMap(GameMap gameMap, Location location) {
+    public void changeMap(GameMap gameMap, Location location, boolean joining) {
         Block door = gameMap.getBlockAt(location, null);
         if (door == null) {
+            if(joining)
+                gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
             player.setLocation(location.clone());
             player.getLocation().setLastX(location.getX());
             player.getLocation().setLastY(location.getY());

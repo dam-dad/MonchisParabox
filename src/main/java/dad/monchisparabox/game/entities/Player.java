@@ -3,6 +3,7 @@ package dad.monchisparabox.game.entities;
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
+import dad.monchisparabox.App;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
@@ -80,6 +81,7 @@ public class Player extends Entity<Rectangle> {
 			}
 		} else {
 			//TODO Volver al mapa anterior
+			App.getMainController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
 			System.out.println("(Player) Esta saliendo del mapa mi rey");
 		}
 	}

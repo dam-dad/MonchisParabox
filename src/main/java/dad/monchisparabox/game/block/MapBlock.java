@@ -12,8 +12,6 @@ public class MapBlock extends Block {
     private ImageView mapView;
     private GameMap gameMap;
 
-    //TODO Guardar de donde se entro por ultima vez (location)
-
     public MapBlock(Location location) {
         super(location);
         image = new Image("/assets/block/libre3.png");
@@ -35,12 +33,15 @@ public class MapBlock extends Block {
 
     @Override
     public void render() {
+        if(rendered) return;
         location.getMap().addEntity(mapView, location.getX(), location.getY());
+        rendered = true;
     }
 
     @Override
     public void destroy() {
         location.getMap().getBlocks().remove(this);
         location.getMap().getChildren().remove(mapView);
+        rendered = false;
     }
 }
