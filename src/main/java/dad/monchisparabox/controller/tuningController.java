@@ -17,6 +17,7 @@ public class tuningController implements Initializable {
 	//actions
 	private EventHandler<MouseEvent> onAtras;
 	private EventHandler<MouseEvent> onSalir;
+	private EventHandler<MouseEvent> onSonido;
 	
 	// view 
 	private Image skinActual;
@@ -88,18 +89,22 @@ public class tuningController implements Initializable {
 		//COMPLEMENTO 1
 		
 		complemento1xXImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento1ImageView.setImage(new Image("/images/complementos/c0.png"));
 		});
 		
 		complemento1x1ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento1ImageView.setImage(new Image("/images/complementos/c1.1.png"));
 		});
 		
 		complemento1x2ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento1ImageView.setImage(new Image("/images/complementos/c1.2.png"));
 		});
 		
 		complemento1x3ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento1ImageView.setImage(new Image("/images/complementos/c1.3.png"));
 		});
 
@@ -107,29 +112,33 @@ public class tuningController implements Initializable {
 		//COMPLEMENTO 2
 		
 		complemento2xXImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento2ImageView.setImage(new Image("/images/complementos/c0.png"));
 		});
 		
 		complemento2x1ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento2ImageView.setImage(new Image("/images/complementos/c2.1.png"));
 		});
 		
 		complemento2x2ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento2ImageView.setImage(new Image("/images/complementos/c2.2.png"));
 		});
 		
 		complemento2x3ImageView.setOnMouseClicked(event -> {
+			if(onSonido != null) onSonido.handle(event);
 			complemento2ImageView.setImage(new Image("/images/complementos/c2.3.png"));
 		});
 		
 	}
+
+	public void setOnSonido(EventHandler<MouseEvent> onSonido) {
+		this.onSonido = onSonido;
+	}
 	
 	@FXML
 	void OnAtrasClicked(MouseEvent event) {
-		//System.out.println("Complemento 1: " + complemento1ImageView.getImage().getUrl().substring(complemento1ImageView.getImage().getUrl().lastIndexOf("/") + 1));
-		//System.out.println("Complemento 2: " + complemento2ImageView.getImage().getUrl().substring(complemento2ImageView.getImage().getUrl().lastIndexOf("/") + 1));
-		//System.out.println("Skin: " + skinImageView.getImage().getUrl().substring(skinImageView.getImage().getUrl().lastIndexOf("/") + 1));
-
 		skinActual = new Image(skinImageView.getImage().getUrl());
 		complemento1Actual = new Image(complemento1ImageView.getImage().getUrl());
 		complemento2Actual= new Image(complemento2ImageView.getImage().getUrl());
@@ -177,6 +186,5 @@ public class tuningController implements Initializable {
 		this.complemento2Actual = complemento2Actual;
 		complemento2ImageView.setImage(complemento2Actual);
 	}
-	
-
 }
+
