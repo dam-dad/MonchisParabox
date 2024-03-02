@@ -8,5 +8,6 @@ Cada nivel es un desafío único y representa un nuevo día en la vida de Monchi
 
 Monchi's parabox posee una trama que refleja las decisiones y las segundas oportunidades que ofrece la vida. Además, busca enseñar a los jugadores la importancia de la educación, el amor, el crecimiento personal y el éxito en la vida académica. ¿Estás listo para ayudar al adolescente Monchi a enfrentar sus traumas infantiles y lograr su regreso triunfal a clase junto a su amado Yorman?
 
+
 ![CARATULA MONCHIS PARABOX](https://github.com/dam-dad/MonchisParabox/assets/93495032/fcae966c-7bf7-45cd-9f6f-de6c66cdcbe3)
 
