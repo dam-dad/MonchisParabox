@@ -25,7 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-
+import javafx.scene.media.AudioClip;
 
 public class MainController implements Initializable {
 	
@@ -36,8 +36,8 @@ public class MainController implements Initializable {
 	private Skin skin;
 	
 	//model
-    private double xOffset;
-    private double yOffset;
+	private boolean musica = true, efectos = true;
+    private double xOffset, yOffset;
 	private int posicionActual = 0;
     private List<String> skins = Arrays.asList("/images/skins/skin1.png", "/images/skins/skin2.png", "/images/skins/skin3.png", "/images/skins/skin4.png", "/images/skins/skin5.png");
 	
@@ -58,6 +58,12 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
+		String audioFile = getClass().getResource("/music/musica_inicio.mp3").toString();
+		AudioClip audioClip = new AudioClip(audioFile);
+		audioClip.setVolume(0.3f);
+		audioClip.play();
+
+		
 		// CONTROLADORES
 		inicioController = new inicioController();
 		
@@ -69,9 +75,12 @@ public class MainController implements Initializable {
 		
 		//INICIO > JUGAR
 		inicioController.setOnJugar (e -> {
+			efectoBoton();
 			Image skinFinal = generarSkinFinal(skin.getSkin(), new Image(skin.getComplemento1().getUrl().substring(skin.getComplemento1().getUrl().indexOf("/images/"), skin.getComplemento1().getUrl().length() - 4) + "F.png"));
 			generarSkinFinal(skinFinal, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/images/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
 			skin.setSkinFinal(skinFinal);
+			
+			//MUSICA / EFECTOS / IMAGEN
 		});	
 		
 		//INICIO > MOVER
@@ -92,12 +101,13 @@ public class MainController implements Initializable {
 		//INICIO > AJUSTES
         ajustescontroller = new ajustesController();
 		inicioController.setOnAjustes (e -> {
+			efectoBoton();
 			view.setCenter(ajustescontroller.getView());
-			System.out.print("Ajustes");
 		});
 		
 		//INICIO > SKIN SIGUIENTE 
 		inicioController.setOnSiguiente(e -> {
+			efectoBoton();
 	    	posicionActual++;
 		    
 		    if (posicionActual >= skins.size()) {
@@ -109,6 +119,7 @@ public class MainController implements Initializable {
 		
 		//INICIO > SKIN ANTERIOR 
 		inicioController.setOnAnterior (e -> {
+			efectoBoton();
 		    posicionActual--;
 		    
 		    if (posicionActual < 0) {
@@ -122,6 +133,7 @@ public class MainController implements Initializable {
 		//INICIO > TUNING
 		tuningController = new tuningController();
 		inicioController.setOnEditar (e -> {
+			efectoBoton();
 			tuningController.setskinActual(skin.getSkin());
 			tuningController.setcomplemento1Actual(skin.getComplemento1());
 			tuningController.setcomplemento2Actual(skin.getComplemento2());
@@ -131,36 +143,54 @@ public class MainController implements Initializable {
 		
 		//AJUSTES > INICIO
 		ajustescontroller.setOnAtras (e -> {
+			efectoBoton();
 			view.setCenter(inicioController.getView());
 		});
 		
 		//AJUSTES > SALIR
 		ajustescontroller.setOnSalir (e -> {
+			efectoBoton();
 			Platform.exit();
 		});
 		
-		//AJUSTES > EFECTIS OFF
+		//AJUSTES > MODIFICAR VOLUMEN
+		ajustescontroller.setOnVolumen (e -> {
+			if (musica) {
+				efectoBoton();
+				audioClip.stop();
+				audioClip.play(ajustescontroller.getVolumen() / 100);
+			}
+		});
+		
+		//AJUSTES > EFECTOS OFF
 		ajustescontroller.setonOffEfectos (e -> {
-			System.out.println("QUITAR EFECTOS DE SONIDO");
+			efectoBoton();
+			efectos = false;
 		});
 		
 		//AJUSTES > EFECTOS ON
 		ajustescontroller.setonOnEfectos (e -> {
-			System.out.println("PONER EFECTOS DE SONIDO");
+			efectoBoton();
+			efectos = true;
 		});	
 		
 		//AJUSTES > MÚSICA OFF 
 		ajustescontroller.setonOffMusica (e -> {
-			System.out.println("QUITAR MÚSICA");
+			efectoBoton();
+			audioClip.stop();
+			musica = false;
 		});
 				
 		//AJUSTES > MÚSICA ON
 		ajustescontroller.setonOnMusica (e -> {
-			System.out.println("PONER MÚSICA");
+			efectoBoton();
+			audioClip.play();
+			musica = true;
 		});	
 		
 		//AJUSTES > FLECHAS ON
 		ajustescontroller.setonFlechas (e -> {
+			efectoBoton();
 			System.out.println("ACTIVAR FLECHAS");
 			//ACTIVAR FLECHAS 
 			//DESACTIVAR LETRAS
@@ -168,14 +198,28 @@ public class MainController implements Initializable {
 		
 		//AJUSTES > LETRAS ON
 		ajustescontroller.setonLetras (e -> {
+			efectoBoton();
 			System.out.println("ACTIVAR LETRAS");
 			//ACTIVAR LETRAS
 		    //DESACTIVAR FLECHAS
 		});	
 		
+		//AJUSTES > GENERAR PDF
+		ajustescontroller.setOnPdf (e -> {
+			efectoBoton();
+			System.out.println("GENERAR PDF");
+			//GENERAR PDF
+		});	
+		
+		//AJUSTES > EXPANDIR / REDUCIR
+		ajustescontroller.setOnExpandir (e -> {
+			efectoBoton();
+		});	
+		
 		
 		//TUNING > INICIO
 		tuningController.setOnAtras (e -> {
+			efectoBoton();
 			skin.setSkin(tuningController.getskinActual());
 			skin.setComplemento1(tuningController.getcomplemento1Actual());
 			skin.setComplemento2(tuningController.getcomplemento2Actual());
@@ -187,8 +231,14 @@ public class MainController implements Initializable {
 			view.setCenter(inicioController.getView());
 		});
 		
+		//TUNING > EFECTOS
+		tuningController.setOnSonido (e -> {
+			efectoBoton();
+		});
+		
 		//TUNING > SALIR
 		tuningController.setOnSalir (e -> {
+			efectoBoton();
 			Platform.exit();
 		});
 		
@@ -255,5 +305,12 @@ public class MainController implements Initializable {
 	    return new BufferedImage(colorModel, raster, false, null);
 	}
 	
+	private void efectoBoton() {
+		if (efectos) {
+			String audioFile = getClass().getResource("/music/efecto_boton.mp3").toString();
+			AudioClip audio = new AudioClip(audioFile);
+			audio.play();
+		}
+	}
 	
 }
