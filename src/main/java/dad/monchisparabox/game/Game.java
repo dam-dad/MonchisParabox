@@ -17,6 +17,7 @@ import dad.monchisparabox.game.utilities.Tile;
 import javafx.animation.AnimationTimer;
 import javafx.application.Platform;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 
@@ -67,27 +68,75 @@ public class Game extends AnimationTimer {
         }
     }
 
-    public boolean teleportBlockToMap(GameMap gameMapTo, Block block, Location location) {
+    public boolean teleportBlockToMap(GameMap gameMapTo, boolean kicking, Block block, Location location) {
         Block door = gameMapTo.getBlockAt(location, null);
         if (door == null) {
-            System.out.println("Teleporting block to map | " + block.getClass().getName());
+            Direction facing = block.getLocation().getMap().getFacing();
             block.destroy();
-
             block.setLocation(location.clone());
-            if (gameMapTo.getFacing() == Direction.RIGHT) {
-                block.push(Direction.LEFT);
-            } else if (gameMapTo.getFacing() == Direction.LEFT) {
-                block.push(Direction.RIGHT);
-            } else if (gameMapTo.getFacing() == Direction.UP) {
-                block.push(Direction.DOWN);
-            } else if (gameMapTo.getFacing() == Direction.DOWN) {
-                block.push(Direction.UP);
+
+            if(!kicking) {
+                if (gameMapTo.getFacing() == Direction.RIGHT) {
+                    block.push(Direction.LEFT);
+                } else if (gameMapTo.getFacing() == Direction.LEFT) {
+                    block.push(Direction.RIGHT);
+                } else if (gameMapTo.getFacing() == Direction.UP) {
+                    block.push(Direction.DOWN);
+                } else if (gameMapTo.getFacing() == Direction.DOWN) {
+                    block.push(Direction.UP);
+                }
+            } else {
+                if (facing == Direction.RIGHT) {
+                    block.push(Direction.RIGHT);
+                } else if (facing == Direction.LEFT) {
+                    block.push(Direction.LEFT);
+                } else if (facing == Direction.UP) {
+                    block.push(Direction.UP);
+                } else if (facing == Direction.DOWN) {
+                    block.push(Direction.DOWN);
+                }
             }
 
             location.getMap().getBlocks().add(block);
             return true;
         }
         return false;
+    }
+
+    public Location getEndLocation() {
+        for (GameMap gameMap : maps) {
+            if(gameMap.getEnd() != null) {
+                System.out.println("End location: " + gameMap.getEnd());
+                return gameMap.getEnd();
+            }
+        }
+        return null;
+    }
+
+    public void checkWin() {
+        boolean win = true;
+
+        for (GameMap gameMap : maps) {
+            for (Location location : gameMap.getEndCages()) {
+                if (gameMap.getBlockAt(location, null) == null) {
+                    win = false;
+                    break;
+                }
+            }
+        }
+
+        if(player.getLocation().getMap() != getEndLocation().getMap() || player.getLocation().getX() != getEndLocation().getX() || player.getLocation().getY() != getEndLocation().getY()){
+            win = false;
+        }
+
+        if (win) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Congratulations");
+            alert.setHeaderText("You win!");
+            alert.setContentText("You have completed the game!");
+            alert.showAndWait();
+            App.getMainController().setGame(new Game(root, Tile.mapa));
+        }
     }
 
     // game loop

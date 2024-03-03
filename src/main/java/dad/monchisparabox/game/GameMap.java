@@ -24,7 +24,7 @@ public class GameMap extends Map {
 
     public GameMap(int maxX, int maxY, double scale) {
         super(maxX, maxY, scale);
-        setGridLinesVisible(true);
+        setGridLinesVisible(false);
     }
 
     public void load() {

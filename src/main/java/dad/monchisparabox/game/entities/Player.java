@@ -79,6 +79,7 @@ public class Player extends Entity<Rectangle> {
 			if (block != null) {
 				block.handleCollision(this, direction);
 			}
+			App.getMainController().getGame().checkWin();
 		} else {
 			//TODO Volver al mapa anterior
 			App.getMainController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
