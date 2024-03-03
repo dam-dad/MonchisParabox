@@ -176,7 +176,32 @@ public class GameMap extends Map {
 					//hecho
 					System.out.println("a");
 					limitBlock.setImage(new Image("/assets/block/center_block.png"));
-				}else if(!hasTopLeftBlock && hasTopBlock && !hasTopRightBlock && hasLeftBlock && hasRightBlock){
+				}else if(!hasLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock && hasRightBlock && hasTopBlock && hasTopRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+
+                }else if(!hasTopBlock && !hasRightBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/TopRight.png"));
+
+
+                }else if(!hasTopRightBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasBottomRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoTopRightVertical.png"));
+
+                }else if(!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasTopLeftBlock){
+
+                    limitBlock.setImage(new Image("/assets/block/NoBottomLeft.png"));
+
+                }else if(!hasTopBlock && !hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasBottomRightBlock &&hasRightBlock && !hasTopRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
+                }else if(!hasTopLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoTopLeft.png"));
+
+                }else if(!hasTopRightBlock && hasTopBlock && hasTopLeftBlock && hasRightBlock && hasLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoTopRight.png"));
+
+                }else if(!hasBottomLeftBlock && hasBottomBlock && hasLeftBlock && hasRightBlock && hasBottomRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoLeftBottomBlock.png"));
+
+                }else if(!hasTopLeftBlock && hasTopBlock && !hasTopRightBlock && hasLeftBlock && hasRightBlock){
                     limitBlock.setImage(new Image("/assets/block/noTopLeftNoTopRight.png"));
 
                 }else if(hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasTopBlock ){
