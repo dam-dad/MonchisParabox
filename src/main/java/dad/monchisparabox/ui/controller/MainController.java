@@ -18,47 +18,45 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 
 public class MainController implements Initializable {
-	
+
     @FXML
     private BorderPane view;
-    
+
     private Game game;
 
-	private Music music;
-    
-	public MainController() {
-		try {
+    private Music music;
+
+    public MainController() {
+        try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
             loader.setController(this);
             loader.load();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-	}
+    }
 
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        music = new Music("Priscila");
+        /*	music.play();*/
+        setGame(new Game(getView(), Tile.mapa));
+    }
 
-	
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-    music = new Music("Priscila");
-		music.play();
-		setGame(new Game(getView(), Tile.mapa));
-	}
-	
-	public Game getGame() {
-		return game;
-	}
+    public Game getGame() {
+        return game;
+    }
 
-	public void setGame(Game game) {
-		if(getGame() != null)
-			getGame().stop();
-		this.game = game;
-		getGame().start();
-		getView().setCenter(getGame().getInitialMap());
-	}
+    public void setGame(Game game) {
+        if (getGame() != null)
+            getGame().stop();
+        this.game = game;
+        getGame().start();
+        getView().setCenter(getGame().getInitialMap());
+    }
 
-	public BorderPane getView() {
-		return view;
-	}
+    public BorderPane getView() {
+        return view;
+    }
 }

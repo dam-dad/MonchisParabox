@@ -31,6 +31,7 @@ public class GameMap extends Map {
 
     public void load() {
         getBlocks().forEach(StaticEntity::render);
+        assignBlockImages();
     }
 
     public Location getStart() {
@@ -162,7 +163,14 @@ public class GameMap extends Map {
 					//hecho
 					System.out.println("a");
 					limitBlock.setImage(new Image("/assets/block/center_block.png"));
-				} else if (hasLeftBlock && hasRightBlock && hasTopBlock) {
+				}else if(!hasRightBlock && hasBottomBlock && hasTopBlock && hasLeftBlock) {
+                    System.out.println("n");
+                    limitBlock.setImage(new Image("/assets/block/rightVoid.png"));
+
+                }else if(hasRightBlock && hasBottomBlock && hasTopBlock && !hasLeftBlock) {
+                    System.out.println("n");
+                    limitBlock.setImage(new Image("/assets/block/leftVoid.png"));}
+                else if (hasLeftBlock && hasRightBlock && hasTopBlock) {
 					//hecho
 					System.out.println("b");
 					limitBlock.setImage(new Image("/assets/block/bottom_block.png"));
@@ -197,14 +205,18 @@ public class GameMap extends Map {
 					limitBlock.setImage(new Image("/assets/block/top_left_block.png"));
 					
 				}else if (hasLeftBlock && !hasRightBlock && !hasTopBlock && !hasBottomBlock) {
+                    System.out.println("j");
 					limitBlock.setImage(new Image("/assets/block/right_edge_block.png"));
 				} else if (!hasLeftBlock && hasRightBlock && !hasTopBlock && !hasBottomBlock) {
+                    System.out.println("k");
 					limitBlock.setImage(new Image("/assets/block/left_edge_block.png"));
 				} else if (!hasLeftBlock && !hasRightBlock && hasTopBlock && !hasBottomBlock) {
+                    System.out.println("l");
 					limitBlock.setImage(new Image("/assets/block/bottom_edge_block.png"));
 				} else if (!hasLeftBlock && !hasRightBlock && !hasTopBlock && hasBottomBlock) {
+                    System.out.println("m");
 					limitBlock.setImage(new Image("/assets/block/top_edge_block.png"));
-				} else {
+				}else {
 					//hecho
 					System.out.println("j");
 					limitBlock.setImage(new Image("/assets/block/lonely_block.png"));
