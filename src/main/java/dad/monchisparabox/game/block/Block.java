@@ -46,7 +46,12 @@ public class Block extends CollidableEntity {
             }
         } else {
             System.out.println("Esta saliendo del mapa mi rey");
-            //TODO Sacar el bloque y traer el de atrás
+
+            System.out.println(location.getMap().getJoinLocation().getMap().getStart());
+            
+            App.getMainController().getGame()
+            .teleportBlockToMap(location.getMap().getJoinLocation().getMap(),
+                    this, location.getMap().getJoinLocation());
         }
     }
 
