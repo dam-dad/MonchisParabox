@@ -151,14 +151,27 @@ public class GameMap extends Map {
 				Block rightBlock = getBlockAtForLimitBlock(new Location(this,x + 1, y));
 				Block topBlock = getBlockAtForLimitBlock(new Location(this,x, y - 1));
 				Block bottomBlock = getBlockAtForLimitBlock(new Location(this,x, y + 1));
+                //Implementacion de diagonales
+                Block topLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y - 1));
+                Block topRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y - 1));
+                Block bottomLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y + 1));
+                Block bottomRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y + 1));
+
+
 
 				// Determinar el tipo de bloque de alrededor
-				boolean hasLeftBlock = leftBlock != null;
-				boolean hasRightBlock = rightBlock != null;
-				boolean hasTopBlock = topBlock != null;
-				boolean hasBottomBlock = bottomBlock != null;
+                boolean hasLeftBlock = leftBlock != null;
+                boolean hasRightBlock = rightBlock != null;
+                boolean hasTopBlock = topBlock != null;
+                boolean hasBottomBlock = bottomBlock != null;
+                //Implementacion de diagonales
+                boolean hasTopLeftBlock = topLeftBlock != null;
+                boolean hasTopRightBlock = topRightBlock != null;
+                boolean hasBottomLeftBlock = bottomLeftBlock != null;
+                boolean hasBottomRightBlock = bottomRightBlock != null;
 
-				// Asignar imagen según el tipo de bloque de alrededor
+
+                // Asignar imagen según el tipo de bloque de alrededor
 				if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
 					//hecho
 					System.out.println("a");
