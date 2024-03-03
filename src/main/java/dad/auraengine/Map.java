@@ -14,6 +14,7 @@ public class Map extends GridPane {
 	
 	private int maxHeight;
 	private int maxWidth;
+
 	
 	public Map(int maxX, int maxY, double scale) {
 		super(0, 0);
@@ -22,7 +23,7 @@ public class Map extends GridPane {
 		maxWidth = maxX;
 		
 		setAlignment(Pos.CENTER);
-		setGridLinesVisible(false);
+		setGridLinesVisible(true);
 
 		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
