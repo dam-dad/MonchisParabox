@@ -6,6 +6,7 @@ import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.block.MapBlock;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -79,7 +80,8 @@ public class Tile {
                             map.setEnd(new Location(map, columna, fila));
                             break;
                         case '#':
-                            map.getBlocks().add(new LimitBlock(new Location(map, columna, fila)));
+                            LimitBlock limitBlock = new LimitBlock(new Location(map, columna, fila));
+                            map.getBlocks().add(limitBlock);
                             break;
                         case 'b':
                             map.getBlocks().add(new BoxBlock(new Location(map, columna, fila)));

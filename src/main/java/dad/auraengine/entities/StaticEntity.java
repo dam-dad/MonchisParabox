@@ -11,7 +11,7 @@ import javafx.scene.shape.Shape;
  */
 public class StaticEntity<T extends Shape> extends Entity<T> {
 
-	private ImageView imageView;
+	protected ImageView imageView;
 
 	public StaticEntity(Image image, Location location) {
 		super();

@@ -44,7 +44,8 @@ public class MainController implements Initializable {
 		game = new Game(view, Tile.mapa);
 		game.start();
 		music = new Music("Priscila");
-		music.play();
+		/*music.play();*/
+
 		getView().setCenter(getGame().getInitialMap());
 	}
 	

@@ -14,6 +14,8 @@ public class Block extends CollidableEntity {
 		super(new Image("/assets/block/block.png"), location);
 	}
 
+
+
 	public void push(Direction direction) {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());
@@ -142,4 +144,5 @@ public class Block extends CollidableEntity {
 			entity.cancelMove();
 		}
 	}
+
 }
