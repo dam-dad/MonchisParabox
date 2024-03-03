@@ -176,7 +176,21 @@ public class GameMap extends Map {
 					//hecho
 					System.out.println("a");
 					limitBlock.setImage(new Image("/assets/block/center_block.png"));
-				}else if(!hasRightBlock && hasBottomBlock && hasTopBlock && hasLeftBlock) {
+				}else if(!hasTopLeftBlock && hasTopBlock && !hasTopRightBlock && hasLeftBlock && hasRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/noTopLeftNoTopRight.png"));
+
+                }else if(hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasTopBlock ){
+                    limitBlock.setImage(new Image("/assets/block/NoTopLeftNoBottomLeft.png"));
+
+                }else if(!hasTopRightBlock && !hasTopRightBlock && hasRightBlock && hasTopBlock && hasBottomBlock){
+                 limitBlock.setImage(new Image("/assets/block/NoTopRightNoTopLeft.png"));
+
+                }else if(!hasBottomRightBlock && !hasBottomLeftBlock && hasBottomBlock && hasLeftBlock && hasRightBlock){
+                   limitBlock.setImage(new Image("/assets/block/NoBottomRightNoBottomLeft.png"));
+
+                }
+
+                else if(!hasRightBlock && hasBottomBlock && hasTopBlock && hasLeftBlock) {
                     System.out.println("n");
                     limitBlock.setImage(new Image("/assets/block/rightVoid.png"));
 
