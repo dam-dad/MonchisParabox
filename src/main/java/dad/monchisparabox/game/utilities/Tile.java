@@ -22,7 +22,7 @@ public class Tile {
             #...b.b..#
             #.....b..#
             #........#
-            #...bbbb##
+            #...######
             ##.......#
             #...M....#
             #...p.#.b#
@@ -67,7 +67,7 @@ public class Tile {
 
                     // Este es el fondo vacio
                     Rectangle empty = new Rectangle(50, 50);
-                    empty.setFill(Color.GRAY);
+                    empty.setFill(Color.ALICEBLUE);
                     map.add(empty, columna, fila);
 
                     switch (caracter) {
@@ -83,7 +83,8 @@ public class Tile {
                             map.setEnd(new Location(map, columna, fila));
                             break;
                         case '#':
-                            map.getBlocks().add(new LimitBlock(new Location(map, columna, fila)));
+                            LimitBlock limitBlock = new LimitBlock(new Location(map, columna, fila));
+                            map.getBlocks().add(limitBlock);
                             break;
                         case 'b':
                             map.getBlocks().add(new BoxBlock(new Location(map, columna, fila)));

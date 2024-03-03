@@ -14,7 +14,7 @@ public class BoxBlock extends Block {
 
     public BoxBlock(Location location) {
         super(location);
-        image = new Image("/assets/block/libre2.png");
+        image = new Image("/assets/entities/caja.png");
         blockView = new ImageView(image);
 
         this.location = location;

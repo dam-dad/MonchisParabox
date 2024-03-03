@@ -10,7 +10,6 @@ public class Location {
 	
 	private int lastX;
 	private int lastY;
-	
 	private Location() {}
 	
 	public Location(GameMap map, int X, int Y) {
