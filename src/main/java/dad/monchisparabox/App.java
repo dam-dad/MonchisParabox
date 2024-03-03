@@ -1,9 +1,14 @@
 package dad.monchisparabox;
 
+import dad.auraengine.media.Music;
 import dad.monchisparabox.ui.controller.MainController;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class App extends Application {
 
@@ -19,7 +24,7 @@ public class App extends Application {
         primaryStage.show();
 	}
 
-    public static MainController getMainController() {
-        return mainController;
-    }
+  public static MainController getMainController() {
+      return mainController;
+  }
 }
