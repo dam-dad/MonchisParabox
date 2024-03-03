@@ -7,6 +7,7 @@ import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.block.MapBlock;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -31,9 +32,9 @@ public class Tile {
             #.._.....#
             #........#
             #.b......#
-            #.....#..p
+            #....#...p
             #........#
-            #.....M..#
+            #....M...#
             #........#
             #........#
             ##########
@@ -74,9 +75,11 @@ public class Tile {
                             map.setStart(new Location(map, columna, fila));
                             break;
                         case '_':
+                            map.add(new ImageView(new Image("/assets/graffiti/caja_position.png")), columna, fila);
                             map.getEndCages().add(new Location(map, columna, fila));
                             break;
                         case '=':
+                            map.add(new ImageView(new Image("/assets/graffiti/player_finish.png")), columna, fila);
                             map.setEnd(new Location(map, columna, fila));
                             break;
                         case '#':
@@ -102,9 +105,11 @@ public class Tile {
 
         for (int i = 0; i < mapList.size(); i++) {
             GameMap gameMap = mapList.get(i);
+            int bloq = 1;
             for(Block block : gameMap.getBlocks()) {
                 if(block instanceof MapBlock mapBlock) {
-                    mapBlock.setGameMap(mapList.get(i+1));
+                    mapBlock.setGameMap(mapList.get(i+bloq));
+                    bloq++;
                 }
             }
         }

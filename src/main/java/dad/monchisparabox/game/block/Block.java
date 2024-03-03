@@ -46,12 +46,10 @@ public class Block extends CollidableEntity {
             }
         } else {
             System.out.println("Esta saliendo del mapa mi rey");
-
-            System.out.println(location.getMap().getJoinLocation().getMap().getStart());
-            
-            App.getMainController().getGame()
-            .teleportBlockToMap(location.getMap().getJoinLocation().getMap(),
-                    this, location.getMap().getJoinLocation());
+            if(!App.getMainController().getGame().teleportBlockToMap(location.getMap().getJoinLocation().getMap(),
+                    true, this, location.getMap().getJoinLocation())) {
+                cancelMove();
+            }
         }
     }
 
@@ -67,12 +65,36 @@ public class Block extends CollidableEntity {
 
             // Estoy estancado y voy a cancelar el movimiento
             if (checkCollision(entity.getLocation())) {
+                // Si soy un mapblock y me choca un bloque
+                if (this instanceof MapBlock mapBlock && entity instanceof Block block && !(entity instanceof LimitBlock)) {
+                    if (mapBlock.getGameMap().getFacing() == Direction.UP && direction == Direction.DOWN) {
+                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, block, mapBlock.getGameMap().getStart())) {
+                            block.cancelMove();
+                        }
+                        return;
+                    } else if (mapBlock.getGameMap().getFacing() == Direction.DOWN && direction == Direction.UP) {
+                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, block, mapBlock.getGameMap().getStart())) {
+                            block.cancelMove();
+                        }
+                        return;
+                    } else if (mapBlock.getGameMap().getFacing() == Direction.LEFT && direction == Direction.RIGHT) {
+                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, block, mapBlock.getGameMap().getStart())) {
+                            block.cancelMove();
+                        }
+                        return;
+                    } else if (mapBlock.getGameMap().getFacing() == Direction.RIGHT && direction == Direction.LEFT) {
+                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, block, mapBlock.getGameMap().getStart())) {
+                            block.cancelMove();
+                        }
+                        return;
+                    }
+                }
 
                 // Si soy un bloque y me choca un mapblock
                 if (entity instanceof MapBlock mapBlock) {
                     if (mapBlock.getGameMap().getFacing() == Direction.UP) {
                         if (direction == Direction.UP) {
-                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), this, mapBlock.getGameMap().getStart())) {
+                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, this, mapBlock.getGameMap().getStart())) {
                                 entity.cancelMove();
                             }
                         } else {
@@ -80,7 +102,7 @@ public class Block extends CollidableEntity {
                         }
                     } else if (mapBlock.getGameMap().getFacing() == Direction.DOWN) {
                         if (direction == Direction.DOWN) {
-                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), this, mapBlock.getGameMap().getStart())) {
+                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, this, mapBlock.getGameMap().getStart())) {
                                 entity.cancelMove();
                             }
                         } else {
@@ -88,7 +110,7 @@ public class Block extends CollidableEntity {
                         }
                     } else if (mapBlock.getGameMap().getFacing() == Direction.LEFT) {
                         if (direction == Direction.LEFT) {
-                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), this, mapBlock.getGameMap().getStart())) {
+                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, this, mapBlock.getGameMap().getStart())) {
                                 entity.cancelMove();
                             }
                         } else {
@@ -96,7 +118,7 @@ public class Block extends CollidableEntity {
                         }
                     } else if (mapBlock.getGameMap().getFacing() == Direction.RIGHT) {
                         if (direction == Direction.RIGHT) {
-                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), this, mapBlock.getGameMap().getStart())) {
+                            if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), false, this, mapBlock.getGameMap().getStart())) {
                                 entity.cancelMove();
                             }
                         } else {
@@ -105,36 +127,9 @@ public class Block extends CollidableEntity {
                     }
                 }
 
-                // Si soy un mapblock y me choca un bloque
-                if (this instanceof MapBlock mapBlock && entity instanceof BoxBlock boxBlock) {
-                    System.out.println("Soy un mapblock y me choco con un bloque");
-                    if (mapBlock.getGameMap().getFacing() == Direction.UP && direction == Direction.DOWN) {
-                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), boxBlock, mapBlock.getGameMap().getStart())) {
-                            cancelMove();
-                        }
-                        return;
-                    } else if (mapBlock.getGameMap().getFacing() == Direction.DOWN && direction == Direction.UP) {
-                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), boxBlock, mapBlock.getGameMap().getStart())) {
-                            cancelMove();
-                        }
-                        return;
-                    } else if (mapBlock.getGameMap().getFacing() == Direction.LEFT && direction == Direction.RIGHT) {
-                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), boxBlock, mapBlock.getGameMap().getStart())) {
-                            cancelMove();
-                        }
-                        return;
-                    } else if (mapBlock.getGameMap().getFacing() == Direction.RIGHT && direction == Direction.LEFT) {
-                        if (!App.getMainController().getGame().teleportBlockToMap(mapBlock.getGameMap(), boxBlock, mapBlock.getGameMap().getStart())) {
-                            cancelMove();
-                        }
-                        return;
-                    }
-                }
-
                 if (!(entity instanceof MapBlock)) {
                     // Soy un jugador y me choco con un mapblock
-                    if (this instanceof MapBlock mapBlock && entity instanceof Player player) {
-                        System.out.println("disparo");
+                    if (this instanceof MapBlock mapBlock && entity instanceof Player) {
                         if (mapBlock.getGameMap().getFacing() == Direction.UP && direction == Direction.DOWN) {
                             App.getMainController().getGame().changeMap(mapBlock.getGameMap(), mapBlock.getGameMap().getStart(), true);
                         } else if (mapBlock.getGameMap().getFacing() == Direction.DOWN && direction == Direction.UP) {

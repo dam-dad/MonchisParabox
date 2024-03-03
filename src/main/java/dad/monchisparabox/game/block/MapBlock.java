@@ -2,9 +2,12 @@ package dad.monchisparabox.game.block;
 
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
+import dad.monchisparabox.App;
 import dad.monchisparabox.game.GameMap;
+import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.GridPane;
 
 public class MapBlock extends Block {
