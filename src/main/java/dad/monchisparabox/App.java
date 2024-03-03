@@ -22,8 +22,9 @@ public class App extends Application {
         primaryStage.setScene(new Scene(mainController.getView()));
         primaryStage.setMaximized(true);
         primaryStage.show();
+	}
 
-
-
-    }
+  public static MainController getMainController() {
+      return mainController;
+  }
 }

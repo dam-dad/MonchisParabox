@@ -3,6 +3,7 @@ package dad.monchisparabox.game.entities;
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
+import dad.monchisparabox.App;
 import dad.auraengine.media.Music;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
@@ -17,12 +18,6 @@ public class Player extends Entity<Rectangle> {
 
 	private ImageView playerComponent;
 
-	private Location location;
-
-
-
-
-
 	public Player() {
 		super();
 		// load player image
@@ -32,18 +27,8 @@ public class Player extends Entity<Rectangle> {
 		playerComponent.setImage(image);
 
 		// variables of character size
-		this.width = (int) 50;
-		this.height = (int) 50;
-
-
-	}
-
-	public void setLocation(Location location) {
-		this.location = location;
-	}
-
-	public Location getLocation() {
-		return location;
+		this.width = 50;
+		this.height = 50;
 	}
 
 	// First time in map
@@ -71,27 +56,34 @@ public class Player extends Entity<Rectangle> {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());
 
+		boolean move = false;
+
 		switch (direction) {
 			case LEFT:
-				location.decrementX();
-
+				move = location.decrementX();
 				break;
 			case RIGHT:
-				location.incrementX();
+				move = location.incrementX();
 				break;
 			case UP:
-				location.decrementY();
+				move = location.decrementY();
 				break;
 			case DOWN:
-				location.incrementY();
+				move = location.incrementY();
 				break;
 			default:
 				break;
 		}
 
-		Block block = location.getMap().getBlockAt(location, null);
-		if(block != null) {
-			block.handleCollision(this, direction);
+		if(move) {
+			Block block = location.getMap().getBlockAt(location, null);
+			if (block != null) {
+				block.handleCollision(this, direction);
+			}
+		} else {
+			//TODO Volver al mapa anterior
+			App.getMainController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
+			System.out.println("(Player) Esta saliendo del mapa mi rey");
 		}
 	}
 

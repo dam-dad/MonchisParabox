@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class Map extends GridPane {
 	
-	private static final double CELL_SIZE = 50;
+	private static final double CELL_SIZE = 49.6;
 	
 	private int maxHeight;
 	private int maxWidth;

@@ -85,4 +85,13 @@ public class Location {
 		}
 		return false;
 	}
+
+	public Location clone() {
+		return new Location(map, X, Y);
+	}
+
+	@Override
+	public String toString() {
+		return "Location [map=" + map + ", X=" + X + ", Y=" + Y + "]";
+	}
 }

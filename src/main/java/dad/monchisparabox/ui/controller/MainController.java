@@ -41,16 +41,21 @@ public class MainController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		game = new Game(view, Tile.mapa);
-		game.start();
-		music = new Music("Priscila");
-		/*music.play();*/
-
-		getView().setCenter(getGame().getInitialMap());
+    music = new Music("Priscila");
+		music.play();
+		setGame(new Game(getView(), Tile.mapa));
 	}
 	
 	public Game getGame() {
 		return game;
+	}
+
+	public void setGame(Game game) {
+		if(getGame() != null)
+			getGame().stop();
+		this.game = game;
+		getGame().start();
+		getView().setCenter(getGame().getInitialMap());
 	}
 
 	public BorderPane getView() {
