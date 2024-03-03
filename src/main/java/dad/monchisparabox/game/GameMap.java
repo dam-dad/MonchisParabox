@@ -172,12 +172,34 @@ public class GameMap extends Map {
 
 
                 // Asignar imagen según el tipo de bloque de alrededor
-				if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
-					//hecho
-					System.out.println("a");
-					limitBlock.setImage(new Image("/assets/block/center_block.png"));
-				}else if(!hasLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock && hasRightBlock && hasTopBlock && hasTopRightBlock){
+
+				if(hasTopBlock && hasRightBlock && hasLeftBlock && hasTopLeftBlock && hasBottomLeftBlock && !hasBottomRightBlock && ! hasTopRightBlock) {
+                    limitBlock.setImage(new Image("/assets/block/intermediateUpWhite.png"));
+                }else if(hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock && hasTopRightBlock && hasBottomRightBlock && !hasTopLeftBlock && !hasBottomLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/intermediateBlackDown.png"));
+
+                } else if(!hasBottomRightBlock && hasTopBlock && hasBottomBlock && hasTopRightBlock && hasRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/leftBlockToCone.png"));
+
+                }else if(hasTopBlock && hasTopRightBlock && hasRightBlock && hasBottomRightBlock && !hasBottomBlock && !hasBottomLeftBlock && hasTopLeftBlock && !hasLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/DownRightEsquina.png"));
+
+                }else if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
+                    //hecho
+                    System.out.println("a");
+                    limitBlock.setImage(new Image("/assets/block/center_block.png"));
+                }else if(!hasLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock && hasRightBlock && hasTopBlock && hasTopRightBlock){
                     limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+
+                }else if(!hasLeftBlock && ! hasTopLeftBlock && !hasTopBlock && hasRightBlock && hasTopRightBlock && hasBottomBlock && hasBottomLeftBlock && hasBottomRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoLeftTopNoLeftNoTop.png"));
+
+
+
+                }else if(hasTopBlock && hasTopLeftBlock && hasTopRightBlock && !hasRightBlock && hasLeftBlock && hasBottomLeftBlock && !hasBottomBlock && !hasBottomRightBlock) {
+                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
+                }else if(!hasTopRightBlock && !hasRightBlock && !hasBottomRightBlock && hasLeftBlock && hasTopLeftBlock && hasTopBlock && !hasBottomLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
 
                 }else if(!hasTopBlock && !hasRightBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
                     limitBlock.setImage(new Image("/assets/block/TopRight.png"));

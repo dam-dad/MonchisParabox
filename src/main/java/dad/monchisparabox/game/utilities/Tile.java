@@ -21,9 +21,9 @@ public class Tile {
             #...#....#
             #...b.b..#
             #.....b..#
-            #........#
-            #...######
-            ##.......#
+            ##......##
+            ##########
+            ##......##
             #...M....#
             #...p.#.b#
             ##########
@@ -31,9 +31,9 @@ public class Tile {
             ##########
             #.._.....#
             #........#
-            #.b......#
-            #....#...p
-            #........#
+            #.b..##..#
+            #....##..p
+            #....##..#
             #....M...#
             #........#
             #........#
@@ -67,7 +67,7 @@ public class Tile {
 
                     // Este es el fondo vacio
                     Rectangle empty = new Rectangle(50, 50);
-                    empty.setFill(Color.ALICEBLUE);
+                    empty.setFill(Color.PURPLE);
                     map.add(empty, columna, fila);
 
                     switch (caracter) {
