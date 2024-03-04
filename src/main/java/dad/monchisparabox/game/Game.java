@@ -18,6 +18,7 @@ import javafx.scene.control.DialogPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
@@ -189,10 +190,13 @@ public class Game extends AnimationTimer {
         dialogPane.setStyle("-fx-background-color: #003373;");
         alert.getDialogPane().lookupButton(ButtonType.OK).setOpacity(0);
 
-        alert.showAndWait();
+        alert.show();
 
         alert.setWidth(320);
         alert.setHeight(220);
+
+        alert.setX((Screen.getPrimary().getVisualBounds().getWidth() - alert.getWidth()) / 2);
+        alert.setY((Screen.getPrimary().getVisualBounds().getHeight() - alert.getHeight()) / 2);
 
         Duration duration = Duration.seconds(2);
         KeyFrame keyFrame = new KeyFrame(duration, event -> alert.close());
