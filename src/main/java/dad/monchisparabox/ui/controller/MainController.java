@@ -28,6 +28,7 @@ public class MainController implements Initializable {
 	private inicioController inicioController;
 	private tuningController tuningController;	
 	private ajustesController ajustescontroller;
+	private creditosController creditosController;
 	private Skin skin;
 	
 	//model
@@ -240,6 +241,13 @@ public class MainController implements Initializable {
 		tuningController.setOnSalir (e -> {
 			efectoBoton();
 			Platform.exit();
+		});
+		
+		//CREDITOS > INICIO
+		creditosController = new creditosController();
+		creditosController.setOnInicio (e -> {
+			efectoBoton();
+			view.setCenter(inicioController.getView());
 		});
 		
 		//MOSTRAMOS LA VISTA DEL INICIO
