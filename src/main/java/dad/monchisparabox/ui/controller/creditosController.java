@@ -1,4 +1,4 @@
-package dad.proyectoDAD.controller;
+package dad.monchisparabox.ui.controller;
 
 import javafx.scene.input.MouseEvent;
 import java.io.IOException;
