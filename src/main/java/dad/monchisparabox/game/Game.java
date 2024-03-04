@@ -20,7 +20,10 @@ public class Game extends AnimationTimer {
     private ArrayList<GameMap> maps = new ArrayList<>();
     private Music music;
 
+    private MapData mapData;
+
     public Game(MapData mapData) {
+        this.mapData = mapData;
         maps.addAll(mapData.getGameMaps());
 
         player = new Player();
@@ -31,6 +34,7 @@ public class Game extends AnimationTimer {
         Platform.runLater(App.getMainController().getView()::requestFocus);
 
         init();
+
     }
 
     public Player getPlayer() {
@@ -155,8 +159,17 @@ public class Game extends AnimationTimer {
             alert.setContentText("You have completed the game!");
             alert.showAndWait();
 
-            //TODO Incrementar a más 1, sería el siguiente nivel
-            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(0)));
+            MapData nextMapData = App.getMainController().getMapDataController().getMapById(mapData.getId() + 1);
+            if(nextMapData != null) {
+                App.getMainController().getMapController().setGame(new Game(nextMapData));
+            } else {
+                Alert completed = new Alert(Alert.AlertType.INFORMATION);
+                completed.setTitle("Te pasaste el juego mi rey");
+                completed.setHeaderText("¡Te lo pasaste!");
+                completed.setContentText("¡Te lo pasaste otra vez!");
+                completed.showAndWait();
+                //TODO Volver a la sala
+            }
         }
     }
 
@@ -181,7 +194,7 @@ public class Game extends AnimationTimer {
         if (code == KeyCode.R) {
             music = new Music("Reiniciar");
             music.playOnce();
-            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(0)));
+            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(mapData.getId())));
         }
     }
 }

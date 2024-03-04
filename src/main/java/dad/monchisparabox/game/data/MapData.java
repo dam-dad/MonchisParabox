@@ -21,7 +21,8 @@ public class MapData {
     private String cancion;
 
     // Constructor, getters y setters
-    public MapData() {}
+    public MapData() {
+    }
 
     // Getters y Setters
     public int getId() {
@@ -70,10 +71,17 @@ public class MapData {
                 for (int columna = 0; columna < lineas.get(fila).length(); columna++) {
                     char caracter = lineas.get(fila).charAt(columna);
 
-                    // Este es el fondo vacio
-                    Rectangle empty = new Rectangle(50, 50);
-                    empty.setFill(Color.PURPLE);
-                    map.add(empty, columna, fila);
+                    int numCols = lineas.get(fila).length();
+                    int numRows = lineas.size();
+
+                    boolean isCorner = (fila == 0 && columna == 0) || (fila == 0 && columna == numCols - 1) ||
+                            (fila == numRows - 1 && columna == 0) || (fila == numRows - 1 && columna == numCols - 1);
+
+                    if (!isCorner) {
+                        Rectangle empty = new Rectangle(50, 50);
+                        empty.setFill(Color.PURPLE);
+                        map.add(empty, columna, fila);
+                    }
 
                     switch (caracter) {
                         case 'p':
@@ -111,9 +119,9 @@ public class MapData {
         for (int i = 0; i < mapList.size(); i++) {
             GameMap gameMap = mapList.get(i);
             int bloq = 1;
-            for(Block block : gameMap.getBlocks()) {
-                if(block instanceof MapBlock mapBlock) {
-                    mapBlock.setGameMap(mapList.get(i+bloq));
+            for (Block block : gameMap.getBlocks()) {
+                if (block instanceof MapBlock mapBlock) {
+                    mapBlock.setGameMap(mapList.get(i + bloq));
                     bloq++;
                     mapBlock.renderMapview();
                 }

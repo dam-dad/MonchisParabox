@@ -12,10 +12,10 @@ import java.util.List;
 public class MapDataController {
 
     private List<MapData> loadedMaps;
-    private List<String> mapsToLoad = Arrays.asList("map1.json");
+    private List<String> mapsToLoad = Arrays.asList("map1.json", "map2.json","map3.json", "map4.json", "map5.json", "map6.json", "map7.json", "map8.json", "map9.json", "map10.json");
 
     public MapDataController() {
-        loadedMaps = loadMapsFromJson("/assets/maps/");
+        loadedMaps = loadMapsFromJson("/maps/");
     }
 
     private List<MapData> getLoadedMaps() {
