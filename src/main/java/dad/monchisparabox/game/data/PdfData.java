@@ -1,37 +1,37 @@
 package dad.monchisparabox.game.data;
 
 public class PdfData {
-    private String mapName;
-    private int movements;
-    private String time;
+    private String nombre;
+    private int movimientos;
+    private String tiempo;
 
-    public PdfData(String mapName, int movements, String time) {
-        this.mapName = mapName;
-        this.movements = movements;
-        this.time = time;
+    public PdfData(String nombre, int movimientos, String tiempo) {
+        this.nombre = nombre;
+        this.movimientos = movimientos;
+        this.tiempo = tiempo;
     }
 
-    public String getMapName() {
-        return mapName;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setMapName(String mapName) {
-        this.mapName = mapName;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public int getMovements() {
-        return movements;
+    public int getMovimientos() {
+        return movimientos;
     }
 
-    public void setMovements(int movements) {
-        this.movements = movements;
+    public void setMovimientos(int movimientos) {
+        this.movimientos = movimientos;
     }
 
-    public String getTime() {
-        return time;
+    public String getTiempo() {
+        return tiempo;
     }
 
-    public void setTime(String time) {
-        this.time = time;
+    public void setTiempo(String tiempo) {
+        this.tiempo = tiempo;
     }
 }
