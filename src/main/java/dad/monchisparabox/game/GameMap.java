@@ -7,12 +7,14 @@ import dad.auraengine.Map;
 import dad.auraengine.entities.StaticEntity;
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
+import dad.auraengine.image.ImageColorizer;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.block.MapBlock;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
 
 public class GameMap extends Map {
 

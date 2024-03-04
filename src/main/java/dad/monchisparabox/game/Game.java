@@ -34,7 +34,6 @@ public class Game extends AnimationTimer {
         Platform.runLater(App.getMainController().getView()::requestFocus);
 
         init();
-
     }
 
     public Player getPlayer() {

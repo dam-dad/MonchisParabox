@@ -102,9 +102,7 @@ public class Player extends Entity<Rectangle> {
 			}
 			App.getMainController().getMapController().getGame().checkWin();
 		} else {
-			//TODO Volver al mapa anterior
 			App.getMainController().getMapController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
-			System.out.println("(Player) Esta saliendo del mapa mi rey");
 		}
 	}
 
