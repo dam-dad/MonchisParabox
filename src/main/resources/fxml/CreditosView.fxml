@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane fx:id="view" prefHeight="500.0" prefWidth="900.0" styleClass="inicio" stylesheets="@../css/css.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <VBox fx:id="vBox" alignment="CENTER" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="Monchi's Parabox" textFill="WHITE">
+               <font>
+                  <Font name="Arial Black" size="68.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="label" contentDisplay="CENTER" maxWidth="700.0" minHeight="1800.0" text="xd" textAlignment="CENTER" textFill="WHITE" textOverrun="CENTER_ELLIPSIS">
+               <font>
+                  <Font name="System Bold" size="27.0" />
+               </font>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </Label>
+            <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onInicioClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/inicio.png" />
+               </image>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </ImageView>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
