@@ -43,7 +43,6 @@ public class Block extends CollidableEntity {
                 block.handleCollision(this, direction);
             }
         } else {
-            System.out.println("Esta saliendo del mapa mi rey");
             if(!App.getGameController().getMapController().getGame().teleportBlockToMap(location.getMap().getJoinLocation().getMap(),
                     true, this, location.getMap().getJoinLocation())) {
                 cancelMove();

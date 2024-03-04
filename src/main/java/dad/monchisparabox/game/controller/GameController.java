@@ -22,7 +22,7 @@ public class GameController implements Initializable {
 
     public GameController() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
             loader.setController(this);
             loader.load();
         } catch (IOException e) {

@@ -79,7 +79,7 @@ public class MapData {
 
                     if (!isCorner) {
                         Rectangle empty = new Rectangle(50, 50);
-                        empty.setFill(Color.PURPLE);
+                        empty.setFill(Color.DARKGREY);
                         map.add(empty, columna, fila);
                     }
 

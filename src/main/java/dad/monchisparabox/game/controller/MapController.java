@@ -32,8 +32,6 @@ public class MapController implements Initializable {
 
 	@Override
 	public void initialize(URL url, ResourceBundle resourceBundle) {
-		music = new Music("Priscila");
-		/*	music.play();*/
 		Platform.runLater(() -> {
 			setGame(new Game(App.getGameController().getMapDataController().getMapById(0)));
 		});
