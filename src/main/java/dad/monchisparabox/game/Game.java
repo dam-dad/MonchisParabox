@@ -1,39 +1,27 @@
 package dad.monchisparabox.game;
 
-import java.util.ArrayList;
-
-
-import dad.auraengine.Map;
-import dad.auraengine.entities.Entity;
-import dad.auraengine.entities.StaticEntity;
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
 import dad.auraengine.media.Music;
 import dad.monchisparabox.App;
-import dad.monchisparabox.game.block.LimitBlock;
-import dad.monchisparabox.game.block.MapBlock;
-import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.game.block.Block;
-import dad.monchisparabox.game.block.BoxBlock;
-import dad.monchisparabox.game.utilities.Tile;
+import dad.monchisparabox.game.data.MapData;
+import dad.monchisparabox.game.entities.Player;
 import javafx.animation.AnimationTimer;
-import javafx.animation.ParallelTransition;
-import javafx.animation.ScaleTransition;
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
-import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.util.Duration;
+
+import java.util.ArrayList;
 
 public class Game extends AnimationTimer {
 
     private Player player;
     private ArrayList<GameMap> maps = new ArrayList<>();
+    private Music music;
 
-    public Game(String tiledMap) {
-        maps.addAll(Tile.tiles(tiledMap));
+    public Game(MapData mapData) {
+        maps.addAll(mapData.getGameMaps());
 
         player = new Player();
         player.setLocation(maps.get(0).getStart());
@@ -61,13 +49,13 @@ public class Game extends AnimationTimer {
     public void changeMap(GameMap gameMap, Location location, boolean joining) {
         Block door = gameMap.getBlockAt(location, null);
         if (door == null) {
-            if(joining){
+            if (joining) {
                 //entra
                 music = new Music("AumentoCaja");
                 music.playOnce();
                 gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
 
-            }else{
+            } else {
 
                 music = new Music("DecrecerCaja");
                 music.playOnce();
@@ -89,7 +77,7 @@ public class Game extends AnimationTimer {
             block.destroy();
             block.setLocation(location.clone());
 
-            if(!kicking) {
+            if (!kicking) {
                 if (gameMapTo.getFacing() == Direction.RIGHT) {
                     //se mete
                     music = new Music("AumentoCaja");
@@ -136,7 +124,7 @@ public class Game extends AnimationTimer {
 
     public Location getEndLocation() {
         for (GameMap gameMap : maps) {
-            if(gameMap.getEnd() != null) {
+            if (gameMap.getEnd() != null) {
                 System.out.println("End location: " + gameMap.getEnd());
                 return gameMap.getEnd();
             }
@@ -156,7 +144,7 @@ public class Game extends AnimationTimer {
             }
         }
 
-        if(player.getLocation().getMap() != getEndLocation().getMap() || player.getLocation().getX() != getEndLocation().getX() || player.getLocation().getY() != getEndLocation().getY()){
+        if (player.getLocation().getMap() != getEndLocation().getMap() || player.getLocation().getX() != getEndLocation().getX() || player.getLocation().getY() != getEndLocation().getY()) {
             win = false;
         }
 
@@ -166,7 +154,9 @@ public class Game extends AnimationTimer {
             alert.setHeaderText("You win!");
             alert.setContentText("You have completed the game!");
             alert.showAndWait();
-            App.getMainController().getMapController().setGame(new Game(Tile.mapa));
+
+            //TODO Incrementar a más 1, sería el siguiente nivel
+            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(0)));
         }
     }
 
@@ -188,10 +178,10 @@ public class Game extends AnimationTimer {
             player.handleMovement(Direction.RIGHT);
         }
 
-        if(code == KeyCode.R) {
+        if (code == KeyCode.R) {
             music = new Music("Reiniciar");
             music.playOnce();
-            App.getMainController().getMapController().setGame(new Game(Tile.mapa));
+            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(0)));
         }
     }
 }
