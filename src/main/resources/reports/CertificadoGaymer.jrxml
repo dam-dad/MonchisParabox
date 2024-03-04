@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.21.2.final using JasperReports Library version 6.21.2-8434a0bd7c3bbc37cbf916f2968d35e4b165821a  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="juegos" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a9c4047d-18c7-4c10-a764-918f5db54a38">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Mis Juegos"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="movimientos" class="java.lang.Integer">
+		<fieldDescription><![CDATA[movimientos]]></fieldDescription>
+	</field>
+	<field name="tiempo" class="java.lang.String">
+		<fieldDescription><![CDATA[tiempo]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="100" splitType="Stretch">
+			<staticText>
+				<reportElement x="70" y="0" width="414" height="58" forecolor="#FA0E0A" uuid="8b7b51b9-a65d-46d2-8925-ff095291f9f0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Certificado Gaymer]]></text>
+			</staticText>
+			<textField pattern="dd-MMMMM-yyyy">
+				<reportElement x="455" y="50" width="100" height="20" uuid="0e7f3244-eb26-4750-a7ff-6943dce14c64"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="70" y="20" width="414" height="58" forecolor="#FA0E0A" uuid="72270fff-3bca-409b-82e7-4c74ef2d9be1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Estadísticas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch">
+			<textField>
+				<reportElement x="399" y="5" width="151" height="22" uuid="57440774-c708-4c75-b8d2-a3765b4d4e32"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Copytight Monchi's Parabox"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="5" width="180" height="30" uuid="51db43ae-da70-4c79-8923-779cc239dd61"/>
+				<textElement verticalAlignment="Top"/>
+				<textFieldExpression><![CDATA["Autor: Yorman, Yanet, Brian, Eduardo"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="180" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="e720b0d1-8d58-473d-83bc-dd3c50b92c55"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="180" y="0" width="200" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="5b769c09-01ce-4395-9bd0-9f514b8884d5">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf300cbc-4d3a-4a9a-83bd-c6bc371e57e1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Movimientos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="380" y="0" width="170" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="7aff1623-170b-43d9-81cf-8082969adadd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf300cbc-4d3a-4a9a-83bd-c6bc371e57e1"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Tiempo]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="20" y="10" width="140" height="19" uuid="14dbfea8-5493-4fd8-851e-6fe3e17feeb3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="10" width="100" height="19" uuid="373cd213-182f-4b27-ac8e-a0b845cfce34">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1f802efe-e438-423c-9bcd-fcb9aca456c1"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{movimientos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="424" y="10" width="90" height="19" uuid="2f5dc4e0-709d-463f-8077-aeebcd2fbaf4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6219977f-1d23-431a-8a01-e64418e6ff3f"/>
+				</reportElement>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{tiempo}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="29" width="550" height="1" uuid="7afb38a2-d733-4686-8926-d7fcbe35c22a"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="56" splitType="Stretch">
+			<textField>
+				<reportElement x="230" y="25" width="100" height="30" uuid="ceb5b9bf-1ea2-449a-9d81-af6b8f6c95bb"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Página: " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
