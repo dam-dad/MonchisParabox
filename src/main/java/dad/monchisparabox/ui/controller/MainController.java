@@ -6,12 +6,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.awt.image.ColorModel;
-import java.awt.image.DataBufferInt;
-import java.awt.image.DirectColorModel;
-import java.awt.image.Raster;
-import java.awt.image.WritableRaster;
+import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -292,9 +287,8 @@ public class MainController implements Initializable {
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
-	    Image skinFinal = new Image(outputFile.toURI().toString());
-	    
-	    return skinFinal;
+
+        return new Image(outputFile.toURI().toString());
 	}
 
 	// Método auxiliar para crear un BufferedImage a partir de un array de enteros

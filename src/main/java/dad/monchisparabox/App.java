@@ -13,11 +13,9 @@ public class App  extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-
-		primaryStage.setTitle("Yanet López Rodríguez");
+		primaryStage.setTitle("Monchi's Parabox");
 		primaryStage.setScene(new Scene(controlador.getView(), 928, 522));
-        primaryStage.initStyle(StageStyle.UNDECORATED);
-		//primaryStage.setResizable(false);
+		primaryStage.setMaximized(true);
 		primaryStage.show();
 		
 	}
