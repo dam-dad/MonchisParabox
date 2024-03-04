@@ -1,4 +1,4 @@
-package dad.monchisparabox.ui.controller;
+package dad.monchisparabox.game.controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,14 +8,9 @@ import dad.monchisparabox.game.data.MapDataController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
-public class MainController implements Initializable {
+public class GameController implements Initializable {
 
     @FXML
     private BorderPane view;
@@ -25,11 +20,9 @@ public class MainController implements Initializable {
     private MapDataController mapDataController;
 
 
-
-
-    public MainController() {
+    public GameController() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/GameView.fxml"));
             loader.setController(this);
             loader.load();
         } catch (IOException e) {

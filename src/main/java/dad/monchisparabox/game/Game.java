@@ -29,9 +29,9 @@ public class Game extends AnimationTimer {
         player = new Player();
         player.setLocation(maps.get(0).getStart());
 
-        App.getMainController().getView().setOnKeyPressed(event -> handleKeyPress(event.getCode()));
+        App.getGameController().getView().setOnKeyPressed(event -> handleKeyPress(event.getCode()));
 
-        Platform.runLater(App.getMainController().getView()::requestFocus);
+        Platform.runLater(App.getGameController().getView()::requestFocus);
 
         init();
     }
@@ -69,7 +69,7 @@ public class Game extends AnimationTimer {
             player.getLocation().setLastY(location.getY());
             player.render();
             gameMap.load();
-            App.getMainController().getMapController().getView().setCenter(gameMap);
+            App.getGameController().getMapController().getView().setCenter(gameMap);
         }
     }
 
@@ -158,9 +158,9 @@ public class Game extends AnimationTimer {
             alert.setContentText("You have completed the game!");
             alert.showAndWait();
 
-            MapData nextMapData = App.getMainController().getMapDataController().getMapById(mapData.getId() + 1);
+            MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);
             if(nextMapData != null) {
-                App.getMainController().getMapController().setGame(new Game(nextMapData));
+                App.getGameController().getMapController().setGame(new Game(nextMapData));
             } else {
                 Alert completed = new Alert(Alert.AlertType.INFORMATION);
                 completed.setTitle("Te pasaste el juego mi rey");
@@ -193,7 +193,7 @@ public class Game extends AnimationTimer {
         if (code == KeyCode.R) {
             music = new Music("Reiniciar");
             music.playOnce();
-            App.getMainController().getMapController().setGame(new Game(App.getMainController().getMapDataController().getMapById(mapData.getId())));
+            App.getGameController().getMapController().setGame(new Game(App.getGameController().getMapDataController().getMapById(mapData.getId())));
         }
     }
 }

@@ -2,23 +2,14 @@ package dad.monchisparabox.game.entities;
 
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.movements.Direction;
-import dad.auraengine.entities.movements.Location;
 import dad.monchisparabox.App;
 import dad.auraengine.media.Music;
 import dad.monchisparabox.game.block.Block;
-import dad.monchisparabox.game.block.BoxBlock;
-import dad.monchisparabox.game.block.LimitBlock;
 import javafx.animation.ScaleTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
-import javafx.animation.ScaleTransition;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.GridPane;
 import javafx.util.Duration;
 
 public class Player extends Entity<Rectangle> {
@@ -100,9 +91,9 @@ public class Player extends Entity<Rectangle> {
 			if (block != null) {
 				block.handleCollision(this, direction);
 			}
-			App.getMainController().getMapController().getGame().checkWin();
+			App.getGameController().getMapController().getGame().checkWin();
 		} else {
-			App.getMainController().getMapController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
+			App.getGameController().getMapController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
 		}
 	}
 

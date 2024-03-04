@@ -1,4 +1,4 @@
-package dad.monchisparabox.ui.controller;
+package dad.monchisparabox.game.controller;
 
 import dad.auraengine.media.Music;
 import dad.monchisparabox.App;
@@ -35,7 +35,7 @@ public class MapController implements Initializable {
 		music = new Music("Priscila");
 		/*	music.play();*/
 		Platform.runLater(() -> {
-			setGame(new Game(App.getMainController().getMapDataController().getMapById(0)));
+			setGame(new Game(App.getGameController().getMapDataController().getMapById(0)));
 		});
 	}
 
