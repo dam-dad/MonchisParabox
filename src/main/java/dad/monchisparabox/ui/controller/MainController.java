@@ -71,8 +71,8 @@ public class MainController implements Initializable {
 		//INICIO > JUGAR
 		inicioController.setOnJugar (e -> {
 			efectoBoton();
-			Image skinFinal = generarSkinFinal(skin.getSkin(), new Image(skin.getComplemento1().getUrl().substring(skin.getComplemento1().getUrl().indexOf("/images/"), skin.getComplemento1().getUrl().length() - 4) + "F.png"));
-			generarSkinFinal(skinFinal, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/images/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
+			Image skinFinal = generarSkinFinal(skin.getSkin(), new Image(skin.getComplemento1().getUrl().substring(skin.getComplemento1().getUrl().indexOf("/assets/"), skin.getComplemento1().getUrl().length() - 4) + "F.png"));
+			generarSkinFinal(skinFinal, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/assets/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
 			skin.setSkinFinal(skinFinal);
 			
 			//MUSICA / EFECTOS / IMAGEN
@@ -267,7 +267,7 @@ public class MainController implements Initializable {
 	    pane.snapshot(null, resultImage);
 
 	    // Guarda la imagen en un archivo (cambia la ruta y el nombre del archivo según tu preferencia)
-	    File outputFile = new File("src/main/resources/images/skinFinal.png");
+	    File outputFile = new File("src/main/resources/assets/skinFinal.png");
 
 	    // Utiliza un PixelReader para obtener los píxeles de la imagen de JavaFX
 	    PixelReader pixelReader = resultImage.getPixelReader();
