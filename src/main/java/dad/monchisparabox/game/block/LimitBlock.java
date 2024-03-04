@@ -12,16 +12,9 @@ public class LimitBlock extends Block {
 	public LimitBlock(Location location) {
 		super(location);
 	}
-	private List<Location> endCages = new ArrayList<>();
-	private List<Block> blocks = new ArrayList<>();
-
-
 
 	public void  setImage(Image image){
 		this.image = image;
 		this.imageView.setImage(image);
 	}
-
-
-	
 }
