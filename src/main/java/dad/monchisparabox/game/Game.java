@@ -8,6 +8,7 @@ import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.StaticEntity;
 import dad.auraengine.entities.movements.Direction;
 import dad.auraengine.entities.movements.Location;
+import dad.auraengine.media.Music;
 import dad.monchisparabox.App;
 import dad.monchisparabox.game.block.LimitBlock;
 import dad.monchisparabox.game.block.MapBlock;
@@ -60,8 +61,18 @@ public class Game extends AnimationTimer {
     public void changeMap(GameMap gameMap, Location location, boolean joining) {
         Block door = gameMap.getBlockAt(location, null);
         if (door == null) {
-            if(joining)
+            if(joining){
+                //entra
+                music = new Music("AumentoCaja");
+                music.playOnce();
                 gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
+
+            }else{
+
+                music = new Music("DecrecerCaja");
+                music.playOnce();
+            }
+
             player.setLocation(location.clone());
             player.getLocation().setLastX(location.getX());
             player.getLocation().setLastY(location.getY());
@@ -80,22 +91,39 @@ public class Game extends AnimationTimer {
 
             if(!kicking) {
                 if (gameMapTo.getFacing() == Direction.RIGHT) {
+                    //se mete
+                    music = new Music("AumentoCaja");
+                    music.playOnce();
                     block.push(Direction.LEFT);
                 } else if (gameMapTo.getFacing() == Direction.LEFT) {
+                    music = new Music("AumentoCaja");
+                    music.playOnce();
                     block.push(Direction.RIGHT);
                 } else if (gameMapTo.getFacing() == Direction.UP) {
+                    music = new Music("AumentoCaja");
+                    music.playOnce();
                     block.push(Direction.DOWN);
                 } else if (gameMapTo.getFacing() == Direction.DOWN) {
+                    music = new Music("AumentoCaja");
+                    music.playOnce();
                     block.push(Direction.UP);
                 }
             } else {
                 if (facing == Direction.RIGHT) {
+                    music = new Music("DecrecerCaja");
+                    music.playOnce();
                     block.push(Direction.RIGHT);
                 } else if (facing == Direction.LEFT) {
+                    music = new Music("DecrecerCaja");
+                    music.playOnce();
                     block.push(Direction.LEFT);
                 } else if (facing == Direction.UP) {
+                    music = new Music("DecrecerCaja");
+                    music.playOnce();
                     block.push(Direction.UP);
                 } else if (facing == Direction.DOWN) {
+                    music = new Music("DecrecerCaja");
+                    music.playOnce();
                     block.push(Direction.DOWN);
                 }
             }
@@ -161,6 +189,8 @@ public class Game extends AnimationTimer {
         }
 
         if(code == KeyCode.R) {
+            music = new Music("Reiniciar");
+            music.playOnce();
             App.getMainController().getMapController().setGame(new Game(Tile.mapa));
         }
     }

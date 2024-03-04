@@ -42,6 +42,14 @@ public class Music {
 		player.setCycleCount(Transition.INDEFINITE);
 		player.play();
 	}
+
+
+	public void playOnce() {
+		MediaPlayer oneTimePlayer = new MediaPlayer(media);
+		oneTimePlayer.setVolume(0.3);
+		oneTimePlayer.setOnEndOfMedia(() -> oneTimePlayer.dispose()); // Liberar recursos después de reproducir una vez
+		oneTimePlayer.play();
+	}
 	
 	/**
 	 * Método para pausar la música
