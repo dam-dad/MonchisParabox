@@ -90,26 +90,6 @@ public class GameMap extends Map {
         return null;
     }
 
-    public Block getAdjacentBlock(Location location, KeyCode keyCode) {
-        int adjacentX = (keyCode == KeyCode.A) ? location.getX() - 1 :
-                (keyCode == KeyCode.D) ? location.getX() + 1 : location.getX();
-        int adjacentY = (keyCode == KeyCode.W) ? location.getY() - 1 :
-                (keyCode == KeyCode.S) ? location.getY() + 1 : location.getY();
-
-        // Obtener la lista completa de bloques en el mapa
-        List<Block> blocks = location.getMap().getBlocks();
-
-        // Buscar el bloque adyacente en la lista de bloques
-        for (Block block : blocks) {
-            if (block.getLocation().getX() == adjacentX && block.getLocation().getY() == adjacentY) {
-                return block;
-            }
-        }
-
-        // Si no se encuentra, devolver null
-        return null;
-    }
-
     public Block getBlockAt(Location location, Block blockToIgnore) {
         // Buscar el bloque adyacente en la lista de bloques
         for (Block block : blocks) {
@@ -138,8 +118,6 @@ public class GameMap extends Map {
 		return null;
 	}
 
-
-
 	public void assignBlockImages() {
 		for (Block block : blocks) {
 			if(block instanceof LimitBlock limitBlock) {
@@ -157,8 +135,6 @@ public class GameMap extends Map {
                 Block bottomLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y + 1));
                 Block bottomRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y + 1));
 
-
-
 				// Determinar el tipo de bloque de alrededor
                 boolean hasLeftBlock = leftBlock != null;
                 boolean hasRightBlock = rightBlock != null;
@@ -169,7 +145,6 @@ public class GameMap extends Map {
                 boolean hasTopRightBlock = topRightBlock != null;
                 boolean hasBottomLeftBlock = bottomLeftBlock != null;
                 boolean hasBottomRightBlock = bottomRightBlock != null;
-
 
                 // Asignar imagen según el tipo de bloque de alrededor
 				if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {

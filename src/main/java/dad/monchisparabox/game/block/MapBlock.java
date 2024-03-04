@@ -19,6 +19,8 @@ public class MapBlock extends Block {
         super(location);
         image = new Image("/assets/block/libre3.png");
         mapView = new ImageView(image);
+        mapView.setFitHeight(50);
+        mapView.setFitWidth(50);
     }
 
     public GameMap getGameMap() {
@@ -27,11 +29,17 @@ public class MapBlock extends Block {
 
     public void setGameMap(GameMap gameMap) {
         this.gameMap = gameMap;
+        gameMap.load();
     }
 
     public void updateBlock() {
+        renderMapview();
         GridPane.setColumnIndex(mapView, location.getX());
         GridPane.setRowIndex(mapView, location.getY());
+    }
+
+    public void renderMapview() {
+        mapView.setImage(getGameMap().snapshot(new SnapshotParameters(), null));
     }
 
     @Override
