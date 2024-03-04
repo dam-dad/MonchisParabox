@@ -78,7 +78,7 @@ public class MainController implements Initializable {
 			//IMAGEN 
 			Image imagen = skin.getSkinFinal();
 				
-			//MÚSICA - EFECTOS - VOLUMEN - 
+			//MÚSICA - EFECTOS - VOLUMEN - TECLAS
 			System.out.println("MUSICA: " + (musica ? "ON" : "OFF") + "\n"
 							 + "EFECTOS: " + (efectos ? "ON" : "OFF") + "\n"
 							 + "VOLUMEN: " + ajustescontroller.getVolumen() + "\n"
