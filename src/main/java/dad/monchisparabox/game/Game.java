@@ -12,6 +12,7 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
@@ -22,6 +23,7 @@ import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Game extends AnimationTimer {
@@ -31,6 +33,9 @@ public class Game extends AnimationTimer {
     private Music music;
 
     private MapData mapData;
+
+    private Instant start;
+    private int movimientos;
 
     public Game(MapData mapData) {
         this.mapData = mapData;
@@ -57,6 +62,7 @@ public class Game extends AnimationTimer {
     public void init() {
         getInitialMap().load();
         player.render();
+        start = Instant.now();
     }
 
     public void changeMap(GameMap gameMap, Location location, boolean joining) {
@@ -162,7 +168,15 @@ public class Game extends AnimationTimer {
         }
 
         if (win) {
-            xd();
+            java.time.Duration duration = java.time.Duration.between(start, Instant.now());
+            long hours = duration.toHours();
+            long minutes = duration.toMinutesPart();
+            long seconds = duration.toSecondsPart();
+
+            // Display the result
+            System.out.println("Ha tardado " + hours + ":" + minutes + ":" + seconds);
+
+            alertWin();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);
             if(nextMapData != null) {
                 App.getGameController().getMapController().setGame(new Game(nextMapData));
@@ -173,7 +187,7 @@ public class Game extends AnimationTimer {
         }
     }
 
-    public static void xd() {
+    public void alertWin() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
@@ -183,14 +197,24 @@ public class Game extends AnimationTimer {
         imageView.setFitWidth(300);
         imageView.setFitHeight(200);
 
+        ImageView newImageView = new ImageView(MainController.getUserData().getSkin());
+        newImageView.setFitWidth(45);
+        newImageView.setFitHeight(45);
+
+        newImageView.setX((imageView.getFitWidth() - newImageView.getFitWidth()) / 2);
+        newImageView.setY(40);
+
+        Group group = new Group(imageView, newImageView);
+        alert.getDialogPane().setContent(group);
+
+
         alert.getDialogPane().setStyle("-fx-background-color: transparent;");
-        alert.getDialogPane().setGraphic(imageView);
+
+        alert.getDialogPane().setGraphic(group);
         DialogPane dialogPane = alert.getDialogPane();
 
-        dialogPane.setStyle("-fx-background-color: #003373;");
+        dialogPane.setStyle("-fx-background-color: #f48d01;");
         alert.getDialogPane().lookupButton(ButtonType.OK).setOpacity(0);
-
-        alert.show();
 
         alert.setWidth(320);
         alert.setHeight(220);
@@ -203,6 +227,8 @@ public class Game extends AnimationTimer {
 
         Timeline timeline = new Timeline(keyFrame);
         timeline.play();
+
+        alert.showAndWait();
     }
 
     // game loop
@@ -234,6 +260,10 @@ public class Game extends AnimationTimer {
             } else if (code == KeyCode.RIGHT) {
                 player.handleMovement(Direction.RIGHT);
             }
+        }
+
+        if(code == KeyCode.ESCAPE) {
+            App.getControlador().getView().setCenter(App.getControlador().getInicioController().getView());
         }
 
         if (code == KeyCode.R) {
