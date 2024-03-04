@@ -40,7 +40,7 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         music = new Music("Priscila");
-        /*	music.play();*/
+      //  music.play();
         setGame(new Game(getView(), Tile.mapa));
     }
 

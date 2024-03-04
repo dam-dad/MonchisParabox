@@ -8,15 +8,25 @@ import dad.auraengine.media.Music;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.block.LimitBlock;
+import javafx.animation.ScaleTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Rectangle;
+import javafx.animation.ScaleTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 
 public class Player extends Entity<Rectangle> {
 
 	private ImageView playerComponent;
+	private ScaleTransition scaleTransition;
+
+	private Music music;
 
 	public Player() {
 		super();
@@ -29,6 +39,11 @@ public class Player extends Entity<Rectangle> {
 		// variables of character size
 		this.width = 50;
 		this.height = 50;
+
+		scaleTransition = new ScaleTransition(Duration.seconds(0.2), playerComponent);
+		scaleTransition.setToX(0.9); // Escalar en el eje X a 0.9 (encoger un poco)
+		scaleTransition.setToY(0.9); // Escalar en el eje Y a 0.9 (encoger un poco)
+		scaleTransition.setAutoReverse(true);
 	}
 
 	// First time in map
@@ -55,21 +70,26 @@ public class Player extends Entity<Rectangle> {
 	public void handleMovement(Direction direction) {
 		location.setLastX(location.getX());
 		location.setLastY(location.getY());
+		music = new Music("MovePlayer");
 
 		boolean move = false;
 
 		switch (direction) {
 			case LEFT:
 				move = location.decrementX();
+				music.playOnce();
 				break;
 			case RIGHT:
 				move = location.incrementX();
+				music.playOnce();
 				break;
 			case UP:
 				move = location.decrementY();
+				music.playOnce();
 				break;
 			case DOWN:
 				move = location.incrementY();
+				music.playOnce();
 				break;
 			default:
 				break;
