@@ -100,10 +100,10 @@ public class Player extends Entity<Rectangle> {
 			if (block != null) {
 				block.handleCollision(this, direction);
 			}
-			App.getMainController().getGame().checkWin();
+			App.getMainController().getMapController().getGame().checkWin();
 		} else {
 			//TODO Volver al mapa anterior
-			App.getMainController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
+			App.getMainController().getMapController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);
 			System.out.println("(Player) Esta saliendo del mapa mi rey");
 		}
 	}

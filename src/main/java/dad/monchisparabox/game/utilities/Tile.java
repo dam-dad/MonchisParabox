@@ -110,6 +110,7 @@ public class Tile {
                 if(block instanceof MapBlock mapBlock) {
                     mapBlock.setGameMap(mapList.get(i+bloq));
                     bloq++;
+                    mapBlock.renderMapview();
                 }
             }
         }

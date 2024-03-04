@@ -3,6 +3,7 @@ package dad.monchisparabox.game;
 import java.util.ArrayList;
 
 
+import dad.auraengine.Map;
 import dad.auraengine.entities.Entity;
 import dad.auraengine.entities.StaticEntity;
 import dad.auraengine.entities.movements.Direction;
@@ -16,30 +17,30 @@ import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.block.BoxBlock;
 import dad.monchisparabox.game.utilities.Tile;
 import javafx.animation.AnimationTimer;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.util.Duration;
 
 public class Game extends AnimationTimer {
 
     private Player player;
     private ArrayList<GameMap> maps = new ArrayList<>();
-    private BorderPane root;
 
-    private Music music;
-
-    public Game(BorderPane root, String tiledMap) {
-        this.root = root;
+    public Game(String tiledMap) {
         maps.addAll(Tile.tiles(tiledMap));
 
         player = new Player();
         player.setLocation(maps.get(0).getStart());
 
-        root.setOnKeyPressed(event -> handleKeyPress(event.getCode()));
+        App.getMainController().getView().setOnKeyPressed(event -> handleKeyPress(event.getCode()));
 
-        Platform.runLater(root::requestFocus);
+        Platform.runLater(App.getMainController().getView()::requestFocus);
 
         init();
     }
@@ -77,7 +78,7 @@ public class Game extends AnimationTimer {
             player.getLocation().setLastY(location.getY());
             player.render();
             gameMap.load();
-            root.setCenter(gameMap);
+            App.getMainController().getMapController().getView().setCenter(gameMap);
         }
     }
 
@@ -165,7 +166,7 @@ public class Game extends AnimationTimer {
             alert.setHeaderText("You win!");
             alert.setContentText("You have completed the game!");
             alert.showAndWait();
-            App.getMainController().setGame(new Game(root, Tile.mapa));
+            App.getMainController().getMapController().setGame(new Game(Tile.mapa));
         }
     }
 
@@ -190,8 +191,7 @@ public class Game extends AnimationTimer {
         if(code == KeyCode.R) {
             music = new Music("Reiniciar");
             music.playOnce();
-            App.getMainController().setGame(new Game(root, Tile.mapa));
-
+            App.getMainController().getMapController().setGame(new Game(Tile.mapa));
         }
     }
 }

@@ -1,5 +1,8 @@
 package dad.auraengine;
 
+import dad.monchisparabox.App;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -7,6 +10,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
 
 public class Map extends GridPane {
 	
@@ -24,8 +28,6 @@ public class Map extends GridPane {
 		
 		setAlignment(Pos.CENTER);
 		setGridLinesVisible(true);
-
-		setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
 
 		for (int i = 0; i < maxY; i++) {
 	        RowConstraints rConstraint = new RowConstraints();
@@ -56,16 +58,6 @@ public class Map extends GridPane {
 		// Recargamos la posición por si hay que escalar...
 		setHalignment(node, HPos.CENTER);
 		setValignment(node, VPos.CENTER);
-	}
-	
-	public double getCenterX(int posX) {
-	    double cellWidth = getWidth() / getColumnConstraints().size();
-	    return (cellWidth * (posX + 0.5) + getLayoutX()) * 10;
-	}
-
-	public double getCenterY(int posY) {
-	    double cellHeight = getHeight() / getRowConstraints().size();
-	    return (cellHeight * (posY + 0.5) + getLayoutY()) * 10;
 	}
 	
 	public int getMapMaxHeight() {
