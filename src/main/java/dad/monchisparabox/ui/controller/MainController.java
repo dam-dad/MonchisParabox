@@ -31,10 +31,10 @@ public class MainController implements Initializable {
 	private Skin skin;
 	
 	//model
-	private boolean musica = true, efectos = true;
-    private double xOffset, yOffset;
+	private boolean musica = true, efectos = true, letras = true;
+    	private double xOffset, yOffset;
 	private int posicionActual = 0;
-    private List<String> skins = Arrays.asList("/assets/skins/skin1.png", "/assets/skins/skin2.png", "/assets/skins/skin3.png", "/assets/skins/skin4.png", "/assets/skins/skin5.png");
+    	private List<String> skins = Arrays.asList("/assets/skins/skin1.png", "/assets/skins/skin2.png", "/assets/skins/skin3.png", "/assets/skins/skin4.png", "/assets/skins/skin5.png");
 	
 	// view
 	@FXML
@@ -67,7 +67,7 @@ public class MainController implements Initializable {
 		skin.setSkinFinal(new Image(skins.get(posicionActual)));
 		skin.setComplemento1(new Image("/assets/complementos/c0.png"));
 		skin.setComplemento2(new Image("/assets/complementos/c0.png"));
-		
+
 		//INICIO > JUGAR
 		inicioController.setOnJugar (e -> {
 			efectoBoton();
@@ -75,30 +75,39 @@ public class MainController implements Initializable {
 			generarSkinFinal(skinFinal, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/assets/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
 			skin.setSkinFinal(skinFinal);
 			
-			//MUSICA / EFECTOS / IMAGEN
+			//IMAGEN 
+			Image imagen = skin.getSkinFinal();
+				
+			//MÚSICA - EFECTOS - VOLUMEN - 
+			System.out.println("MUSICA: " + (musica ? "ON" : "OFF") + "\n"
+							 + "EFECTOS: " + (efectos ? "ON" : "OFF") + "\n"
+							 + "VOLUMEN: " + ajustescontroller.getVolumen() + "\n"
+							 + "TECLAS: " + (letras ? "LETRAS" : "FLECHAS") + "\n");
+
+			audioClip.stop();
 		});	
 		
 		//INICIO > MOVER
 		inicioController.setOnMover (e -> {
 			Stage stage = (Stage) view.getScene().getWindow();
 			double newX = e.getScreenX() - xOffset;
-            double newY = e.getScreenY() - yOffset;
-            stage.setX(newX);
-            stage.setY(newY);
+	            double newY = e.getScreenY() - yOffset;
+	            stage.setX(newX);
+	            stage.setY(newY);
 		});
 
 		//INICIO > MOVER PRESSED
 		inicioController.setOnMoverPressed (e -> {
-            xOffset = e.getSceneX();
-            yOffset = e.getSceneY();
+	            xOffset = e.getSceneX();
+	            yOffset = e.getSceneY();
 		});
 		
 		//INICIO > AJUSTES
-        ajustescontroller = new ajustesController();
-		inicioController.setOnAjustes (e -> {
-			efectoBoton();
-			view.setCenter(ajustescontroller.getView());
-		});
+        	ajustescontroller = new ajustesController();
+			inicioController.setOnAjustes (e -> {
+				efectoBoton();
+				view.setCenter(ajustescontroller.getView());
+			});
 		
 		//INICIO > SKIN SIGUIENTE 
 		inicioController.setOnSiguiente(e -> {
@@ -186,17 +195,13 @@ public class MainController implements Initializable {
 		//AJUSTES > FLECHAS ON
 		ajustescontroller.setonFlechas (e -> {
 			efectoBoton();
-			System.out.println("ACTIVAR FLECHAS");
-			//ACTIVAR FLECHAS 
-			//DESACTIVAR LETRAS
+			letras = false;
 		});	
 		
 		//AJUSTES > LETRAS ON
 		ajustescontroller.setonLetras (e -> {
 			efectoBoton();
-			System.out.println("ACTIVAR LETRAS");
-			//ACTIVAR LETRAS
-		    //DESACTIVAR FLECHAS
+			letras = false;
 		});	
 		
 		//AJUSTES > GENERAR PDF
