@@ -149,8 +149,20 @@ public class GameMap extends Map {
                 // Asignar imagen según el tipo de bloque de alrededor
 
 				if(hasTopBlock && hasRightBlock && hasLeftBlock && hasTopLeftBlock && hasBottomLeftBlock && !hasBottomRightBlock && ! hasTopRightBlock) {
-                    limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.jpg"));
+                    limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.png"));
 
+
+                }else if(!hasTopLeftBlock && hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock && hasBottomRightBlock && hasBottomLeftBlock && hasTopRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/NoTopLeftVertical.png"));
+
+                }else if(!hasBottomBlock && !hasBottomLeftBlock && !hasLeftBlock && !hasTopLeftBlock && hasTopBlock && hasTopRightBlock && hasRightBlock && hasBottomRightBlock){
+                    limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+
+                }else if(!hasBottomRightBlock && !hasTopBlock && !hasTopLeftBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock && hasRightBlock && hasBottomLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/UpConectionWhitreDown.png"));
+
+                }else if(!hasBottomBlock && !hasRightBlock && !hasBottomRightBlock && !hasBottomLeftBlock && hasTopBlock && hasTopRightBlock && hasTopLeftBlock && hasLeftBlock){
+                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
 
                 }else if(!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasLeftBlock && hasTopRightBlock && hasTopLeftBlock && hasBottomRightBlock){
                     limitBlock.setImage(new Image("/assets/block/NoBottomLeftDown.png"));
