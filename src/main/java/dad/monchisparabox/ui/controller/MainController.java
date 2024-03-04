@@ -1,5 +1,8 @@
 package dad.monchisparabox.ui.controller;
 
+import dad.monchisparabox.App;
+import dad.monchisparabox.game.controller.GameController;
+import dad.monchisparabox.game.data.UserData;
 import dad.monchisparabox.skin.Skin;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -36,7 +39,9 @@ public class MainController implements Initializable {
     	private double xOffset, yOffset;
 	private int posicionActual = 0;
     	private List<String> skins = Arrays.asList("/assets/skins/skin1.png", "/assets/skins/skin2.png", "/assets/skins/skin3.png", "/assets/skins/skin4.png", "/assets/skins/skin5.png");
-	
+
+		private static UserData userData;
+
 	// view
 	@FXML
 	private BorderPane view;
@@ -72,20 +77,15 @@ public class MainController implements Initializable {
 		//INICIO > JUGAR
 		inicioController.setOnJugar (e -> {
 			efectoBoton();
-			Image skinFinal = generarSkinFinal(skin.getSkin(), new Image(skin.getComplemento1().getUrl().substring(skin.getComplemento1().getUrl().indexOf("/assets/"), skin.getComplemento1().getUrl().length() - 4) + "F.png"));
-			generarSkinFinal(skinFinal, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/assets/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
-			skin.setSkinFinal(skinFinal);
-			
-			//IMAGEN 
-			Image imagen = skin.getSkinFinal();
-				
-			//MÚSICA - EFECTOS - VOLUMEN - TECLAS
-			System.out.println("MUSICA: " + (musica ? "ON" : "OFF") + "\n"
-							 + "EFECTOS: " + (efectos ? "ON" : "OFF") + "\n"
-							 + "VOLUMEN: " + ajustescontroller.getVolumen() + "\n"
-							 + "TECLAS: " + (letras ? "LETRAS" : "FLECHAS") + "\n");
+			Image firstLayer = generarSkinFinal(skin.getSkin(), new Image(skin.getComplemento1().getUrl().substring(skin.getComplemento1().getUrl().indexOf("/assets/"), skin.getComplemento1().getUrl().length() - 4) + "F.png"));
+			Image secondLayer = generarSkinFinal(firstLayer, new Image(skin.getComplemento2().getUrl().substring(skin.getComplemento2().getUrl().indexOf("/assets/"), skin.getComplemento2().getUrl().length() - 4) + "F.png"));
+			skin.setSkinFinal(secondLayer);
 
 			audioClip.stop();
+
+			userData = new UserData(skin.getSkinFinal(), musica, efectos, ajustescontroller.getVolumen(), letras);
+
+			view.setCenter(App.getGameController().getView());
 		});	
 		
 		//INICIO > MOVER
@@ -161,7 +161,6 @@ public class MainController implements Initializable {
 		//AJUSTES > MODIFICAR VOLUMEN
 		ajustescontroller.setOnVolumen (e -> {
 			if (musica) {
-				efectoBoton();
 				audioClip.stop();
 				audioClip.play(ajustescontroller.getVolumen() / 100);
 			}
@@ -257,7 +256,15 @@ public class MainController implements Initializable {
 	public BorderPane getView() {
 		return view;
 	}
-	
+
+	public static UserData getUserData() {
+		return userData;
+	}
+
+	public dad.monchisparabox.ui.controller.creditosController getCreditosController() {
+		return creditosController;
+	}
+
 	public Image generarSkinFinal(Image skin, Image complemento1) {
 	    // Crea un ImageView para cada imagen
 	    ImageView skinView = new ImageView(skin);

@@ -7,10 +7,19 @@ import dad.monchisparabox.App;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.data.MapData;
 import dad.monchisparabox.game.entities.Player;
+import dad.monchisparabox.ui.controller.MainController;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.DialogPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.util.ArrayList;
 
@@ -152,24 +161,44 @@ public class Game extends AnimationTimer {
         }
 
         if (win) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Congratulations");
-            alert.setHeaderText("You win!");
-            alert.setContentText("You have completed the game!");
-            alert.showAndWait();
-
+            xd();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);
             if(nextMapData != null) {
                 App.getGameController().getMapController().setGame(new Game(nextMapData));
             } else {
-                Alert completed = new Alert(Alert.AlertType.INFORMATION);
-                completed.setTitle("Te pasaste el juego mi rey");
-                completed.setHeaderText("¡Te lo pasaste!");
-                completed.setContentText("¡Te lo pasaste otra vez!");
-                completed.showAndWait();
-                //TODO Volver a la sala
+                App.getControlador().getView().setCenter(App.getControlador().getCreditosController().getView());
+                App.getControlador().getCreditosController().subir();
             }
         }
+    }
+
+    public static void xd() {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText(null);
+        alert.initStyle(StageStyle.UNDECORATED);
+
+        Image image = new Image("/assets/xdxd.png");
+        ImageView imageView = new ImageView(image);
+        imageView.setFitWidth(300);
+        imageView.setFitHeight(200);
+
+        alert.getDialogPane().setStyle("-fx-background-color: transparent;");
+        alert.getDialogPane().setGraphic(imageView);
+        DialogPane dialogPane = alert.getDialogPane();
+
+        dialogPane.setStyle("-fx-background-color: #003373;");
+        alert.getDialogPane().lookupButton(ButtonType.OK).setOpacity(0);
+
+        alert.showAndWait();
+
+        alert.setWidth(320);
+        alert.setHeight(220);
+
+        Duration duration = Duration.seconds(2);
+        KeyFrame keyFrame = new KeyFrame(duration, event -> alert.close());
+
+        Timeline timeline = new Timeline(keyFrame);
+        timeline.play();
     }
 
     // game loop
@@ -180,14 +209,27 @@ public class Game extends AnimationTimer {
     }
 
     private void handleKeyPress(KeyCode code) {
-        if (code == KeyCode.W) {
-            player.handleMovement(Direction.UP);
-        } else if (code == KeyCode.A) {
-            player.handleMovement(Direction.LEFT);
-        } else if (code == KeyCode.S) {
-            player.handleMovement(Direction.DOWN);
-        } else if (code == KeyCode.D) {
-            player.handleMovement(Direction.RIGHT);
+
+        if(MainController.getUserData().letras()) {
+            if (code == KeyCode.W) {
+                player.handleMovement(Direction.UP);
+            } else if (code == KeyCode.A) {
+                player.handleMovement(Direction.LEFT);
+            } else if (code == KeyCode.S) {
+                player.handleMovement(Direction.DOWN);
+            } else if (code == KeyCode.D) {
+                player.handleMovement(Direction.RIGHT);
+            }
+        } else {
+            if (code == KeyCode.UP) {
+                player.handleMovement(Direction.UP);
+            } else if (code == KeyCode.LEFT) {
+                player.handleMovement(Direction.LEFT);
+            } else if (code == KeyCode.DOWN) {
+                player.handleMovement(Direction.DOWN);
+            } else if (code == KeyCode.RIGHT) {
+                player.handleMovement(Direction.RIGHT);
+            }
         }
 
         if (code == KeyCode.R) {

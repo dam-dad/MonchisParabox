@@ -5,6 +5,7 @@ import dad.auraengine.entities.movements.Direction;
 import dad.monchisparabox.App;
 import dad.auraengine.media.Music;
 import dad.monchisparabox.game.block.Block;
+import dad.monchisparabox.ui.controller.MainController;
 import javafx.animation.ScaleTransition;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,10 +23,12 @@ public class Player extends Entity<Rectangle> {
 	public Player() {
 		super();
 		// load player image
-		image = new Image("/assets/entities/show_player.png");
+		image = MainController.getUserData().getSkin();
 
 		playerComponent = new ImageView();
 		playerComponent.setImage(image);
+		playerComponent.setFitWidth(50);
+		playerComponent.setFitHeight(50);
 
 		// variables of character size
 		this.width = 50;
