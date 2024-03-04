@@ -32,7 +32,7 @@
          <children>
             <ImageView fx:id="atrasImageView" fitWidth="30.0" onMouseClicked="#OnAtrasClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/atras.png" />
+                  <Image url="@../assets/atras.png" />
                </image>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -40,7 +40,7 @@
             </ImageView>
             <ImageView fx:id="salirImageView" fitWidth="30.0" onMouseClicked="#onSalirClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/salir.png" />
+                  <Image url="@../assets/salir.png" />
                </image>
                <GridPane.margin>
                   <Insets right="20.0" />
@@ -48,7 +48,7 @@
             </ImageView>
             <ImageView fx:id="skinImageView" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/skins/skin1.png" />
+                  <Image url="@../assets/skins/skin1.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="60.0" left="-10.0" />
@@ -56,7 +56,7 @@
             </ImageView>
             <ImageView fx:id="complemento1x1ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/complementos/complemento1.1.png" />
+                  <Image url="@../assets/complementos/complemento1.1.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -64,7 +64,7 @@
             </ImageView>
             <ImageView fx:id="complemento1xXImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/complementos/complemento.X.png" />
+                  <Image url="@../assets/complementos/complemento.X.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -72,7 +72,7 @@
             </ImageView>
             <ImageView fx:id="complemento1x3ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/complementos/complemento1.3.png" />
+                  <Image url="@../assets/complementos/complemento1.3.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -80,7 +80,7 @@
             </ImageView>
             <ImageView fx:id="complemento1x2ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/complementos/complemento1.2.png" />
+                  <Image url="@../assets/complementos/complemento1.2.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -88,7 +88,7 @@
             </ImageView>
             <ImageView fx:id="complemento2xXImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/complementos/complemento.X.png" />
+                  <Image url="@../assets/complementos/complemento.X.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -96,7 +96,7 @@
             </ImageView>
             <ImageView fx:id="complemento2x2ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/complementos/complemento2.2.png" />
+                  <Image url="@../assets/complementos/complemento2.2.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -104,7 +104,7 @@
             </ImageView>
             <ImageView fx:id="complemento2x1ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/complementos/complemento2.1.png" />
+                  <Image url="@../assets/complementos/complemento2.1.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -112,7 +112,7 @@
             </ImageView>
             <ImageView fx:id="complemento2x3ImageView" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/complementos/complemento2.3.png" />
+                  <Image url="@../assets/complementos/complemento2.3.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-10.0" left="-50.0" />
@@ -123,7 +123,7 @@
                   <Insets left="17.0" top="15.0" />
                </GridPane.margin>
                <image>
-                  <Image url="@../images/complementos/c0.png" />
+                  <Image url="@../assets/complementos/c0.png" />
                </image>
             </ImageView>
             <ImageView fx:id="complemento2ImageView" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="4">
@@ -131,7 +131,7 @@
                   <Insets left="-10.0" top="15.0" />
                </GridPane.margin>
                <image>
-                  <Image url="@../images/complementos/c0.png" />
+                  <Image url="@../assets/complementos/c0.png" />
                </image>
             </ImageView>
          </children>

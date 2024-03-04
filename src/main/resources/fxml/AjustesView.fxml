@@ -35,7 +35,7 @@
          <children>
             <ImageView fx:id="VolumenMenosImageView" fitWidth="25.0" onMouseClicked="#onVolumenMenosClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/volumen1.png" />
+                  <Image url="@../assets/volumen1.png" />
                </image>
                <GridPane.margin>
                   <Insets right="10.0" />
@@ -43,7 +43,7 @@
             </ImageView>
             <ImageView fx:id="volumenMasImageView" fitWidth="24.0" onMouseClicked="#onVolumenMasClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="5" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/volumen2.png" />
+                  <Image url="@../assets/volumen2.png" />
                </image>
                <GridPane.margin>
                   <Insets left="10.0" />
@@ -51,7 +51,7 @@
             </ImageView>
             <ImageView fx:id="musicaImageView" fitWidth="50.0" onMouseClicked="#onMusicaClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/volumen3.png" />
+                  <Image url="@../assets/volumen3.png" />
                </image>
             </ImageView>
             <Label text="Música" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -64,7 +64,7 @@
             </Label>
             <ImageView fx:id="efectosImageView" fitWidth="50.0" onMouseClicked="#onEfectosClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/volumen3.png" />
+                  <Image url="@../assets/volumen3.png" />
                </image>
             </ImageView>
             <Label text="Efectos" textFill="WHITE" GridPane.columnIndex="4" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
@@ -83,7 +83,7 @@
             </Label>
             <ImageView fx:id="letrasImageView" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onLetrasClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/teclasLetrasX.png" />
+                  <Image url="@../assets/teclasLetrasX.png" />
                </image>
                <GridPane.margin>
                   <Insets left="30.0" top="10.0" />
@@ -91,7 +91,7 @@
             </ImageView>
             <ImageView fx:id="flechasImageView" fitHeight="150.0" fitWidth="200.0" onMouseClicked="#onFlechasClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/teclasFlechas.png" />
+                  <Image url="@../assets/teclasFlechas.png" />
                </image>
                <GridPane.margin>
                   <Insets right="30.0" top="10.0" />
@@ -108,7 +108,7 @@
             </Label>
             <ImageView fx:id="diplomaImageView" fitWidth="80.0" onMouseClicked="#onDiplomaClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="5" GridPane.valignment="BOTTOM">
                <image>
-                  <Image url="@../images/diploma.png" />
+                  <Image url="@../assets/diploma.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-40.0" />
@@ -116,7 +116,7 @@
             </ImageView>
             <ImageView fx:id="atrasImageView" fitWidth="30.0" onMouseClicked="#OnAtrasClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/atras.png" />
+                  <Image url="@../assets/atras.png" />
                </image>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -124,7 +124,7 @@
             </ImageView>
             <ImageView fx:id="salirImageView" fitWidth="30.0" onMouseClicked="#onSalirClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/salir.png" />
+                  <Image url="@../assets/salir.png" />
                </image>
                <GridPane.margin>
                   <Insets right="20.0" />
@@ -135,12 +135,12 @@
                   <Insets right="20.0" />
                </GridPane.margin>
                <image>
-                  <Image url="@../images/expandir.png" />
+                  <Image url="@../assets/expandir.png" />
                </image>
             </ImageView>
             <ImageView fx:id="astronautaRacista" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="1">
                <image>
-                  <Image url="@../images/astronautaRacista.gif" />
+                  <Image url="@../assets/astronautaRacista.gif" />
                </image>
                <GridPane.margin>
                   <Insets bottom="200.0" left="-250.0" />

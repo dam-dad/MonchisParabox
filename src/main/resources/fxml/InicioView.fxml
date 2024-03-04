@@ -31,7 +31,7 @@
          <children>
             <ImageView fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/Nombre1.png" />
+                  <Image url="@../assets/Nombre1.png" />
                </image>
                <GridPane.margin>
                   <Insets left="45.0" top="130.0" />
@@ -39,12 +39,12 @@
             </ImageView>
             <ImageView fx:id="skinImageView" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/skins/skin1.png" />
+                  <Image url="@../assets/skins/skin1.png" />
                </image>
             </ImageView>
             <ImageView fx:id="ajustesImageView" fitWidth="40.0" onMouseClicked="#onAjustesClicked" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../images/ajustes.png" />
+                  <Image url="@../assets/ajustes.png" />
                </image>
                <GridPane.margin>
                   <Insets left="20.0" />
@@ -52,7 +52,7 @@
             </ImageView>
             <ImageView fx:id="moverImageView" fitWidth="40.0" onMouseDragged="#onMoverDragged" onMousePressed="#onMoverPressed" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="6" GridPane.halignment="RIGHT" GridPane.rowIndex="5">
                <image>
-                  <Image url="@../images/mover.png" />
+                  <Image url="@../assets/mover.png" />
                </image>
                <GridPane.margin>
                   <Insets right="20.0" />
@@ -60,7 +60,7 @@
             </ImageView>
             <ImageView fx:id="editarImageView" fitWidth="40.0" onMouseClicked="#onEditarClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.rowIndex="2">
                <image>
-                  <Image url="@../images/pincelImage.png" />
+                  <Image url="@../assets/pincelImage.png" />
                </image>
                <GridPane.margin>
                   <Insets bottom="-40.0" left="-20.0" />
@@ -68,17 +68,17 @@
             </ImageView>
             <ImageView fx:id="anteriorImageView" fitWidth="50.0" onMouseClicked="#onAnteriorClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/flechaI.png" />
+                  <Image url="@../assets/flechaI.png" />
                </image>
             </ImageView>
             <ImageView fx:id="siguienteImageView" fitWidth="50.0" onMouseClicked="#onSiguienteClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="4" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/flechaD.png" />
+                  <Image url="@../assets/flechaD.png" />
                </image>
             </ImageView>
             <ImageView fx:id="jugarImageView" fitHeight="50.0" fitWidth="120.0" onMouseClicked="#onJugarClicked" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                <image>
-                  <Image url="@../images/jugar.png" />
+                  <Image url="@../assets/jugar.png" />
                </image>
                <GridPane.margin>
                   <Insets top="30.0" />
@@ -86,7 +86,7 @@
             </ImageView>
             <ImageView fx:id="complemento1ImageView" fitWidth="97.5" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <image>
-                  <Image url="@../images/complementos/c0.png" />
+                  <Image url="@../assets/complementos/c0.png" />
                </image>
                <GridPane.margin>
                   <Insets top="-50.0" />
@@ -94,7 +94,7 @@
             </ImageView>
             <ImageView fx:id="complemento2ImageView" fitWidth="130.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="3" GridPane.rowIndex="3">
                <image>
-                  <Image url="@../images/complementos/c0.png" />
+                  <Image url="@../assets/complementos/c0.png" />
                </image>
                <GridPane.margin>
                   <Insets top="50.0" />
