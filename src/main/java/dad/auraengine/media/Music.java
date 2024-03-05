@@ -3,6 +3,7 @@ package dad.auraengine.media;
 import java.net.URISyntaxException;
 import java.net.URL;
 
+import dad.monchisparabox.ui.controller.MainController;
 import javafx.animation.Transition;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -43,12 +44,29 @@ public class Music {
 		player.play();
 	}
 
+	public void stopMusic() {
+		if (player != null) {
+			player.stop();
+		}
+	}
+
+
+	public void play(double volume) {
+		player = new MediaPlayer(media);
+		player.setVolume(volume);
+		player.setCycleCount(Transition.INDEFINITE);
+		player.play();
+	}
+
 
 	public void playOnce() {
-		MediaPlayer oneTimePlayer = new MediaPlayer(media);
-		oneTimePlayer.setVolume(0.3);
-		oneTimePlayer.setOnEndOfMedia(() -> oneTimePlayer.dispose()); // Liberar recursos después de reproducir una vez
-		oneTimePlayer.play();
+		if(MainController.getUserData().efectosEnabled()){
+			MediaPlayer oneTimePlayer = new MediaPlayer(media);
+			oneTimePlayer.setVolume(0.3);
+			oneTimePlayer.setOnEndOfMedia(() -> oneTimePlayer.dispose()); // Liberar recursos después de reproducir una vez
+			oneTimePlayer.play();
+		}
+
 	}
 	
 	/**
@@ -61,5 +79,8 @@ public class Music {
 			e.printStackTrace();
 		}
 	}
-	
+
+	public void setPlayer(MediaPlayer player) {
+		this.player = player;
+	}
 }

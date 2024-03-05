@@ -2,15 +2,15 @@
 {
   "id": 7,
   "nombre": "Monchi se pierde en las sendas del mal",
-  "cancion": "Priscilla Snow - Empty.mp3",
+  "cancion": "InfinityEnter",
   "mapa": [
     [
       "##########",
       "##########",
-      "#.p......#",
+      "#........#",
       "#........#",
       "#..M.....#",
-      "#........#",
+      "#_..._p..#",
       "#..M.....#",
       "#.......=#",
       "##########",

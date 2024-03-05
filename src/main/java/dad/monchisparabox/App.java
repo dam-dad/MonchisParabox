@@ -5,6 +5,7 @@ import dad.monchisparabox.ui.controller.MainController;
 import javafx.application.Application;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -23,6 +24,7 @@ public class App  extends Application {
 		primaryStage.setTitle("Monchi's Parabox");
 		primaryStage.setScene(new Scene(controlador.getView(), 928, 522));
 		primaryStage.setMaximized(true);
+		primaryStage.getIcons().add(new Image("/assets/icono.png"));
 		primaryStage.show();
 	}
 
@@ -32,5 +34,9 @@ public class App  extends Application {
 
 	public static GameController getGameController() {
 		return (gameController == null ? gameController = new GameController() : gameController);
+	}
+
+	public static void setGameController(GameController gameController) {
+		App.gameController = gameController;
 	}
 }

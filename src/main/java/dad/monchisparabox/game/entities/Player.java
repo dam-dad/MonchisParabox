@@ -94,6 +94,7 @@ public class Player extends Entity<Rectangle> {
 			if (block != null) {
 				block.handleCollision(this, direction);
 			}
+			App.getGameController().getMapController().getGame().movimientos++;
 			App.getGameController().getMapController().getGame().checkWin();
 		} else {
 			App.getGameController().getMapController().getGame().changeMap(location.getMap().getJoinLocation().getMap(), location.getMap().getJoinLocation(), false);

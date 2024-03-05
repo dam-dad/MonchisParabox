@@ -6,12 +6,14 @@ import dad.auraengine.media.Music;
 import dad.monchisparabox.App;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.data.MapData;
+import dad.monchisparabox.game.data.StatsController;
 import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.ui.controller.MainController;
 import javafx.animation.AnimationTimer;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.scene.Group;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.DialogPane;
@@ -22,6 +24,7 @@ import javafx.stage.Screen;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
+import java.time.Instant;
 import java.util.ArrayList;
 
 public class Game extends AnimationTimer {
@@ -32,12 +35,25 @@ public class Game extends AnimationTimer {
 
     private MapData mapData;
 
+
+     private Music musicaAumento = new Music("AumentoCaja");
+     private   Music musicaDecrecer = new Music("DecrecerCaja");
+
+    private Instant start;
+    public int movimientos;
+
+
     public Game(MapData mapData) {
         this.mapData = mapData;
         maps.addAll(mapData.getGameMaps());
 
         player = new Player();
+
         player.setLocation(maps.get(0).getStart());
+
+        music = new Music(mapData.getCancion());
+
+        music.play(MainController.getUserData().getVolumen()/100.0);
 
         App.getGameController().getView().setOnKeyPressed(event -> handleKeyPress(event.getCode()));
 
@@ -57,6 +73,7 @@ public class Game extends AnimationTimer {
     public void init() {
         getInitialMap().load();
         player.render();
+        start = Instant.now();
     }
 
     public void changeMap(GameMap gameMap, Location location, boolean joining) {
@@ -64,14 +81,12 @@ public class Game extends AnimationTimer {
         if (door == null) {
             if (joining) {
                 //entra
-                music = new Music("AumentoCaja");
-                music.playOnce();
+              musicaAumento.playOnce();
                 gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
 
             } else {
 
-                music = new Music("DecrecerCaja");
-                music.playOnce();
+             musicaDecrecer.playOnce();
             }
 
             player.setLocation(location.clone());
@@ -84,6 +99,7 @@ public class Game extends AnimationTimer {
     }
 
     public boolean teleportBlockToMap(GameMap gameMapTo, boolean kicking, Block block, Location location) {
+
         Block door = gameMapTo.getBlockAt(location, null);
         if (door == null) {
             Direction facing = block.getLocation().getMap().getFacing();
@@ -93,38 +109,38 @@ public class Game extends AnimationTimer {
             if (!kicking) {
                 if (gameMapTo.getFacing() == Direction.RIGHT) {
                     //se mete
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.LEFT);
                 } else if (gameMapTo.getFacing() == Direction.LEFT) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.RIGHT);
                 } else if (gameMapTo.getFacing() == Direction.UP) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.DOWN);
                 } else if (gameMapTo.getFacing() == Direction.DOWN) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.UP);
                 }
             } else {
                 if (facing == Direction.RIGHT) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.RIGHT);
                 } else if (facing == Direction.LEFT) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.LEFT);
                 } else if (facing == Direction.UP) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.UP);
                 } else if (facing == Direction.DOWN) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.DOWN);
                 }
             }
@@ -162,8 +178,19 @@ public class Game extends AnimationTimer {
         }
 
         if (win) {
-            xd();
+            java.time.Duration duration = java.time.Duration.between(start, Instant.now());
+            long hours = duration.toHours();
+            long minutes = duration.toMinutesPart();
+            long seconds = duration.toSecondsPart();
+
+            // Display the result
+            System.out.println("Ha tardado " + hours + ":" + minutes + ":" + seconds);
+
+            StatsController.guardar(mapData.getId(), hours + ":" + minutes + ":" + seconds, movimientos);
+
+            alertWin();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);
+            music.stopMusic();
             if(nextMapData != null) {
                 App.getGameController().getMapController().setGame(new Game(nextMapData));
             } else {
@@ -173,7 +200,8 @@ public class Game extends AnimationTimer {
         }
     }
 
-    public static void xd() {
+
+    public void alertWin() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setHeaderText(null);
         alert.initStyle(StageStyle.UNDECORATED);
@@ -183,14 +211,24 @@ public class Game extends AnimationTimer {
         imageView.setFitWidth(300);
         imageView.setFitHeight(200);
 
+        ImageView newImageView = new ImageView(MainController.getUserData().getSkin());
+        newImageView.setFitWidth(45);
+        newImageView.setFitHeight(45);
+
+        newImageView.setX((imageView.getFitWidth() - newImageView.getFitWidth()) / 2);
+        newImageView.setY(40);
+
+        Group group = new Group(imageView, newImageView);
+        alert.getDialogPane().setContent(group);
+
+
         alert.getDialogPane().setStyle("-fx-background-color: transparent;");
-        alert.getDialogPane().setGraphic(imageView);
+
+        alert.getDialogPane().setGraphic(group);
         DialogPane dialogPane = alert.getDialogPane();
 
-        dialogPane.setStyle("-fx-background-color: #003373;");
+        dialogPane.setStyle("-fx-background-color: #f48d01;");
         alert.getDialogPane().lookupButton(ButtonType.OK).setOpacity(0);
-
-        alert.show();
 
         alert.setWidth(320);
         alert.setHeight(220);
@@ -203,6 +241,8 @@ public class Game extends AnimationTimer {
 
         Timeline timeline = new Timeline(keyFrame);
         timeline.play();
+
+        alert.showAndWait();
     }
 
     // game loop
@@ -236,7 +276,12 @@ public class Game extends AnimationTimer {
             }
         }
 
+        if(code == KeyCode.ESCAPE) {
+            App.getControlador().getView().setCenter(App.getControlador().getInicioController().getView());
+        }
+
         if (code == KeyCode.R) {
+            music.stopMusic();
             music = new Music("Reiniciar");
             music.playOnce();
             App.getGameController().getMapController().setGame(new Game(App.getGameController().getMapDataController().getMapById(mapData.getId())));
