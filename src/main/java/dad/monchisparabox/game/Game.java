@@ -6,6 +6,7 @@ import dad.auraengine.media.Music;
 import dad.monchisparabox.App;
 import dad.monchisparabox.game.block.Block;
 import dad.monchisparabox.game.data.MapData;
+import dad.monchisparabox.game.data.StatsController;
 import dad.monchisparabox.game.entities.Player;
 import dad.monchisparabox.ui.controller.MainController;
 import javafx.animation.AnimationTimer;
@@ -39,7 +40,7 @@ public class Game extends AnimationTimer {
      private   Music musicaDecrecer = new Music("DecrecerCaja");
 
     private Instant start;
-    private int movimientos;
+    public int movimientos;
 
 
     public Game(MapData mapData) {
@@ -184,6 +185,8 @@ public class Game extends AnimationTimer {
 
             // Display the result
             System.out.println("Ha tardado " + hours + ":" + minutes + ":" + seconds);
+
+            StatsController.guardar(mapData.getId(), hours + ":" + minutes + ":" + seconds, movimientos);
 
             alertWin();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);

@@ -247,7 +247,9 @@ public class MainController implements Initializable {
 		creditosController = new creditosController();
 		creditosController.setOnInicio (e -> {
 			efectoBoton();
+			App.setGameController(null);
 			view.setCenter(inicioController.getView());
+			creditosController = new creditosController();
 		});
 		
 		//MOSTRAMOS LA VISTA DEL INICIO

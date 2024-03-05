@@ -35,4 +35,8 @@ public class App  extends Application {
 	public static GameController getGameController() {
 		return (gameController == null ? gameController = new GameController() : gameController);
 	}
+
+	public static void setGameController(GameController gameController) {
+		App.gameController = gameController;
+	}
 }
