@@ -68,8 +68,11 @@ public class creditosController implements Initializable {
 				+ "Cada nivel es un desafío único y representa un nuevo día en la vida de Monchi. A medida que avanza, deberá superar distintos desafíos homosexuales, sin embargo, lo más frustrante para él será que, una vez que complete un nivel, en vez de avanzar, aparecerá en el inicio de otro nivel en una estructura de niveles anidados, los cuales sumergirán al jugador en un viaje lleno de emociones intensas y desafíos estimulantes, sintiendo como si estuviera acompañando a el fokin Monchi en su búsqueda personal.\r\n"
 				+ "\r\n"
 				+ "Monchi's parabox posee una trama que refleja las decisiones y las segundas oportunidades que ofrece la vida. Además, busca enseñar a los jugadores la importancia de la educación, el amor, el crecimiento personal y el éxito en la vida académica. ¿Estás listo para ayudar al adolescente Monchi a enfrentar sus traumas infantiles y lograr su regreso triunfal a clase junto a su amado Yorman?\r\n"
-				+ "\r\n\n"
-				+ "¡Enhorabuena por haber logrado llegar hasta aquí! Tu perseverancia y dedicación han hecho posible que el amor entre Yorman y Monchi florezca una vez más. Ahora, juntos en el ciclo de desarrollo de aplicaciones multiplataforma, están más felices y unidos que nunca. ¡Gracias por haber sido parte de esta hermosa historia de amor!");
+				+ "\r\n"
+				+ "¡Enhorabuena por haber logrado llegar hasta aquí! Tu perseverancia y dedicación han hecho posible que el amor entre Yorman y Monchi florezca una vez más. Ahora, juntos en el ciclo de desarrollo de aplicaciones multiplataforma, están más felices y unidos que nunca. ¡Gracias por haber sido parte de esta hermosa historia de amor!\r\n"
+				+ "\r\n"
+				+ "Desarrollado por: \r\nYorman Santos Hernández\r\nBrian Román González Pereyra\r\nYanet López Rodríguez\r\nEduardo Galván Concepción\r\n"
+				+ "\r\n\n");
 	
 	}
 	

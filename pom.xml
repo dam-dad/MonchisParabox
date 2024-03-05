@@ -64,7 +64,6 @@
                                 <icoFile>installerAssets/windows/favicon.ico</icoFile>
                                 <generateSetup>true</generateSetup>
                                 <wrapJar>true</wrapJar>
-								<headerType>console</headerType>
                             </winConfig>
                         </configuration>
                     </execution>
