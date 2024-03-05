@@ -2,6 +2,7 @@ package dad.monchisparabox.ui.controller;
 
 import dad.monchisparabox.App;
 import dad.monchisparabox.game.controller.GameController;
+import dad.monchisparabox.game.data.PdfData;
 import dad.monchisparabox.game.data.UserData;
 import dad.monchisparabox.skin.Skin;
 import javafx.scene.image.Image;
@@ -12,8 +13,11 @@ import javax.imageio.ImageIO;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -23,6 +27,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import javafx.scene.media.AudioClip;
 
 public class MainController implements Initializable {
@@ -207,6 +218,41 @@ public class MainController implements Initializable {
 		
 		//AJUSTES > GENERAR PDF
 		ajustescontroller.setOnPdf (e -> {
+			PdfData pdfData1 = new PdfData("Mapa1", 600, "1000");
+			PdfData pdfData2 = new PdfData("Mapa2", 69, "100");
+			PdfData pdfData3 = new PdfData("Mapa3", 100, "80");
+			PdfData pdfData4 = new PdfData("Mapa4", 250, "250");
+			PdfData pdfData5 = new PdfData("Mapa5", 600, "1000");
+			PdfData pdfData6 = new PdfData("Mapa6", 600, "1000");
+			PdfData pdfData7 = new PdfData("Mapa7", 600, "1000");
+			PdfData pdfData8 = new PdfData("Mapa8", 600, "1000");
+			PdfData pdfData9 = new PdfData("Mapa9", 600, "1000");
+			PdfData pdfData10 = new PdfData("Mapa10", 600, "1000");
+			List<PdfData> pdfData = new ArrayList<>();
+			pdfData.add(pdfData1);
+			pdfData.add(pdfData2);
+			pdfData.add(pdfData3);
+			pdfData.add(pdfData4);
+			pdfData.add(pdfData5);
+			pdfData.add(pdfData6);
+			pdfData.add(pdfData7);
+			pdfData.add(pdfData8);
+			pdfData.add(pdfData9);
+			pdfData.add(pdfData10);
+
+			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(pdfData);
+
+			// Cargar el archivo JRXML del informe JasperReports
+			InputStream inputStream = getClass().getResourceAsStream("/reports/CertificadoGaymer.jrxml");
+			JasperReport jasperReport;
+			try {
+				jasperReport = JasperCompileManager.compileReport(inputStream);
+				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource);
+				JasperExportManager.exportReportToPdfFile(jasperPrint, "pdf/certificado_gaymer.pdf");
+			} catch (JRException e1) {
+				e1.printStackTrace();
+			}
+
 			efectoBoton();
 			System.out.println("GENERAR PDF");
 			//GENERAR PDF
