@@ -16,100 +16,158 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 
+/**
+ * Clase que representa un mapa del juego Monchi's Parabox.
+ */
 public class GameMap extends Map {
 
-    private Location start;
-    private Location end;
+	private Location start;
+	private Location end;
 
-    private List<Location> endCages = new ArrayList<>();
-    private List<Block> blocks = new ArrayList<>();
+	private List<Location> endCages = new ArrayList<>();
+	private List<Block> blocks = new ArrayList<>();
 
-    private Location joinLocation;
+	private Location joinLocation;
 
-    public GameMap(int maxX, int maxY, double scale) {
-        super(maxX, maxY, scale);
-        setGridLinesVisible(false);
-    }
+	/**
+	 * Constructor de la clase GameMap.
+	 *
+	 * @param maxX  Máximo valor en el eje X del mapa.
+	 * @param maxY  Máximo valor en el eje Y del mapa.
+	 * @param scale Escala del mapa.
+	 */
+	public GameMap(int maxX, int maxY, double scale) {
+		super(maxX, maxY, scale);
+		setGridLinesVisible(false);
+	}
 
-    public void load() {
-        getBlocks().forEach(StaticEntity::render);
-        assignBlockImages();
-    }
+	/**
+	 * Carga el mapa.
+	 */
+	public void load() {
+		getBlocks().forEach(StaticEntity::render);
+		assignBlockImages();
+	}
 
-    public Location getStart() {
-        return start;
-    }
+	/**
+	 * Obtiene la ubicación de inicio del mapa.
+	 *
+	 * @return La ubicación de inicio del mapa.
+	 */
+	public Location getStart() {
+		return start;
+	}
 
-    public void setStart(Location start) {
-        this.start = start;
-    }
+	/**
+	 * Establece la ubicación de inicio del mapa.
+	 *
+	 * @param start La ubicación de inicio del mapa.
+	 */
+	public void setStart(Location start) {
+		this.start = start;
+	}
 
-    public Location getEnd() {
-        return end;
-    }
+	/**
+	 * Obtiene la ubicación final del mapa.
+	 *
+	 * @return La ubicación final del mapa.
+	 */
+	public Location getEnd() {
+		return end;
+	}
 
-    public void setEnd(Location end) {
-        this.end = end;
-    }
+	/**
+	 * Establece la ubicación final del mapa.
+	 *
+	 * @param end La ubicación final del mapa.
+	 */
+	public void setEnd(Location end) {
+		this.end = end;
+	}
 
-    public List<Block> getBlocks() {
-        return blocks;
-    }
+	/**
+	 * Obtiene la lista de bloques del mapa.
+	 *
+	 * @return La lista de bloques del mapa.
+	 */
+	public List<Block> getBlocks() {
+		return blocks;
+	}
 
-    public List<Location> getEndCages() {
-        return endCages;
-    }
+	/**
+	 * Obtiene la lista de jaulas de finalización del mapa.
+	 *
+	 * @return La lista de jaulas de finalización del mapa.
+	 */
+	public List<Location> getEndCages() {
+		return endCages;
+	}
 
-    public Location getJoinLocation() {
-        return joinLocation;
-    }
+	/**
+	 * Obtiene la ubicación de unión del mapa.
+	 *
+	 * @return La ubicación de unión del mapa.
+	 */
+	public Location getJoinLocation() {
+		return joinLocation;
+	}
 
-    public void setJoinLocation(Location joinLocation) {
-        this.joinLocation = joinLocation;
-    }
+	/**
+	 * Establece la ubicación de unión del mapa.
+	 *
+	 * @param joinLocation La ubicación de unión del mapa.
+	 */
+	public void setJoinLocation(Location joinLocation) {
+		this.joinLocation = joinLocation;
+	}
 
-    public void handleMap() {
-        for (Block block : getBlocks()) {
-            if (block instanceof BoxBlock boxBlock) {
-                boxBlock.updateBlock();
-            }
-            if (block instanceof MapBlock mapBlock) {
-                mapBlock.updateBlock();
-            }
-        }
-    }
+	/**
+	 * Maneja las actualizaciones del mapa.
+	 */
+	public void handleMap() {
+		for (Block block : getBlocks()) {
+			if (block instanceof BoxBlock boxBlock) {
+				boxBlock.updateBlock();
+			}
+			if (block instanceof MapBlock mapBlock) {
+				mapBlock.updateBlock();
+			}
+		}
+	}
 
-    public Direction getFacing() {
-        if (getStart().getX() == 0 && getStart().getX() < getMapMaxWidth() - 1 && getStart().getY() > 0 && getStart().getY() < getMapMaxHeight() - 1) {
-            return Direction.LEFT;
-        } else if (getStart().getX() == getMapMaxWidth() - 1 && getStart().getY() > 0 && getStart().getY() < getMapMaxHeight() - 1) {
-            return Direction.RIGHT;
-        } else if (getStart().getX() < getMapMaxWidth() - 1 && getStart().getX() > 0 && getStart().getY() == 0) {
-            return Direction.UP;
-        } else if (getStart().getX() < getMapMaxWidth() - 1 && getStart().getX() > 0 && getStart().getY() == getMapMaxHeight() - 1) {
-            return Direction.DOWN;
-        }
-        return null;
-    }
+	/**
+	 * Obtiene la dirección hacia la que está orientado el mapa.
+	 *
+	 * @return La dirección hacia la que está orientado el mapa.
+	 */
+	public Direction getFacing() {
+		if (getStart().getX() == 0 && getStart().getX() < getMapMaxWidth() - 1 && getStart().getY() > 0
+				&& getStart().getY() < getMapMaxHeight() - 1) {
+			return Direction.LEFT;
+		} else if (getStart().getX() == getMapMaxWidth() - 1 && getStart().getY() > 0
+				&& getStart().getY() < getMapMaxHeight() - 1) {
+			return Direction.RIGHT;
+		} else if (getStart().getX() < getMapMaxWidth() - 1 && getStart().getX() > 0 && getStart().getY() == 0) {
+			return Direction.UP;
+		} else if (getStart().getX() < getMapMaxWidth() - 1 && getStart().getX() > 0
+				&& getStart().getY() == getMapMaxHeight() - 1) {
+			return Direction.DOWN;
+		}
+		return null;
+	}
 
-    public Block getBlockAt(Location location, Block blockToIgnore) {
-        // Buscar el bloque adyacente en la lista de bloques
-        for (Block block : blocks) {
-            if (block != blockToIgnore) {
-                if (block.getLocation().getX() == location.getX() && block.getLocation().getY() == location.getY()) {
-                    return block;
-                }
-            }
-        }
-
-        // Si no se encuentra, devolver null
-        return null;
-    }
-  
-  public  Block getBlockAtForLimitBlock(Location location) {
+	/**
+	 * Obtiene el bloque en una ubicación específica, ignorando un bloque
+	 * específico.
+	 *
+	 * @param location      La ubicación del bloque.
+	 * @param blockToIgnore El bloque a ignorar.
+	 * @return El bloque en la ubicación dada, o null si no hay ninguno.
+	 */
+	public Block getBlockAt(Location location, Block blockToIgnore) {
 		// Buscar el bloque adyacente en la lista de bloques
 		for (Block block : blocks) {
-			if(block instanceof LimitBlock limitBlock) {
+			if (block != blockToIgnore) {
 				if (block.getLocation().getX() == location.getX() && block.getLocation().getY() == location.getY()) {
 					return block;
 				}
@@ -120,171 +178,217 @@ public class GameMap extends Map {
 		return null;
 	}
 
+	/**
+	 * Obtiene el bloque de límite en una ubicación específica.
+	 *
+	 * @param location La ubicación del bloque.
+	 * @return El bloque de límite en la ubicación dada, o null si no hay ninguno.
+	 */
+	public Block getBlockAtForLimitBlock(Location location) {
+		// Buscar el bloque adyacente en la lista de bloques
+		for (Block block : blocks) {
+			if (block instanceof LimitBlock limitBlock) {
+				if (block.getLocation().getX() == location.getX() && block.getLocation().getY() == location.getY()) {
+					return block;
+				}
+			}
+		}
+
+		// Si no se encuentra, devolver null
+		return null;
+	}
+
+	/**
+	 * Asigna las imágenes de los bloques según los bloques adyacentes.
+	 */
 	public void assignBlockImages() {
 		for (Block block : blocks) {
-			if(block instanceof LimitBlock limitBlock) {
+			if (block instanceof LimitBlock limitBlock) {
 				int x = block.getLocation().getX();
 				int y = block.getLocation().getY();
 
 				// Obtener los bloques adyacentes
-				Block leftBlock = getBlockAtForLimitBlock(new Location(this,x - 1, y));
-				Block rightBlock = getBlockAtForLimitBlock(new Location(this,x + 1, y));
-				Block topBlock = getBlockAtForLimitBlock(new Location(this,x, y - 1));
-				Block bottomBlock = getBlockAtForLimitBlock(new Location(this,x, y + 1));
-                //Implementacion de diagonales
-                Block topLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y - 1));
-                Block topRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y - 1));
-                Block bottomLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y + 1));
-                Block bottomRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y + 1));
+				Block leftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y));
+				Block rightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y));
+				Block topBlock = getBlockAtForLimitBlock(new Location(this, x, y - 1));
+				Block bottomBlock = getBlockAtForLimitBlock(new Location(this, x, y + 1));
+				// Implementacion de diagonales
+				Block topLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y - 1));
+				Block topRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y - 1));
+				Block bottomLeftBlock = getBlockAtForLimitBlock(new Location(this, x - 1, y + 1));
+				Block bottomRightBlock = getBlockAtForLimitBlock(new Location(this, x + 1, y + 1));
 
 				// Determinar el tipo de bloque de alrededor
-                boolean hasLeftBlock = leftBlock != null;
-                boolean hasRightBlock = rightBlock != null;
-                boolean hasTopBlock = topBlock != null;
-                boolean hasBottomBlock = bottomBlock != null;
-                //Implementacion de diagonales
-                boolean hasTopLeftBlock = topLeftBlock != null;
-                boolean hasTopRightBlock = topRightBlock != null;
-                boolean hasBottomLeftBlock = bottomLeftBlock != null;
-                boolean hasBottomRightBlock = bottomRightBlock != null;
+				boolean hasLeftBlock = leftBlock != null;
+				boolean hasRightBlock = rightBlock != null;
+				boolean hasTopBlock = topBlock != null;
+				boolean hasBottomBlock = bottomBlock != null;
+				// Implementacion de diagonales
+				boolean hasTopLeftBlock = topLeftBlock != null;
+				boolean hasTopRightBlock = topRightBlock != null;
+				boolean hasBottomLeftBlock = bottomLeftBlock != null;
+				boolean hasBottomRightBlock = bottomRightBlock != null;
 
-                // Asignar imagen según el tipo de bloque de alrededor
+				// Asignar imagen según el tipo de bloque de alrededor
 
-				if(hasTopBlock && hasRightBlock && hasLeftBlock && hasTopLeftBlock && hasBottomLeftBlock && !hasBottomRightBlock && ! hasTopRightBlock) {
-                    limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.png"));
+				if (hasTopBlock && hasRightBlock && hasLeftBlock && hasTopLeftBlock && hasBottomLeftBlock
+						&& !hasBottomRightBlock && !hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.png"));
 
+				} else if (!hasTopLeftBlock && hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock
+						&& hasBottomRightBlock && hasBottomLeftBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopLeftVertical.png"));
 
-                }else if(!hasTopLeftBlock && hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock && hasBottomRightBlock && hasBottomLeftBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoTopLeftVertical.png"));
+				} else if (!hasBottomBlock && !hasBottomLeftBlock && !hasLeftBlock && !hasTopLeftBlock && hasTopBlock
+						&& hasTopRightBlock && hasRightBlock && hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
 
-                }else if(!hasBottomBlock && !hasBottomLeftBlock && !hasLeftBlock && !hasTopLeftBlock && hasTopBlock && hasTopRightBlock && hasRightBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+				} else if (!hasBottomRightBlock && !hasTopBlock && !hasTopLeftBlock && !hasTopRightBlock
+						&& hasBottomBlock && hasLeftBlock && hasRightBlock && hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/UpConectionWhitreDown.png"));
 
-                }else if(!hasBottomRightBlock && !hasTopBlock && !hasTopLeftBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock && hasRightBlock && hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/UpConectionWhitreDown.png"));
+				} else if (!hasBottomBlock && !hasRightBlock && !hasBottomRightBlock && !hasBottomLeftBlock
+						&& hasTopBlock && hasTopRightBlock && hasTopLeftBlock && hasLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
 
-                }else if(!hasBottomBlock && !hasRightBlock && !hasBottomRightBlock && !hasBottomLeftBlock && hasTopBlock && hasTopRightBlock && hasTopLeftBlock && hasLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
+				} else if (!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasLeftBlock
+						&& hasTopRightBlock && hasTopLeftBlock && hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoBottomLeftDown.png"));
 
-                }else if(!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasLeftBlock && hasTopRightBlock && hasTopLeftBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoBottomLeftDown.png"));
+				} else if (!hasBottomRightBlock && hasRightBlock && hasTopBlock && hasLeftBlock && hasTopLeftBlock
+						&& hasBottomBlock && hasBottomLeftBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.png"));
 
-                }else if(!hasBottomRightBlock && hasRightBlock && hasTopBlock && hasLeftBlock && hasTopLeftBlock && hasBottomBlock && hasBottomLeftBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/intermediateDownWhite.png"));
+				} else if (!hasTopBlock && !hasTopLeftBlock && !hasLeftBlock && !hasBottomLeftBlock && hasBottomBlock
+						&& hasBottomRightBlock && hasRightBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
 
-                }else if(!hasTopBlock && !hasTopLeftBlock && !hasLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasBottomRightBlock && hasRightBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
+				} else if (!hasTopRightBlock && hasTopBlock && hasRightBlock && hasBottomBlock && hasLeftBlock
+						&& hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/VoidTopRight.png"));
 
-                }else if(!hasTopRightBlock && hasTopBlock && hasRightBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/VoidTopRight.png"));
+				} else if (!hasTopBlock && !hasTopRightBlock && !hasBottomRightBlock && hasBottomBlock && hasRightBlock
+						&& hasLeftBlock && hasBottomLeftBlock && hasTopLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/UpConectionWhitreDown.png"));
 
-                }else if(!hasTopBlock && !hasTopRightBlock && !hasBottomRightBlock && hasBottomBlock && hasRightBlock && hasLeftBlock && hasBottomLeftBlock && hasTopLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/UpConectionWhitreDown.png"));
+				} else if (!hasBottomBlock && hasBottomRightBlock && !hasBottomLeftBlock && !hasTopLeftBlock
+						&& hasRightBlock && hasLeftBlock && hasTopBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/downBlackConecction.png"));
 
-                }else if(!hasBottomBlock && hasBottomRightBlock && !hasBottomLeftBlock && !hasTopLeftBlock && hasRightBlock && hasLeftBlock && hasTopBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/downBlackConecction.png"));
+				} else if (!hasBottomBlock && !hasRightBlock && hasTopBlock && hasLeftBlock && hasTopLeftBlock
+						&& hasTopRightBlock && hasBottomLeftBlock && hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
 
-                }else if(!hasBottomBlock && !hasRightBlock && hasTopBlock && hasLeftBlock && hasTopLeftBlock && hasTopRightBlock && hasBottomLeftBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
+				} else if (!hasTopBlock && !hasRightBlock && hasTopRightBlock && hasBottomRightBlock && hasBottomBlock
+						&& hasLeftBlock && hasBottomLeftBlock && hasTopLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/TopRight.png"));
 
-                }else if(!hasTopBlock && !hasRightBlock && hasTopRightBlock && hasBottomRightBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock && hasTopLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/TopRight.png"));
+				} else if (!hasTopBlock && !hasLeftBlock && hasTopLeftBlock && hasTopRightBlock && hasRightBlock
+						&& hasBottomBlock && hasBottomRightBlock && hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
 
-                }else if(!hasTopBlock && !hasLeftBlock && hasTopLeftBlock && hasTopRightBlock && hasRightBlock && hasBottomBlock && hasBottomRightBlock && hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
+				} else if (!hasBottomBlock && hasTopBlock && !hasLeftBlock && hasRightBlock && hasBottomLeftBlock
+						&& hasBottomRightBlock && hasTopRightBlock && hasTopLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
 
-                }else if(!hasBottomBlock && hasTopBlock && !hasLeftBlock && hasRightBlock && hasBottomLeftBlock && hasBottomRightBlock && hasTopRightBlock && hasTopLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+				} else if (!hasBottomLeftBlock && hasLeftBlock && hasTopLeftBlock && hasBottomBlock && hasTopBlock
+						&& !hasRightBlock && !hasBottomRightBlock && !hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/rigthfinish.png"));
 
-                }else if(!hasBottomLeftBlock && hasLeftBlock && hasTopLeftBlock && hasBottomBlock && hasTopBlock && !hasRightBlock && !hasBottomRightBlock && !hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/rigthfinish.png"));
+				} else if (hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock && hasTopRightBlock
+						&& hasBottomRightBlock && !hasTopLeftBlock && !hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/intermediateBlackDown.png"));
 
-                }else if(hasTopBlock && hasRightBlock && hasLeftBlock && hasBottomBlock && hasTopRightBlock && hasBottomRightBlock && !hasTopLeftBlock && !hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/intermediateBlackDown.png"));
+				} else if (!hasTopLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock
+						&& hasRightBlock && hasLeftBlock && hasTopBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/downBlackConecction.png"));
 
-                }else if(!hasTopLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock && hasRightBlock && hasLeftBlock && hasTopBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/downBlackConecction.png"));
+				} else if (!hasBottomRightBlock && hasTopBlock && hasBottomBlock && hasTopRightBlock && hasRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/leftBlockToCone.png"));
 
-                }else if(!hasBottomRightBlock && hasTopBlock && hasBottomBlock && hasTopRightBlock && hasRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/leftBlockToCone.png"));
+				} else if (hasTopBlock && hasTopRightBlock && hasRightBlock && hasBottomRightBlock && !hasBottomBlock
+						&& !hasBottomLeftBlock && hasTopLeftBlock && !hasLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/DownRightEsquina.png"));
 
-                }else if(hasTopBlock && hasTopRightBlock && hasRightBlock && hasBottomRightBlock && !hasBottomBlock && !hasBottomLeftBlock && hasTopLeftBlock && !hasLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/DownRightEsquina.png"));
+				} else if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
+					// hecho
+					System.out.println("a");
+					limitBlock.setImage(new Image("/assets/block/center_block.png"));
+				} else if (!hasLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock
+						&& hasRightBlock && hasTopBlock && hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
 
-                }else if (hasLeftBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
-                    //hecho
-                    System.out.println("a");
-                    limitBlock.setImage(new Image("/assets/block/center_block.png"));
-                }else if(!hasLeftBlock && !hasBottomBlock && !hasBottomLeftBlock && !hasBottomRightBlock && hasRightBlock && hasTopBlock && hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/bottomRight.png"));
+				} else if (!hasLeftBlock && !hasTopLeftBlock && !hasTopBlock && hasRightBlock /* && hasTopRightBlock */
+						&& hasBottomBlock && hasBottomLeftBlock && hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoLeftTopNoLeftNoTop.png"));
 
-                }else if(!hasLeftBlock && ! hasTopLeftBlock && !hasTopBlock && hasRightBlock /*&& hasTopRightBlock*/ && hasBottomBlock && hasBottomLeftBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoLeftTopNoLeftNoTop.png"));
+				} else if (hasTopBlock && hasTopLeftBlock && hasTopRightBlock && !hasRightBlock && hasLeftBlock
+						&& hasBottomLeftBlock && !hasBottomBlock && !hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
+				} else if (!hasTopRightBlock && !hasRightBlock && !hasBottomRightBlock && hasLeftBlock
+						&& hasTopLeftBlock && hasTopBlock && !hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
 
+				} else if (!hasTopBlock && !hasRightBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock
+						&& hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/TopRight.png"));
 
+				} else if (!hasTopRightBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopRightVertical.png"));
 
-                }else if(hasTopBlock && hasTopLeftBlock && hasTopRightBlock && !hasRightBlock && hasLeftBlock && hasBottomLeftBlock && !hasBottomBlock && !hasBottomRightBlock) {
-                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
-                }else if(!hasTopRightBlock && !hasRightBlock && !hasBottomRightBlock && hasLeftBlock && hasTopLeftBlock && hasTopBlock && !hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/BottomRightEsquina.png"));
+				} else if (!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasTopLeftBlock) {
 
-                }else if(!hasTopBlock && !hasRightBlock && !hasTopRightBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/TopRight.png"));
+					limitBlock.setImage(new Image("/assets/block/NoBottomLeft.png"));
 
+				} else if (!hasTopBlock && !hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock
+						&& hasBottomRightBlock && hasRightBlock && !hasTopRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
+				} else if (!hasTopLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopLeft.png"));
 
-                }else if(!hasTopRightBlock && hasTopBlock && hasBottomBlock && hasRightBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoTopRightVertical.png"));
+				} else if (!hasTopRightBlock && hasTopBlock && hasTopLeftBlock && hasRightBlock && hasLeftBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopRight.png"));
 
-                }else if(!hasBottomLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasTopLeftBlock){
+				} else if (!hasBottomLeftBlock && hasBottomBlock && hasLeftBlock && hasRightBlock
+						&& hasBottomRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoLeftBottomBlock.png"));
 
-                    limitBlock.setImage(new Image("/assets/block/NoBottomLeft.png"));
+				} else if (!hasTopLeftBlock && hasTopBlock && !hasTopRightBlock && hasLeftBlock && hasRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/noTopLeftNoTopRight.png"));
 
-                }else if(!hasTopBlock && !hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasBottomRightBlock &&hasRightBlock && !hasTopRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/TopLeft.png"));
-                }else if(!hasTopLeftBlock && hasTopBlock && hasBottomBlock && hasLeftBlock && hasBottomLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoTopLeft.png"));
+				} else if (hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasTopBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopLeftNoBottomLeft.png"));
 
-                }else if(!hasTopRightBlock && hasTopBlock && hasTopLeftBlock && hasRightBlock && hasLeftBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoTopRight.png"));
+				} else if (!hasTopRightBlock && !hasTopRightBlock && hasRightBlock && hasTopBlock && hasBottomBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoTopRightNoTopLeft.png"));
 
-                }else if(!hasBottomLeftBlock && hasBottomBlock && hasLeftBlock && hasRightBlock && hasBottomRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/NoLeftBottomBlock.png"));
+				} else if (!hasBottomRightBlock && !hasBottomLeftBlock && hasBottomBlock && hasLeftBlock
+						&& hasRightBlock) {
+					limitBlock.setImage(new Image("/assets/block/NoBottomRightNoBottomLeft.png"));
 
-                }else if(!hasTopLeftBlock && hasTopBlock && !hasTopRightBlock && hasLeftBlock && hasRightBlock){
-                    limitBlock.setImage(new Image("/assets/block/noTopLeftNoTopRight.png"));
+				}
 
-                }else if(hasLeftBlock && !hasTopLeftBlock && !hasBottomLeftBlock && hasBottomBlock && hasTopBlock ){
-                    limitBlock.setImage(new Image("/assets/block/NoTopLeftNoBottomLeft.png"));
+				else if (!hasRightBlock && hasBottomBlock && hasTopBlock && hasLeftBlock) {
+					System.out.println("n");
+					limitBlock.setImage(new Image("/assets/block/rightVoid.png"));
 
-                }else if(!hasTopRightBlock && !hasTopRightBlock && hasRightBlock && hasTopBlock && hasBottomBlock){
-                 limitBlock.setImage(new Image("/assets/block/NoTopRightNoTopLeft.png"));
-
-                }else if(!hasBottomRightBlock && !hasBottomLeftBlock && hasBottomBlock && hasLeftBlock && hasRightBlock){
-                   limitBlock.setImage(new Image("/assets/block/NoBottomRightNoBottomLeft.png"));
-
-                }
-
-                else if(!hasRightBlock && hasBottomBlock && hasTopBlock && hasLeftBlock) {
-                    System.out.println("n");
-                    limitBlock.setImage(new Image("/assets/block/rightVoid.png"));
-
-                }else if(hasRightBlock && hasBottomBlock && hasTopBlock && !hasLeftBlock) {
-                    System.out.println("n");
-                    limitBlock.setImage(new Image("/assets/block/leftVoid.png"));}
-                else if (hasLeftBlock && hasRightBlock && hasTopBlock) {
-					//hecho
+				} else if (hasRightBlock && hasBottomBlock && hasTopBlock && !hasLeftBlock) {
+					System.out.println("n");
+					limitBlock.setImage(new Image("/assets/block/leftVoid.png"));
+				} else if (hasLeftBlock && hasRightBlock && hasTopBlock) {
+					// hecho
 					System.out.println("b");
 					limitBlock.setImage(new Image("/assets/block/bottom_block.png"));
 				} else if (hasLeftBlock && hasRightBlock && hasBottomBlock) {
-					//hecho
+					// hecho
 					System.out.println("c");
 					limitBlock.setImage(new Image("/assets/block/top_block.png"));
 				} else if (hasLeftBlock && hasRightBlock) {
-					//hecho
+					// hecho
 					System.out.println("d");
 					limitBlock.setImage(new Image("/assets/block/horizontal_block.png"));
 				} else if (hasTopBlock && hasBottomBlock) {
-					//hecho
+					// hecho
 					System.out.println("e");
 					limitBlock.setImage(new Image("/assets/block/vertical_block.png"));
 				} else if (hasLeftBlock && hasTopBlock) {
@@ -292,33 +396,33 @@ public class GameMap extends Map {
 					System.out.println("f");
 					limitBlock.setImage(new Image("/assets/block/bottom_right_block.png"));
 				} else if (hasLeftBlock && hasBottomBlock) {
-					//hecho
+					// hecho
 					System.out.println("g");
 
 					limitBlock.setImage(new Image("/assets/block/top_right_block.png"));
 				} else if (hasRightBlock && hasTopBlock) {
-					//hecho
+					// hecho
 					System.out.println("h");
 					limitBlock.setImage(new Image("/assets/block/bottom_left_block.png"));
 				} else if (hasRightBlock && hasBottomBlock) {
-					//hecho
+					// hecho
 					System.out.println("i");
 					limitBlock.setImage(new Image("/assets/block/top_left_block.png"));
-					
-				}else if (hasLeftBlock && !hasRightBlock && !hasTopBlock && !hasBottomBlock) {
-                    System.out.println("j");
+
+				} else if (hasLeftBlock && !hasRightBlock && !hasTopBlock && !hasBottomBlock) {
+					System.out.println("j");
 					limitBlock.setImage(new Image("/assets/block/right_edge_block.png"));
 				} else if (!hasLeftBlock && hasRightBlock && !hasTopBlock && !hasBottomBlock) {
-                    System.out.println("k");
+					System.out.println("k");
 					limitBlock.setImage(new Image("/assets/block/left_edge_block.png"));
 				} else if (!hasLeftBlock && !hasRightBlock && hasTopBlock && !hasBottomBlock) {
-                    System.out.println("l");
+					System.out.println("l");
 					limitBlock.setImage(new Image("/assets/block/bottom_edge_block.png"));
 				} else if (!hasLeftBlock && !hasRightBlock && !hasTopBlock && hasBottomBlock) {
-                    System.out.println("m");
+					System.out.println("m");
 					limitBlock.setImage(new Image("/assets/block/top_edge_block.png"));
-				}else {
-					//hecho
+				} else {
+					// hecho
 					System.out.println("j");
 					limitBlock.setImage(new Image("/assets/block/lonely_block.png"));
 				}

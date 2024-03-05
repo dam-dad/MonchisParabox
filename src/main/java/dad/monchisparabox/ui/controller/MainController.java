@@ -40,6 +40,9 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import javafx.scene.media.AudioClip;
 
+/**
+ * Controlador principal de la aplicación.
+ */
 public class MainController implements Initializable {
 	
 	// controllers
@@ -61,6 +64,9 @@ public class MainController implements Initializable {
 	@FXML
 	private BorderPane view;
 
+	/**
+     * Constructor del controlador principal.
+     */
 	public MainController() {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainView.fxml"));
@@ -71,6 +77,9 @@ public class MainController implements Initializable {
 		}
 	}
 
+	/**
+     * Método de inicialización del controlador.
+     */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
@@ -290,33 +299,67 @@ public class MainController implements Initializable {
 		view.setCenter(inicioController.getView());
 	}
 	
+	/**
+	 * Obtiene la vista principal de la aplicación.
+	 *
+	 * @return La instancia de BorderPane que representa la vista principal de la aplicación.
+	 */
 	public BorderPane getView() {
-		return view;
+	    return view;
 	}
 
+	/**
+	 * Obtiene los datos del usuario actual.
+	 *
+	 * @return Los datos del usuario actual.
+	 */
 	public static UserData getUserData() {
-		return userData;
+	    return userData;
 	}
 
+	/**
+	 * Obtiene el controlador de la vista de créditos.
+	 *
+	 * @return El controlador de la vista de créditos.
+	 */
 	public dad.monchisparabox.ui.controller.creditosController getCreditosController() {
-		return creditosController;
+	    return creditosController;
 	}
 
+	/**
+	 * Obtiene el controlador de la vista de inicio.
+	 *
+	 * @return El controlador de la vista de inicio.
+	 */
 	public dad.monchisparabox.ui.controller.inicioController getInicioController() {
-		return inicioController;
+	    return inicioController;
 	}
 
+	/**
+	 * Abre un archivo PDF en el sistema de escritorio.
+	 *
+	 * @param filePath La ruta del archivo PDF a abrir.
+	 * @throws IOException Si ocurre un error al intentar abrir el archivo.
+	 */
 	public void openPDF(String filePath) throws IOException {
-		File file = new File(filePath);
+	    File file = new File(filePath);
 
-		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
-			Desktop.getDesktop().open(file);
-		} else {
-			System.out.println("Desktop not supported. Cannot open PDF.");
-			// You can add fallback logic here, such as launching a specific PDF viewer application.
-		}
+	    if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+	        Desktop.getDesktop().open(file);
+	    } else {
+	        System.out.println("Desktop not supported. Cannot open PDF.");
+	        // You can add fallback logic here, such as launching a specific PDF viewer application.
+	    }
 	}
 
+
+	/**
+     * Método para generar la imagen final de la skin.
+     *
+     * @param skin        Imagen base de la skin.
+     * @param complemento1 Imagen del primer complemento.
+     * @return Imagen final generada.
+     */
 	public Image generarSkinFinal(Image skin, Image complemento1) {
 	    // Crea un ImageView para cada imagen
 	    ImageView skinView = new ImageView(skin);
@@ -363,7 +406,14 @@ public class MainController implements Initializable {
         return new Image(outputFile.toURI().toString());
 	}
 
-	// Método auxiliar para crear un BufferedImage a partir de un array de enteros
+	/**
+	 * Método auxiliar para crear un BufferedImage a partir de un array de enteros.
+	 *
+	 * @param imageData Un array de enteros que representa los datos de la imagen.
+	 * @param width La anchura de la imagen.
+	 * @param height La altura de la imagen.
+	 * @return La imagen BufferedImage creada a partir de los datos proporcionados.
+	 */
 	private BufferedImage createBufferedImage(int[] imageData, int width, int height) {
 	    DataBufferInt buffer = new DataBufferInt(imageData, imageData.length);
 	    WritableRaster raster = Raster.createPackedRaster(buffer, width, height, width, new int[]{0xFF0000, 0x00FF00, 0x0000FF, 0xFF000000}, null);
@@ -371,6 +421,9 @@ public class MainController implements Initializable {
 	    return new BufferedImage(colorModel, raster, false, null);
 	}
 	
+	/**
+     * Método para reproducir el efecto de botón.
+     */
 	private void efectoBoton() {
 		if (efectos) {
 			String audioFile = getClass().getResource("/music/efecto_boton.mp3").toString();

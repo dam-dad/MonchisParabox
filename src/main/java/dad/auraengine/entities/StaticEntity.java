@@ -6,42 +6,62 @@ import javafx.scene.image.ImageView;
 import javafx.scene.shape.Shape;
 
 /**
- *   Genera un objeto de transicion que visualmente es igual a un tile de suelo
- *   emplea el metodo getShape para comprobar colisiones con el player
+ * La clase StaticEntity representa una entidad estática en el juego, como un tile de suelo.
+ * Utiliza un método getShape para comprobar colisiones con el jugador.
  */
 public class StaticEntity<T extends Shape> extends Entity<T> {
 
-	protected ImageView imageView;
-	protected boolean rendered = false;
+    /** Vista de imagen asociada a la entidad. */
+    protected ImageView imageView;
 
-	public StaticEntity(Image image, Location location) {
-		super();
-		this.image = image;
-		this.location = location;
-		this.width = (int) image.getWidth();
-		this.height = (int) image.getHeight();
-	}
+    /** Indica si la entidad ha sido renderizada en el juego. */
+    protected boolean rendered = false;
 
-	@Override
-	public void render() {
-		if(rendered) return;
+    /**
+     * Crea una nueva instancia de StaticEntity con la imagen y la ubicación especificadas.
+     *
+     * @param image     La imagen asociada a la entidad.
+     * @param location  La ubicación de la entidad.
+     */
+    public StaticEntity(Image image, Location location) {
+        super();
+        this.image = image;
+        this.location = location;
+        this.width = (int) image.getWidth();
+        this.height = (int) image.getHeight();
+    }
 
-		imageView = new ImageView(image);
-		location.getMap().addEntity(imageView, location.getX(), location.getY());
-		rendered = true;
-	}
+    /**
+     * Renderiza la entidad en el juego.
+     */
+    @Override
+    public void render() {
+        if (rendered) return;
 
-	@Override
-	public T getCollisionShape() {
-		return null;
-	}
+        imageView = new ImageView(image);
+        location.getMap().addEntity(imageView, location.getX(), location.getY());
+        rendered = true;
+    }
 
-	@Override
-	public void destroy() {
-		if(imageView != null) {
-			location.getMap().getChildren().remove(imageView);
-			rendered = false;
-		}
-	}
+    /**
+     * Obtiene la forma de colisión de la entidad.
+     *
+     * @return La forma de colisión de la entidad.
+     */
+    @Override
+    public T getCollisionShape() {
+        return null;
+    }
+
+    /**
+     * Destruye la entidad en el juego.
+     */
+    @Override
+    public void destroy() {
+        if (imageView != null) {
+            location.getMap().getChildren().remove(imageView);
+            rendered = false;
+        }
+    }
 
 }

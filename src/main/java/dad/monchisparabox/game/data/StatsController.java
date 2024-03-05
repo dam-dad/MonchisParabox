@@ -11,14 +11,29 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que gestiona la carga y guardado de estadísticas del juego.
+ */
 public class StatsController {
 
+    /**
+     * Obtiene la lista de estadísticas guardadas.
+     *
+     * @return La lista de estadísticas.
+     */
     public static List<Stats> getListaStats() {
         String appDataFolder = System.getenv("APPDATA");
         String filePath = appDataFolder + "\\MonchisParabox\\stats.json";
         return cargarDesdeArchivo(filePath);
     }
 
+    /**
+     * Guarda las estadísticas de una partida en el archivo JSON.
+     *
+     * @param mapaObjetivo      El ID del mapa de la partida.
+     * @param tiempo            El tiempo transcurrido en la partida.
+     * @param nuevosMovimientos El número de movimientos realizados en la partida.
+     */
     public static void guardar(int mapaObjetivo, String tiempo, int nuevosMovimientos) {
         // Cargar datos desde el archivo JSON
         String appDataFolder = System.getenv("APPDATA");
@@ -48,6 +63,12 @@ public class StatsController {
         }
     }
 
+    /**
+     * Carga las estadísticas desde un archivo JSON.
+     *
+     * @param nombreArchivo El nombre del archivo JSON.
+     * @return La lista de estadísticas cargadas desde el archivo.
+     */
     private static List<Stats> cargarDesdeArchivo(String nombreArchivo) {
         try (FileReader fileReader = new FileReader(nombreArchivo)) {
             // Crear un tipo para representar la lista de Stats
@@ -61,6 +82,12 @@ public class StatsController {
         }
     }
 
+    /**
+     * Guarda las estadísticas en un archivo JSON.
+     *
+     * @param listaStats    La lista de estadísticas a guardar.
+     * @param nombreArchivo El nombre del archivo JSON.
+     */
     private static void guardarEnArchivo(List<Stats> listaStats, String nombreArchivo) {
         try (FileWriter fileWriter = new FileWriter(nombreArchivo)) {
             // Convertir la lista a JSON y guardar en el archivo
@@ -75,3 +102,4 @@ public class StatsController {
     }
 
 }
+

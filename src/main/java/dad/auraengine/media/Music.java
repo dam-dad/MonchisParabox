@@ -9,8 +9,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
 /**
- * Clase que controla la musica
- *
+ * Clase que controla la reproducción de música en el juego.
  */
 public class Music {
 	
@@ -18,11 +17,12 @@ public class Music {
 	private Media media;
 	
 	/**
-	 * Constructor que recibe el nombre del archivo de musica
-	 * @param el fichero de musica
+	 * Constructor que recibe el nombre del archivo de música.
+	 * @param file el nombre del archivo de música (sin la extensión).
 	 */
 	public Music(String file) {
 		try {
+			// Obtener la URL del archivo de música
 			URL path = getClass().getResource("/music/" + file + ".mp3");
 			if (path == null) {
 				throw new IllegalArgumentException("El archivo de música no se encontró: " + file);
@@ -33,24 +33,29 @@ public class Music {
 		}
 	}
 
-	
 	/**
-	 * Método para iniciar musica
+	 * Inicia la reproducción de la música.
 	 */
 	public void play() {
 		player = new MediaPlayer(media);
-		player.setVolume(0.3);
-		player.setCycleCount(Transition.INDEFINITE);
+		player.setVolume(0.3); // Establecer el volumen
+		player.setCycleCount(Transition.INDEFINITE); // Reproducir indefinidamente
 		player.play();
 	}
 
+	/**
+	 * Detiene la reproducción de la música.
+	 */
 	public void stopMusic() {
 		if (player != null) {
 			player.stop();
 		}
 	}
 
-
+	/**
+	 * Inicia la reproducción de la música con el volumen especificado.
+	 * @param volume el volumen de reproducción.
+	 */
 	public void play(double volume) {
 		player = new MediaPlayer(media);
 		player.setVolume(volume);
@@ -58,7 +63,10 @@ public class Music {
 		player.play();
 	}
 
-
+	/**
+	 * Reproduce la música una vez.
+	 * Si los efectos de sonido están habilitados, reproduce la música una vez.
+	 */
 	public void playOnce() {
 		if(MainController.getUserData().efectosEnabled()){
 			MediaPlayer oneTimePlayer = new MediaPlayer(media);
@@ -66,11 +74,10 @@ public class Music {
 			oneTimePlayer.setOnEndOfMedia(() -> oneTimePlayer.dispose()); // Liberar recursos después de reproducir una vez
 			oneTimePlayer.play();
 		}
-
 	}
 	
 	/**
-	 * Método para pausar la música
+	 * Pausa la reproducción de la música.
 	 */
 	public void pause() {
 		try {

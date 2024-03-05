@@ -8,12 +8,25 @@ import dad.monchisparabox.App;
 import dad.monchisparabox.game.entities.Player;
 import javafx.scene.image.Image;
 
+/**
+ * Clase que representa un bloque en el juego Monchi's Parabox.
+ */
 public class Block extends CollidableEntity {
 
+	/**
+     * Constructor de la clase Block.
+     *
+     * @param location La ubicación del bloque.
+     */
     public Block(Location location) {
         super(new Image("/assets/block/block.png"), location);
     }
 
+    /**
+     * Método para empujar el bloque en una dirección determinada.
+     *
+     * @param direction La dirección en la que se empuja el bloque.
+     */
     public void push(Direction direction) {
         location.setLastX(location.getX());
         location.setLastY(location.getY());
@@ -50,6 +63,12 @@ public class Block extends CollidableEntity {
         }
     }
 
+    /**
+     * Maneja la colisión del bloque con otra entidad.
+     *
+     * @param entity     La entidad con la que se produce la colisión.
+     * @param direction  La dirección en la que se produce la colisión.
+     */
     public void handleCollision(Entity entity, Direction direction) {
         if (checkCollision(entity.getLocation())) {
             if (this instanceof LimitBlock) {

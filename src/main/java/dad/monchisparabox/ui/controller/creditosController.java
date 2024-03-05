@@ -16,12 +16,15 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
-public class creditosController  implements Initializable {
+/**
+ * Controlador para la vista de los créditos del juego.
+ */
+public class creditosController implements Initializable {
 	
-	//actions
+	// Acciones
 	private EventHandler<MouseEvent> onInicio;
 	
-	// view 
+	// Vista
     @FXML
     private ImageView image;
     
@@ -39,6 +42,10 @@ public class creditosController  implements Initializable {
 		return view;
 	}
 	
+	/**
+	 * Constructor por defecto.
+	 * Carga la vista asociada al controlador.
+	 */
 	public creditosController() {
 		try { 
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/CreditosView.fxml"));
@@ -53,6 +60,7 @@ public class creditosController  implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		label.setWrapText(true);
 		
+		// Texto de los créditos
 		label.setText("Monchi's parabox es un juego que narra la historia de un adolescente rebelde llamado Monchi, quien, por razones desconocidas, ha decidido fugarse del ciclo de desarrollo de aplicaciones multiplataforma y abandonar su amante Yorman. Sin embargo, después de reflexionar sobre su elección, decide darle una oportunidad a el amor y regresar a clase, sin saber que esto le llevará a embarcarse en una travesía llena de desafíos y misterios.\r\n"
 				+ "\r\n"
 				+ "La valentía y determinación de Monchi no conocen límites, y luchará incansablemente para resolver cada nivel y superar cada trauma de abandono, todo con el objetivo de regresar a clase y reunirse con su cuchi cuchi Yorman. Será necesario que Monchi se enfrente a su pasado, afrontando sus miedos más profundos y aprendiendo valiosas lecciones en su travesía.\r\n"
@@ -65,6 +73,9 @@ public class creditosController  implements Initializable {
 	
 	}
 	
+	/**
+	 * Método para iniciar la animación de desplazamiento hacia arriba de los créditos.
+	 */
 	public void subir() {
 		TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(80), vBox);
 		translateTransition.setByY(-1600); 
@@ -75,14 +86,24 @@ public class creditosController  implements Initializable {
 		pause.play();
 	}
 	
-	
+	/**
+	 * Método manejador para el evento de hacer clic en el botón de inicio.
+	 * 
+	 * @param event El evento de clic del ratón.
+	 */
 	@FXML
     void onInicioClicked(MouseEvent event) {
 		if(onInicio != null) onInicio.handle(event);
 	}
 	
+	/**
+	 * Establece el manejador para el evento de inicio.
+	 * 
+	 * @param onInicio El manejador del evento de inicio.
+	 */
 	public void setOnInicio(EventHandler<MouseEvent> onInicio) {
 		this.onInicio = onInicio;
 	}
 	
 }
+

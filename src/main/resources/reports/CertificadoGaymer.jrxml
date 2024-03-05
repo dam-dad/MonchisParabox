@@ -87,10 +87,10 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="30" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<textField>
-				<reportElement x="20" y="10" width="140" height="19" uuid="14dbfea8-5493-4fd8-851e-6fe3e17feeb3"/>
-				<textElement textAlignment="Center"/>
+				<reportElement x="10" y="-1" width="164" height="40" uuid="14dbfea8-5493-4fd8-851e-6fe3e17feeb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
 				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
 			</textField>
 			<textField>
@@ -101,14 +101,14 @@
 				<textFieldExpression><![CDATA[$F{movimientos}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="424" y="10" width="90" height="19" uuid="2f5dc4e0-709d-463f-8077-aeebcd2fbaf4">
+				<reportElement x="420" y="10" width="90" height="19" uuid="2f5dc4e0-709d-463f-8077-aeebcd2fbaf4">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="6219977f-1d23-431a-8a01-e64418e6ff3f"/>
 				</reportElement>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{tiempo}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement x="0" y="29" width="550" height="1" uuid="7afb38a2-d733-4686-8926-d7fcbe35c22a"/>
+				<reportElement x="0" y="40" width="550" height="1" uuid="7afb38a2-d733-4686-8926-d7fcbe35c22a"/>
 			</line>
 		</band>
 	</detail>

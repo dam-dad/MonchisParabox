@@ -4,16 +4,29 @@ import javafx.application.Application;
 
 import java.io.File;
 
+/**
+ * Clase principal que contiene el método main para iniciar la aplicación Monchi's Parabox.
+ */
 public class Main {
 
-	public static void main(String[] args) {
-		String appDataFolder = System.getenv("APPDATA");
-		String filePath = appDataFolder + "\\MonchisParabox\\";
+    /**
+     * Método principal que inicia la aplicación Monchi's Parabox.
+     *
+     * @param args Argumentos de línea de comandos (no se utilizan en esta aplicación)
+     */
+    public static void main(String[] args) {
+        // Obtener la carpeta de datos de la aplicación del entorno del sistema
+        String appDataFolder = System.getenv("APPDATA");
 
-		if(!new File(filePath).exists()) {
-			new File(filePath).mkdir();
-		}
+        // Construir la ruta del archivo de datos de la aplicación
+        String filePath = appDataFolder + "\\MonchisParabox\\";
 
-		Application.launch(App.class, args);
-	}
+        // Comprobar si la carpeta de datos de la aplicación existe, si no, crearla
+        if (!new File(filePath).exists()) {
+            new File(filePath).mkdir();
+        }
+
+        // Iniciar la aplicación Monchi's Parabox
+        Application.launch(App.class, args);
+    }
 }

@@ -14,53 +14,110 @@ import javafx.scene.shape.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase que representa los datos de un mapa en el juego Monchi's Parabox.
+ */
 public class MapData {
     private int id;
     private String nombre;
     private List<List<String>> mapa;
     private String cancion;
 
-    // Constructor, getters y setters
+    /**
+     * Constructor de la clase MapData.
+     */
     public MapData() {
     }
 
     // Getters y Setters
+
+    /**
+     * Devuelve el identificador del mapa.
+     *
+     * @return El identificador del mapa.
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Establece el identificador del mapa.
+     *
+     * @param id El identificador a establecer.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Devuelve el nombre del mapa.
+     *
+     * @return El nombre del mapa.
+     */
     public String getNombre() {
         return nombre;
     }
 
+    /**
+     * Establece el nombre del mapa.
+     *
+     * @param nombre El nombre a establecer.
+     */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
+    /**
+     * Devuelve el mapa representado como una lista de listas de cadenas.
+     *
+     * @return El mapa representado como una lista de listas de cadenas.
+     */
     public List<List<String>> getMapa() {
         return mapa;
     }
 
+    /**
+     * Establece el mapa representado como una lista de listas de cadenas.
+     *
+     * @param mapa El mapa a establecer.
+     */
     public void setMapa(List<List<String>> mapa) {
         this.mapa = mapa;
     }
 
+    /**
+     * Devuelve la canción asociada al mapa.
+     *
+     * @return La canción asociada al mapa.
+     */
     public String getCancion() {
         return cancion;
     }
 
+    /**
+     * Establece la canción asociada al mapa.
+     *
+     * @param cancion La canción a establecer.
+     */
     public void setCancion(String cancion) {
         this.cancion = cancion;
     }
 
+    /**
+     * Carga los mapas a partir de la representación de mapa de baldosas.
+     *
+     * @return Una lista de mapas del juego.
+     */
     public List<GameMap> getGameMaps() {
         return loadFromTile(mapa);
     }
 
+    /**
+     * Carga los mapas a partir de la representación de mapa de baldosas.
+     *
+     * @param mapasArray La representación del mapa como una lista de listas de cadenas.
+     * @return Una lista de mapas del juego.
+     */
     private List<GameMap> loadFromTile(List<List<String>> mapasArray) {
         List<GameMap> mapList = new ArrayList<>();
 
@@ -131,3 +188,4 @@ public class MapData {
         return mapList;
     }
 }
+

@@ -1,10 +1,20 @@
 package dad.auraengine.entities.movements;
 
 /**
- * Enum de direcciones de movimiento y dónde esta mirando el cubo
+ * Enumeración que define las direcciones de movimiento y la orientación del cubo.
  */
 public enum Direction {
 
-	UP, DOWN, LEFT, RIGHT;
+    /** Dirección hacia arriba. */
+    UP,
 
+    /** Dirección hacia abajo. */
+    DOWN,
+
+    /** Dirección hacia la izquierda. */
+    LEFT,
+
+    /** Dirección hacia la derecha. */
+    RIGHT;
+    
 }
