@@ -1,8 +1,6 @@
 package dad.monchisparabox.ui.controller;
 
 import dad.monchisparabox.App;
-import dad.monchisparabox.game.controller.GameController;
-import dad.monchisparabox.game.controller.MapController;
 import dad.monchisparabox.game.data.MapDataController;
 import dad.monchisparabox.game.data.PdfData;
 import dad.monchisparabox.game.data.StatsController;
@@ -243,8 +241,10 @@ public class MainController implements Initializable {
 			try {
 				jasperReport = JasperCompileManager.compileReport(inputStream);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource);
-				JasperExportManager.exportReportToPdfFile(jasperPrint, "pdf/certificado_gaymer.pdf");
-				openPDF("pdf/certificado_gaymer.pdf");
+				String appDataFolder = System.getenv("APPDATA");
+				String filePath = appDataFolder + "\\MonchisParabox\\generated";
+				JasperExportManager.exportReportToPdfFile(jasperPrint, appDataFolder + "\\certificado_gaymer.pdf");
+				openPDF(appDataFolder + "\\certificado_gaymer.pdf");
 			} catch (JRException e1) {
 				e1.printStackTrace();
 			} catch (IOException ex) {
