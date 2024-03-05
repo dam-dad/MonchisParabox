@@ -20,7 +20,7 @@
 	<title>
 		<band height="100" splitType="Stretch">
 			<staticText>
-				<reportElement x="70" y="0" width="414" height="58" forecolor="#FA0E0A" uuid="8b7b51b9-a65d-46d2-8925-ff095291f9f0"/>
+				<reportElement x="70" y="0" width="414" height="58" forecolor="#930058" uuid="8b7b51b9-a65d-46d2-8925-ff095291f9f0"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="19" isBold="true"/>
 				</textElement>
@@ -31,12 +31,16 @@
 				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="70" y="20" width="414" height="58" forecolor="#FA0E0A" uuid="72270fff-3bca-409b-82e7-4c74ef2d9be1"/>
+				<reportElement x="70" y="20" width="414" height="58" forecolor="#930058" uuid="72270fff-3bca-409b-82e7-4c74ef2d9be1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Estadísticas]]></text>
 			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="100" height="100" uuid="774f2107-7f77-4567-a646-711151a64a50"/>
+				<imageExpression><![CDATA["assets/show_player.png"]]></imageExpression>
+			</image>
 		</band>
 	</title>
 	<pageHeader>
@@ -47,7 +51,7 @@
 				<textFieldExpression><![CDATA["Copytight Monchi's Parabox"]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="5" width="180" height="30" uuid="51db43ae-da70-4c79-8923-779cc239dd61"/>
+				<reportElement x="0" y="10" width="180" height="14" uuid="51db43ae-da70-4c79-8923-779cc239dd61"/>
 				<textElement verticalAlignment="Top"/>
 				<textFieldExpression><![CDATA["Autor: Yorman, Yanet, Brian, Eduardo"]]></textFieldExpression>
 			</textField>
@@ -56,14 +60,14 @@
 	<columnHeader>
 		<band height="40" splitType="Stretch">
 			<staticText>
-				<reportElement mode="Opaque" x="0" y="0" width="180" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="e720b0d1-8d58-473d-83bc-dd3c50b92c55"/>
+				<reportElement mode="Opaque" x="0" y="0" width="180" height="30" forecolor="#FFFFFF" backcolor="#930058" uuid="e720b0d1-8d58-473d-83bc-dd3c50b92c55"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="14"/>
 				</textElement>
 				<text><![CDATA[Nombre]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="180" y="0" width="200" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="5b769c09-01ce-4395-9bd0-9f514b8884d5">
+				<reportElement mode="Opaque" x="180" y="0" width="200" height="30" forecolor="#FFFFFF" backcolor="#930058" uuid="5b769c09-01ce-4395-9bd0-9f514b8884d5">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf300cbc-4d3a-4a9a-83bd-c6bc371e57e1"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -72,7 +76,7 @@
 				<text><![CDATA[Movimientos]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="380" y="0" width="170" height="30" forecolor="#FFFFFF" backcolor="#FF0400" uuid="7aff1623-170b-43d9-81cf-8082969adadd">
+				<reportElement mode="Opaque" x="380" y="0" width="170" height="30" forecolor="#FFFFFF" backcolor="#930058" uuid="7aff1623-170b-43d9-81cf-8082969adadd">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="bf300cbc-4d3a-4a9a-83bd-c6bc371e57e1"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
