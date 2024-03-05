@@ -179,14 +179,11 @@ public class Game extends AnimationTimer {
 
         if (win) {
             java.time.Duration duration = java.time.Duration.between(start, Instant.now());
-            long hours = duration.toHours();
-            long minutes = duration.toMinutesPart();
+
+            long minutes = duration.toMinutes();
             long seconds = duration.toSecondsPart();
 
-            // Display the result
-            System.out.println("Ha tardado " + hours + ":" + minutes + ":" + seconds);
-
-            StatsController.guardar(mapData.getId(), hours + ":" + minutes + ":" + seconds, movimientos);
+            StatsController.guardar(mapData.getId(), minutes + "m " + seconds + "s", movimientos);
 
             alertWin();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);

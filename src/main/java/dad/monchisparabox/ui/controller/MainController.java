@@ -2,7 +2,10 @@ package dad.monchisparabox.ui.controller;
 
 import dad.monchisparabox.App;
 import dad.monchisparabox.game.controller.GameController;
+import dad.monchisparabox.game.controller.MapController;
+import dad.monchisparabox.game.data.MapDataController;
 import dad.monchisparabox.game.data.PdfData;
+import dad.monchisparabox.game.data.StatsController;
 import dad.monchisparabox.game.data.UserData;
 import dad.monchisparabox.skin.Skin;
 import javafx.scene.image.Image;
@@ -10,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelReader;
 import javafx.scene.image.WritableImage;
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.*;
 import java.io.File;
 import java.io.IOException;
@@ -218,27 +222,9 @@ public class MainController implements Initializable {
 		
 		//AJUSTES > GENERAR PDF
 		ajustescontroller.setOnPdf (e -> {
-			PdfData pdfData1 = new PdfData("Mapa1", 600, "1000");
-			PdfData pdfData2 = new PdfData("Mapa2", 69, "100");
-			PdfData pdfData3 = new PdfData("Mapa3", 100, "80");
-			PdfData pdfData4 = new PdfData("Mapa4", 250, "250");
-			PdfData pdfData5 = new PdfData("Mapa5", 600, "1000");
-			PdfData pdfData6 = new PdfData("Mapa6", 600, "1000");
-			PdfData pdfData7 = new PdfData("Mapa7", 600, "1000");
-			PdfData pdfData8 = new PdfData("Mapa8", 600, "1000");
-			PdfData pdfData9 = new PdfData("Mapa9", 600, "1000");
-			PdfData pdfData10 = new PdfData("Mapa10", 600, "1000");
 			List<PdfData> pdfData = new ArrayList<>();
-			pdfData.add(pdfData1);
-			pdfData.add(pdfData2);
-			pdfData.add(pdfData3);
-			pdfData.add(pdfData4);
-			pdfData.add(pdfData5);
-			pdfData.add(pdfData6);
-			pdfData.add(pdfData7);
-			pdfData.add(pdfData8);
-			pdfData.add(pdfData9);
-			pdfData.add(pdfData10);
+			MapDataController mapDataController = new MapDataController();
+			StatsController.getListaStats().forEach(stats -> pdfData.add(new PdfData(mapDataController.getMapById(stats.getIdMapa()).getNombre(), stats.getMovimientos(), stats.getTiempo())));
 
 			JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(pdfData);
 
@@ -249,12 +235,14 @@ public class MainController implements Initializable {
 				jasperReport = JasperCompileManager.compileReport(inputStream);
 				JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, new HashMap<>(), dataSource);
 				JasperExportManager.exportReportToPdfFile(jasperPrint, "pdf/certificado_gaymer.pdf");
+				openPDF("pdf/certificado_gaymer.pdf");
 			} catch (JRException e1) {
 				e1.printStackTrace();
-			}
+			} catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
 
-			efectoBoton();
-			System.out.println("GENERAR PDF");
+            efectoBoton();
 			//GENERAR PDF
 		});	
 		
@@ -316,6 +304,17 @@ public class MainController implements Initializable {
 
 	public dad.monchisparabox.ui.controller.inicioController getInicioController() {
 		return inicioController;
+	}
+
+	public void openPDF(String filePath) throws IOException {
+		File file = new File(filePath);
+
+		if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.OPEN)) {
+			Desktop.getDesktop().open(file);
+		} else {
+			System.out.println("Desktop not supported. Cannot open PDF.");
+			// You can add fallback logic here, such as launching a specific PDF viewer application.
+		}
 	}
 
 	public Image generarSkinFinal(Image skin, Image complemento1) {

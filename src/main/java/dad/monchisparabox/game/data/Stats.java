@@ -16,4 +16,16 @@ public class Stats {
         this.tiempo = nuevoTiempo;
         this.movimientos = nuevosMovimientos;
     }
+
+    public int getIdMapa() {
+        return idMapa;
+    }
+
+    public String getTiempo() {
+        return tiempo;
+    }
+
+    public int getMovimientos() {
+        return movimientos;
+    }
 }
