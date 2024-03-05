@@ -86,6 +86,7 @@ public class MainController implements Initializable {
 			userData = new UserData(skin.getSkinFinal(), musica, efectos, ajustescontroller.getVolumen(), letras);
 
 			view.setCenter(App.getGameController().getView());
+			App.getGameController().getView().requestFocus();
 		});	
 		
 		//INICIO > MOVER
@@ -196,7 +197,7 @@ public class MainController implements Initializable {
 		ajustescontroller.setonFlechas (e -> {
 			efectoBoton();
 			letras = false;
-		});	
+		});
 		
 		//AJUSTES > LETRAS ON
 		ajustescontroller.setonLetras (e -> {
@@ -263,6 +264,10 @@ public class MainController implements Initializable {
 
 	public dad.monchisparabox.ui.controller.creditosController getCreditosController() {
 		return creditosController;
+	}
+
+	public dad.monchisparabox.ui.controller.inicioController getInicioController() {
+		return inicioController;
 	}
 
 	public Image generarSkinFinal(Image skin, Image complemento1) {
