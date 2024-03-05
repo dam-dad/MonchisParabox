@@ -34,15 +34,25 @@ public class Game extends AnimationTimer {
 
     private MapData mapData;
 
+
+     private Music musicaAumento = new Music("AumentoCaja");
+     private   Music musicaDecrecer = new Music("DecrecerCaja");
+
     private Instant start;
     private int movimientos;
+
 
     public Game(MapData mapData) {
         this.mapData = mapData;
         maps.addAll(mapData.getGameMaps());
 
         player = new Player();
+
         player.setLocation(maps.get(0).getStart());
+
+        music = new Music(mapData.getCancion());
+
+        music.play(MainController.getUserData().getVolumen()/100.0);
 
         App.getGameController().getView().setOnKeyPressed(event -> handleKeyPress(event.getCode()));
 
@@ -70,14 +80,12 @@ public class Game extends AnimationTimer {
         if (door == null) {
             if (joining) {
                 //entra
-                music = new Music("AumentoCaja");
-                music.playOnce();
+              musicaAumento.playOnce();
                 gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
 
             } else {
 
-                music = new Music("DecrecerCaja");
-                music.playOnce();
+             musicaDecrecer.playOnce();
             }
 
             player.setLocation(location.clone());
@@ -90,6 +98,7 @@ public class Game extends AnimationTimer {
     }
 
     public boolean teleportBlockToMap(GameMap gameMapTo, boolean kicking, Block block, Location location) {
+
         Block door = gameMapTo.getBlockAt(location, null);
         if (door == null) {
             Direction facing = block.getLocation().getMap().getFacing();
@@ -99,38 +108,38 @@ public class Game extends AnimationTimer {
             if (!kicking) {
                 if (gameMapTo.getFacing() == Direction.RIGHT) {
                     //se mete
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.LEFT);
                 } else if (gameMapTo.getFacing() == Direction.LEFT) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.RIGHT);
                 } else if (gameMapTo.getFacing() == Direction.UP) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.DOWN);
                 } else if (gameMapTo.getFacing() == Direction.DOWN) {
-                    music = new Music("AumentoCaja");
-                    music.playOnce();
+                    musicaAumento.playOnce();
+
                     block.push(Direction.UP);
                 }
             } else {
                 if (facing == Direction.RIGHT) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.RIGHT);
                 } else if (facing == Direction.LEFT) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.LEFT);
                 } else if (facing == Direction.UP) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.UP);
                 } else if (facing == Direction.DOWN) {
-                    music = new Music("DecrecerCaja");
-                    music.playOnce();
+                    musicaDecrecer.playOnce();
+
                     block.push(Direction.DOWN);
                 }
             }
@@ -178,6 +187,7 @@ public class Game extends AnimationTimer {
 
             alertWin();
             MapData nextMapData = App.getGameController().getMapDataController().getMapById(mapData.getId() + 1);
+            music.stopMusic();
             if(nextMapData != null) {
                 App.getGameController().getMapController().setGame(new Game(nextMapData));
             } else {
@@ -186,6 +196,7 @@ public class Game extends AnimationTimer {
             }
         }
     }
+
 
     public void alertWin() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -267,6 +278,7 @@ public class Game extends AnimationTimer {
         }
 
         if (code == KeyCode.R) {
+            music.stopMusic();
             music = new Music("Reiniciar");
             music.playOnce();
             App.getGameController().getMapController().setGame(new Game(App.getGameController().getMapDataController().getMapById(mapData.getId())));
