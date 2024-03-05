@@ -381,8 +381,10 @@ public class MainController implements Initializable {
 	    // Renderiza y guarda la imagen resultante en el objeto WritableImage
 	    pane.snapshot(null, resultImage);
 
+		String appDataFolder = System.getenv("APPDATA");
+		String filePath = appDataFolder + "\\MonchisParabox";
 	    // Guarda la imagen en un archivo (cambia la ruta y el nombre del archivo según tu preferencia)
-	    File outputFile = new File("src/main/resources/assets/skinFinal.png");
+	    File outputFile = new File(filePath + "\\generated\\skinFinal.png");
 
 	    // Utiliza un PixelReader para obtener los píxeles de la imagen de JavaFX
 	    PixelReader pixelReader = resultImage.getPixelReader();

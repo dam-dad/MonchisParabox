@@ -24,6 +24,7 @@ public class Main {
         // Comprobar si la carpeta de datos de la aplicación existe, si no, crearla
         if (!new File(filePath).exists()) {
             new File(filePath).mkdir();
+            new File(filePath + "\\generated").mkdir();
         }
 
         // Iniciar la aplicación Monchi's Parabox

@@ -103,7 +103,25 @@ public class Game extends AnimationTimer {
      * @param joining  Booleano que indica si se está uniendo o no.
      */
     public void changeMap(GameMap gameMap, Location location, boolean joining) {
-        // Implementación omitida por brevedad
+        Block door = gameMap.getBlockAt(location, null);
+        if (door == null) {
+            if (joining) {
+                //entra
+                musicaAumento.playOnce();
+                gameMap.setJoinLocation(new Location(player.getLocation().getMap(), player.getLocation().getLastX(), player.getLocation().getLastY()));
+
+            } else {
+
+                musicaDecrecer.playOnce();
+            }
+
+            player.setLocation(location.clone());
+            player.getLocation().setLastX(location.getX());
+            player.getLocation().setLastY(location.getY());
+            player.render();
+            gameMap.load();
+            App.getGameController().getMapController().getView().setCenter(gameMap);
+        }
     }
 
     /**
